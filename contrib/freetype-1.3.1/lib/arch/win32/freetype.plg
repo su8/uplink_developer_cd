@@ -1,0 +1,50 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: freetype - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSPB2D5.TMP" with contents
+[
+/nologo /MLd /W3 /GX /Zi /O1 /I "." /I "..\.." /I "..\..\extend" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fo"Debug/" /Fd"Debug/" /FD /c 
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\arch\win32\freetype.c"
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\Extend\Ftxcmap.c"
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\Extend\ftxerr18.c"
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\Extend\Ftxgasp.c"
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\Extend\Ftxkern.c"
+"C:\DevStudio6\Vc98\contrib\freetype-1.3.1\lib\Extend\ftxpost.c"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSPB2D5.TMP" 
+Creating command line "link.exe -lib /nologo /out:"freetype.lib"  ".\Debug\freetype.obj" ".\Debug\Ftxcmap.obj" ".\Debug\ftxerr18.obj" ".\Debug\Ftxgasp.obj" ".\Debug\Ftxkern.obj" ".\Debug\ftxpost.obj" "
+<h3>Output Window</h3>
+Compiling...
+freetype.c
+..\..\ttgload.c(784) : warning C4018: '<' : signed/unsigned mismatch
+..\..\ttinterp.c(3144) : warning C4018: '!=' : signed/unsigned mismatch
+..\..\ttraster.c(2173) : warning C4244: '=' : conversion from 'long ' to 'short ', possible loss of data
+Ftxcmap.c
+ftxerr18.c
+Ftxgasp.c
+Ftxkern.c
+ftxpost.c
+Generating Code...
+..\..\ttapi.c(578) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttapi.c(601) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttgload.c(1195) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttobjs.c(575) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttinterp.c(5051) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttinterp.c(5051) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttinterp.c(5066) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttinterp.c(5073) : warning C4761: integral size mismatch in argument; conversion supplied
+..\..\ttobjs.c(1312) : warning C4761: integral size mismatch in argument; conversion supplied
+Creating library...
+
+
+
+<h3>Results</h3>
+freetype.lib - 0 error(s), 12 warning(s)
+</pre>
+</body>
+</html>

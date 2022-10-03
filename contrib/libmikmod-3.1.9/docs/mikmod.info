@@ -1,0 +1,74 @@
+This is mikmod.info, produced by makeinfo version 4.0 from mikmod.texi.
+
+   Copyright (C) 1998, 1999, 2000 Miodrag Vallat and others -- see file
+AUTHORS for complete list.
+
+   This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU Library General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* MikMod: (mikmod).            MikMod Sound Library.
+END-INFO-DIR-ENTRY
+
+
+Indirect:
+mikmod.info-1: 1007
+mikmod.info-2: 48918
+mikmod.info-3: 98126
+
+Tag Table:
+(Indirect)
+Node: Top1007
+Node: Introduction1458
+Node: Tutorial2336
+Node: MikMod Concepts3066
+Node: A Skeleton Program4026
+Node: Playing Modules5604
+Node: Playing Sound Effects9446
+Node: More Sound Effects13472
+Ref: More Sound Effects-Footnote-115895
+Node: Using the Library16081
+Node: Library Version16481
+Node: Type Definitions18656
+Node: Error Handling19703
+Node: Library Initialization21334
+Ref: Library Initialization-Footnote-124558
+Node: Samples and Voice Control24662
+Node: Modules and Player Control27519
+Node: Loading Data from Memory31792
+Node: Library Reference32705
+Node: Variable Reference33136
+Node: Structure Reference38134
+Node: Error Reference48918
+Ref: Error Reference-Footnote-158037
+Node: Function Reference58198
+Node: Library Core Functions58585
+Node: Module Player Functions70809
+Node: Sample Functions81811
+Node: Voice Functions83910
+Node: Loader Reference90113
+Node: Module Loaders90313
+Node: Sample Loaders96699
+Node: Driver Reference96988
+Node: Network Drivers97233
+Node: Hardware Drivers98126
+Node: Disk Writer Drivers100430
+Node: Other Drivers101069
+Node: Index102100
+Node: Function Index102264
+Node: Type and Variable Index106098
+
+End Tag Table

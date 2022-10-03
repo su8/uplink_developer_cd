@@ -1,0 +1,143 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:604: checking for a BSD compatible install
+configure:657: checking whether build environment is sane
+configure:714: checking whether make sets ${MAKE}
+configure:760: checking for working aclocal
+configure:773: checking for working autoconf
+configure:786: checking for working automake
+configure:799: checking for working autoheader
+configure:812: checking for working makeinfo
+configure:829: checking whether to enable maintainer-specific portions of Makefiles
+configure:991: checking for gcc
+configure:1104: checking whether the C compiler (gcc  ) works
+configure:1120: gcc -o conftest    conftest.c  1>&5
+configure:1146: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:1151: checking whether we are using GNU C
+configure:1160: gcc -E conftest.c
+configure:1179: checking whether gcc accepts -g
+configure:1211: checking how to run the C preprocessor
+configure:1232: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1302: checking for a BSD compatible install
+configure:1355: checking whether ln -s works
+configure:1451: checking host system type
+configure:1472: checking build system type
+configure:1492: checking for ranlib
+configure:1531: checking for ld used by GCC
+configure:1593: checking if the linker (/usr/bin/ld) is GNU ld
+GNU ld version 2.9.5 (with BFD 2.9.5.0.22)
+configure:1609: checking for BSD-compatible nm
+ltconfig:601: checking for object suffix
+ltconfig:602: gcc -c -g -O2  conftest.c 1>&5
+ltconfig:742: checking if gcc PIC flag -fPIC works
+ltconfig:743: gcc -c -g -O2 -fPIC -DPIC  conftest.c 1>&5
+ltconfig:795: checking if gcc supports -c -o file.o
+ltconfig:796: gcc -c -g -O2 -o out/conftest2.o  conftest.c 1>&5
+ltconfig:828: checking if gcc supports -c -o file.lo
+ltconfig:829: gcc -c -g -O2 -c -o conftest.lo  conftest.c 1>&5
+ltconfig:880: checking if gcc supports -fno-rtti -fno-exceptions
+ltconfig:881: gcc -c -g -O2 -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+ltconfig:924: checking if gcc static flag -static works
+ltconfig:925: gcc -o conftest -g -O2   -static conftest.c  1>&5
+GNU ld version 2.9.5 (with BFD 2.9.5.0.22)
+ltconfig:1557: checking if global_symbol_pipe works
+ltconfig:1558: gcc -c -g -O2  conftest.c 1>&5
+ltconfig:1561: eval "/usr/bin/nm -B conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW]\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1613: gcc -o conftest -g -O2 -fno-builtin -fno-rtti -fno-exceptions   conftest.c conftstm.o 1>&5
+configure:1809: checking whether make sets ${MAKE}
+configure:1838: checking for ranlib
+configure:1869: checking if makeinfo supports html output
+configure:1901: checking for dlfcn.h
+configure:1911: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:1940: checking for dlopen in -lc
+configure:1959: gcc -o conftest -g -O2   conftest.c -lc   1>&5
+/tmp/ccRUmmYp.o: In function `main':
+/tmp/jak97/contrib/libmikmod-3.1.9/configure:1955: undefined reference to `dlopen'
+collect2: ld returned 1 exit status
+configure: failed program was:
+#line 1948 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char dlopen();
+
+int main() {
+dlopen()
+; return 0; }
+configure:1978: checking for dlopen in -ldl
+configure:1997: gcc -o conftest -g -O2   conftest.c -ldl   1>&5
+configure:2030: checking for pthread_create in -lpthread
+configure:2049: gcc -o conftest -g -O2   conftest.c -lpthread   1>&5
+configure:2120: checking for sys/asoundlib.h
+configure:2130: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2126: sys/asoundlib.h: No such file or directory
+configure: failed program was:
+#line 2125 "configure"
+#include "confdefs.h"
+#include <sys/asoundlib.h>
+configure:2249: checking for esd-config
+configure:2284: checking for ESD - version >= 0.2.6
+configure:2366: gcc -o conftest -g -O2    conftest.c  -L/usr/lib -lesd -laudiofile -lm 1>&5
+configure:2447: checking if esd requires alsa
+configure:2555: checking for AF/AFlib.h
+configure:2565: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2561: AF/AFlib.h: No such file or directory
+configure: failed program was:
+#line 2560 "configure"
+#include "confdefs.h"
+#include <AF/AFlib.h>
+configure:2638: checking for libgus.h
+configure:2648: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2644: libgus.h: No such file or directory
+configure: failed program was:
+#line 2643 "configure"
+#include "confdefs.h"
+#include <libgus.h>
+configure:2723: checking for sys/sam9407.h
+configure:2733: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2729: sys/sam9407.h: No such file or directory
+configure: failed program was:
+#line 2728 "configure"
+#include "confdefs.h"
+#include <sys/sam9407.h>
+configure:2767: checking for ANSI C header files
+configure:2780: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2847: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2874: checking for fcntl.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2874: checking for malloc.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2874: checking for memory.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2874: checking for strings.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2874: checking for sys/ioctl.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2874: checking for unistd.h
+configure:2884: gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2917: checking whether gcc needs -traditional
+configure:2963: checking for working const
+configure:3017: gcc -c -g -O2  conftest.c 1>&5
+configure:3038: checking for size_t
+configure:3072: checking if compiler understands the signed keyword
+configure:3092: gcc -c -g -O2  conftest.c 1>&5
+configure:3126: checking for setenv
+configure:3154: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3126: checking for snprintf
+configure:3154: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3126: checking for srandom
+configure:3154: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3181: checking for strcasecmp
+configure:3209: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3181: checking for strdup
+configure:3209: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3181: checking for strstr
+configure:3209: gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3535: checking for OSS (/dev/sndstat)
+configure:3671: checking if RTLD_GLOBAL is defined
+configure:3683: gcc -c -g -O2   conftest.c 1>&5
+configure:3714: checking if inlining functions is safe
+configure:3734: gcc -o conftest -g -O2    conftest.c  1>&5
+configure:3768: checking if compiler is pgcc

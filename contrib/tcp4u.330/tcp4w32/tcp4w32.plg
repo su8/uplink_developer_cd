@@ -1,0 +1,76 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tcp4u32 - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\WINDOWS\TEMP\RSP62A5.TMP" with contents
+[
+/MT /W3 /GX /O1 /Oy /Ob2 /I "..\Include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "TCP4W_DLL" /FR"./" /Fo"./" /Fd"./" /FD /c 
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\htp4_err.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\htp4_url.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\http4u.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\smtp4u.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4_err.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4_log.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4u.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4u_ex.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tn4u.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\tn_proto.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\udp4u.c"
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\util.c"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP62A5.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP62A6.TMP" with contents
+[
+/MT /W3 /GX /O2 /Oy /Ob2 /I "..\Include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "TCP4W_DLL" /FR"./" /Fo"./" /Fd"./" /FD /c 
+"C:\DevStudio6\VC98\contrib\tcp4u.330\src\skt4u.c"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP62A6.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP62A7.TMP" with contents
+[
+wsock32.lib kernel32.lib user32.lib /subsystem:windows /dll /pdb:none /machine:I386 /def:".\TCP4W32.DEF" /out:"./tcp4w32.dll" /implib:"./tcp4w32.lib" 
+.\htp4_err.obj
+.\htp4_url.obj
+.\http4u.obj
+.\skt4u.obj
+.\smtp4u.obj
+.\tcp4_err.obj
+.\tcp4_log.obj
+.\tcp4u.obj
+.\tcp4u_ex.obj
+.\tn4u.obj
+.\tn_proto.obj
+.\udp4u.obj
+.\util.obj
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP62A7.TMP"
+<h3>Output Window</h3>
+Compiling...
+Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 12.00.8168 for 80x86
+Copyright (C) Microsoft Corp 1984-1998. All rights reserved.
+
+cl /MT /W3 /GX /O1 /Oy /Ob2 /I "..\Include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "TCP4W_DLL" /FR"./" /Fo"./" /Fd"./" /FD /c 
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\htp4_err.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\htp4_url.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\http4u.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\smtp4u.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4_err.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4_log.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4u.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tcp4u_ex.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tn4u.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\tn_proto.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\udp4u.c"
+   "C:\DevStudio6\VC98\contrib\tcp4u.330\src\util.c"
+
+htp4_err.c
+htp4_url.c
+http4u.c
+smtp4u.c
+
+</pre>
+</body>
+</html>

@@ -1,0 +1,9 @@
+OBJECTS = soundgarden.o soundgarden_unix.o
+
+libsoundgarden.a : $(OBJECTS)
+
+include ../standard.mk
+include ../includes.mk
+
+
+

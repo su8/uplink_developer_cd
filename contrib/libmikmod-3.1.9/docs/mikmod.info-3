@@ -1,0 +1,243 @@
+This is mikmod.info, produced by makeinfo version 4.0 from mikmod.texi.
+
+   Copyright (C) 1998, 1999, 2000 Miodrag Vallat and others -- see file
+AUTHORS for complete list.
+
+   This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU Library General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* MikMod: (mikmod).            MikMod Sound Library.
+END-INFO-DIR-ENTRY
+
+
+File: mikmod.info,  Node: Hardware Drivers,  Next: Disk Writer Drivers,  Prev: Network Drivers,  Up: Driver Reference
+
+Hardware Drivers
+----------------
+
+   These drivers access to the sound hardware of the machine they run
+on.  Depending on your Unix flavor, you'll end with one or more drivers
+from this list:
+
+`drv_aix'
+     This driver is only available under AIX, and access its audio
+     device.
+     This driver only supports software mixing.
+
+`drv_alsa'
+     This driver is only available under Linux, and requires the ALSA
+     driver to be compiled for your current kernel.
+     This driver only supports software mixing, but a future version of
+     the driver might be able to use the hardware capabilities of some
+     sound cards.
+
+`drv_dart'
+     This driver is only available under OS/2 version 3 and higher
+     (Warp), and uses the "Direct Audio Real-Time" interface.
+     This driver only supports software mixing.
+
+`drv_hp'
+     This driver is only available under HP-UX, and access its audio
+     device.
+     This driver only supports software mixing.
+
+`drv_os2'
+     This driver is only available under OS/2 version 3 and higher
+     (Warp), and OS/2 2.x with MMPM/2.
+     This driver only supports software mixing.
+
+`drv_oss'
+     This driver is available under any Unix with the Open Sound System
+     drivers installed. Linux and FreeBSD also come with the OSS/Lite
+     driver (the non-commercial version of OSS) and can make use of
+     this driver.
+     This driver only supports software mixing.
+
+`drv_sam9407'
+     This driver is only available under Linux, and requires the Linux
+     sam9407 driver to be compiled for your current kernel.
+     This driver only supports hardware mixing.
+
+`drv_sgi'
+     This driver is only available under IRIX, and uses the SGI audio
+     library.
+     This driver only supports software mixing.
+
+`drv_sun'
+     This driver is only available under Unices which implement
+     SunOS-like audio device interfaces, that is, SunOS, Solaris,
+     NetBSD and OpenBSD.
+     This driver only supports software mixing.
+
+`drv_ultra'
+     This driver is only available under Linux, and requires the Linux
+     Ultrasound driver (the ancestor of ALSA) to be compiled for your
+     current kernel.
+     This driver only supports hardware mixing.
+
+
+File: mikmod.info,  Node: Disk Writer Drivers,  Next: Other Drivers,  Prev: Hardware Drivers,  Up: Driver Reference
+
+Disk Writer Drivers
+-------------------
+
+   These drivers work on any machine, since the generated sound is not
+sent to hardware, but written in a file. Disk writer drivers only
+support software mixing.
+
+`drv_raw'
+     This driver outputs the sound date in a file by default named
+     `music.raw' in the current directory. The file has no header and
+     only contains the sound output.
+
+`drv_wav'
+     This driver outputs the sound data in a RIFF WAVE file by default
+     named `music.wav' in the current directory.
+
+
+File: mikmod.info,  Node: Other Drivers,  Prev: Disk Writer Drivers,  Up: Driver Reference
+
+Other Drivers
+-------------
+
+   These drivers are of little interest, but are handy sometimes.
+
+`drv_stdout'
+     This driver outputs the sound data to the program's standard
+     output. To avoid inconvenience, the data will not be output if the
+     standard output is a terminal, thus you have to pipe it through
+     another command or to redirect it to a file.  Using this driver
+     and redirecting to a file is equivalent to using the `drv_raw'
+     disk writer.
+     This driver only supports software mixing.
+
+`drv_pipe'
+     This driver pipes the sound data to a command (which must be given
+     in the driver commandline, via `MikMod_Init').
+     This driver only supports software mixing.
+
+`drv_nos'
+     This driver doesn't produce sound at all, and will work on any
+     machine.
+     Since it does not have to produce sound, it supports both hardware
+     and software mixing, with as many hardware voices as you like.
+
+
+File: mikmod.info,  Node: Index,  Next: Function Index,  Prev: Library Reference,  Up: Top
+
+Index
+*****
+
+* Menu:
+
+* Function Index::
+* Type and Variable Index::
+
+
+File: mikmod.info,  Node: Function Index,  Next: Type and Variable Index,  Prev: Index,  Up: Index
+
+Function Index
+**************
+
+* Menu:
+
+* MikMod_Active:                         Library Core Functions.
+* MikMod_DisableOutput:                  Library Core Functions.
+* MikMod_EnableOutput:                   Library Core Functions.
+* MikMod_Exit:                           Library Core Functions.
+* MikMod_GetVersion:                     Library Core Functions.
+* MikMod_InfoDriver:                     Library Core Functions.
+* MikMod_InfoLoader:                     Library Core Functions.
+* MikMod_Init:                           Library Core Functions.
+* MikMod_InitThreads:                    Library Core Functions.
+* MikMod_Lock:                           Library Core Functions.
+* MikMod_RegisterAllDrivers:             Library Core Functions.
+* MikMod_RegisterAllLoaders:             Library Core Functions.
+* MikMod_RegisterDriver:                 Library Core Functions.
+* MikMod_RegisterErrorHandler:           Library Core Functions.
+* MikMod_RegisterLoader:                 Library Core Functions.
+* MikMod_RegisterPlayer:                 Library Core Functions.
+* MikMod_Reset:                          Library Core Functions.
+* MikMod_SetNumVoices:                   Library Core Functions.
+* MikMod_strerror:                       Library Core Functions.
+* MikMod_Unlock:                         Library Core Functions.
+* MikMod_Update:                         Library Core Functions.
+* Player_Active:                         Module Player Functions.
+* Player_Free:                           Module Player Functions.
+* Player_GetChannelVoice:                Module Player Functions.
+* Player_GetModule:                      Module Player Functions.
+* Player_Load:                           Module Player Functions.
+* Player_LoadFP:                         Module Player Functions.
+* Player_LoadTitle:                      Module Player Functions.
+* Player_LoadTitleFP:                    Module Player Functions.
+* Player_Mute:                           Module Player Functions.
+* Player_Muted:                          Module Player Functions.
+* Player_NextPosition:                   Module Player Functions.
+* Player_Paused:                         Module Player Functions.
+* Player_PrevPosition:                   Module Player Functions.
+* Player_SetPosition:                    Module Player Functions.
+* Player_SetSpeed:                       Module Player Functions.
+* Player_SetTempo:                       Module Player Functions.
+* Player_SetVolume:                      Module Player Functions.
+* Player_Start:                          Module Player Functions.
+* Player_Stop:                           Module Player Functions.
+* Player_ToggleMute:                     Module Player Functions.
+* Player_TogglePause:                    Module Player Functions.
+* Player_Unmute:                         Module Player Functions.
+* Sample_Free:                           Sample Functions.
+* Sample_Load:                           Sample Functions.
+* Sample_LoadFP:                         Sample Functions.
+* Sample_Play:                           Sample Functions.
+* Voice_GetFrequency:                    Voice Functions.
+* Voice_GetPanning:                      Voice Functions.
+* Voice_GetPosition:                     Voice Functions.
+* Voice_GetVolume:                       Voice Functions.
+* Voice_Play:                            Voice Functions.
+* Voice_RealVolume:                      Voice Functions.
+* Voice_SetFrequency:                    Voice Functions.
+* Voice_SetPanning:                      Voice Functions.
+* Voice_SetVolume:                       Voice Functions.
+* Voice_Stop:                            Voice Functions.
+* Voice_Stopped:                         Voice Functions.
+
+
+File: mikmod.info,  Node: Type and Variable Index,  Prev: Function Index,  Up: Index
+
+Type and Variable Index
+***********************
+
+* Menu:
+
+* INSTRUMENT:                            Structure Reference.
+* md_device:                             Variable Reference.
+* md_driver:                             Variable Reference.
+* md_mixfreq:                            Variable Reference.
+* md_mode:                               Variable Reference.
+* md_musicvolume:                        Variable Reference.
+* md_pansep:                             Variable Reference.
+* md_reverb:                             Variable Reference.
+* md_sndfxvolume:                        Variable Reference.
+* md_volume:                             Variable Reference.
+* MDRIVER:                               Structure Reference.
+* MikMod_critical:                       Variable Reference.
+* MikMod_errno:                          Variable Reference.
+* MODULE:                                Structure Reference.
+* MREADER:                               Structure Reference.
+* MWRITER:                               Structure Reference.
+* SAMPLE:                                Structure Reference.
+
+

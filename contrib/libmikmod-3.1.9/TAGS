@@ -1,0 +1,2748 @@
+
+drivers/drv_sam9407.c,1239
+#define SAM_NUM_BANKS	58,1607
+#define SAM_NUM_VOICES	59,1633
+#define NO_LOOP_SAMPLES	60,1659
+#define PENDING_PLAY	62,1686
+#define PENDING_STOP	63,1714
+#define PENDING_VOLUME	64,1742
+#define PENDING_FREQ	65,1772
+} Bank;Bank72,1881
+} Voice;Voice89,2069
+static Bank banks[91,2079
+static Voice voices[93,2114
+static int card=95,2152
+static int modfd=96,2171
+static void commandLine(98,2193
+static BOOL isPresent(108,2328
+static SWORD sampleLoad(121,2533
+void sampleUnload(181,3814
+static ULONG freeSampleSpace(193,4013
+static ULONG realSampleLength(203,4175
+static BOOL init(211,4274
+static void exitHook(242,4818
+static BOOL reset(250,4897
+static BOOL setNumVoices(258,4989
+static BOOL playStart(263,5036
+static void playStop(269,5120
+static void update(275,5224
+static void voiceSetVolume(377,8071
+static UWORD voiceGetVolume(386,8246
+static void voiceSetFrequency(391,8346
+static ULONG voiceGetFrequency(400,8508
+static void voiceSetPanning(405,8612
+static ULONG voiceGetPanning(414,8788
+static void voicePlay(419,8892
+static void voiceStop(440,9329
+static BOOL voiceStopped(449,9484
+static SLONG voiceGetPosition(457,9626
+static ULONG voiceRealVolume(462,9686
+MIKMODAPI MDRIVER drv_sam9407=467,9744
+
+drivers/drv_AF.c,479
+static	SBYTE *audiobuffer=65,1732
+static	int AFFragmentSize;66,1764
+static	AFAudioConn *AFaud=67,1791
+static	ATime AFtime;68,1823
+static	AC AFac;69,1844
+static	AFDeviceDescriptor *AFdesc;70,1860
+static	CHAR *soundbox=71,1895
+static void AF_CommandLine(73,1924
+static BOOL AF_IsThere(83,2089
+		return 90,2221
+static BOOL AF_Init(93,2236
+static BOOL AF_PlayStart(150,3597
+static void AF_Exit(156,3682
+static void AF_Update(166,3807
+MIKMODAPI MDRIVER drv_AF=182,4199
+
+drivers/drv_aix.c,349
+#define BUFFERSIZE 53,1411
+static	int buffersize=54,1433
+static	int fd=55,1470
+static	SBYTE *audiobuffer=56,1488
+static void AIX_CommandLine(58,1521
+static BOOL AIX_IsThere(72,1737
+static BOOL AIX_Init(84,1948
+static void AIX_Exit(147,3390
+static void AIX_Update(157,3497
+static void AIX_Pause(162,3593
+MIKMODAPI MDRIVER drv_aix=167,3690
+
+drivers/drv_alsa.c,1285
+static void* libasound=79,2635
+#define RTLD_GLOBAL 81,2689
+#define alsa_cards_mask	85,2765
+#define alsa_ctl_close	86,2807
+#define alsa_ctl_hw_info	87,2847
+#define alsa_ctl_open	88,2890
+#define alsa_ctl_pcm_info	89,2928
+#define alsa_ctl_pcm_playback_info	90,2973
+#define alsa_pcm_close	91,3034
+#define alsa_pcm_drain_playback	92,3074
+#define alsa_pcm_flush_playback	93,3130
+#define alsa_pcm_open	94,3186
+#define alsa_pcm_playback_format	95,3224
+#define alsa_pcm_playback_info	96,3281
+#define alsa_pcm_playback_params	97,3335
+#define alsa_pcm_playback_status	98,3392
+#define alsa_pcm_write	99,3449
+#define DEFAULT_NUMFRAGS 102,3518
+static	snd_pcm_t *pcm_h=104,3546
+static	int fragmentsize,105,3576
+static	int fragmentsize,numfrags=105,3576
+static	SBYTE *audiobuffer=106,3627
+static	int cardmin=107,3659
+static	int device=108,3699
+static BOOL ALSA_Link(111,3744
+static void ALSA_Unlink(139,5201
+static void ALSA_CommandLine(164,5835
+static BOOL ALSA_IsThere(185,6304
+static BOOL ALSA_Init_internal(199,6505
+static BOOL ALSA_Init(354,10470
+static void ALSA_Exit_internal(365,10632
+static void ALSA_Exit(376,10800
+static void ALSA_Update(384,10901
+static void ALSA_PlayStop(411,11662
+static BOOL ALSA_Reset(418,11750
+MIKMODAPI MDRIVER drv_alsa=424,11837
+
+drivers/drv_dart.c,707
+#define INCL_DOS45,1410
+#define INCL_OS2MM46,1427
+#define PPFN 49,1503
+#define MAX_BUFFERCOUNT 56,1595
+static MCI_MIX_BUFFER MixBuffers[58,1622
+static MCI_MIXSETUP_PARMS MixSetupParms;59,1673
+static MCI_BUFFER_PARMS BufferParms;60,1714
+static ULONG DeviceIndex 61,1751
+static ULONG BufferSize 62,1818
+static ULONG BufferCount 63,1884
+static ULONG DeviceID 64,1938
+static void Dart_CommandLine(66,1966
+static LONG APIENTRY Dart_UpdateBuffers(97,2719
+static BOOL Dart_IsPresent(121,3456
+static BOOL Dart_Init(139,3974
+static void Dart_Exit(216,6236
+static BOOL Dart_PlayStart(232,6590
+static void Dart_Update(261,7374
+static void Dart_PlayStop(266,7474
+MIKMODAPI MDRIVER drv_dart 276,7667
+
+drivers/drv_ds.c,1239
+#define INITGUID45,1290
+#define DSBCAPS_CTRLALL 51,1481
+#define FRAGSIZE 57,1676
+#define UPDATES 59,1715
+static LPDIRECTSOUND pSoundCard;61,1735
+static LPDIRECTSOUNDBUFFER pPrimarySoundBuffer,62,1768
+static LPDIRECTSOUNDBUFFER pPrimarySoundBuffer,pSoundBuffer;62,1768
+static LPDIRECTSOUNDNOTIFY pSoundBufferNotify;63,1829
+static HANDLE notifyUpdateHandle,65,1877
+static HANDLE notifyUpdateHandle,updateBufferHandle;65,1877
+static DWORD updateBufferThreadID,66,1930
+static DWORD updateBufferThreadID,soundBufferCurrentPosition,66,1930
+static DWORD updateBufferThreadID,soundBufferCurrentPosition,blockBytes1,66,1930
+static DWORD updateBufferThreadID,soundBufferCurrentPosition,blockBytes1,blockBytes2;66,1930
+static LPVOID pBlock1,67,2016
+static LPVOID pBlock1,pBlock2;67,2016
+static DWORD sleepInterval;68,2047
+static BOOL threadInUse;69,2075
+static int fragsize=70,2100
+static DWORD controlflags 71,2133
+static DWORD WINAPI updateBufferProc(73,2202
+static void DS_CommandLine(131,4107
+static BOOL DS_IsPresent(151,4457
+static BOOL DS_Init(160,4628
+static void DS_Exit(264,7948
+static void DS_Update(297,8823
+static void DS_PlayStop(302,8865
+static BOOL DS_PlayStart(309,8975
+MIKMODAPI MDRIVER drv_ds=319,9154
+
+drivers/drv_esd.c,969
+static void* libesd=66,1866
+#define RTLD_GLOBAL 68,1917
+#define esd_closestream 72,2011
+#define esd_playstream 73,2045
+#define SETENV 77,2111
+#define SETENV 79,2161
+static	int sndfd=82,2209
+static	esd_format_t format;83,2230
+static	SBYTE *audiobuffer=84,2258
+static	CHAR *espeaker=85,2290
+esd_format_t esd_audio_format=89,2384
+int esd_audio_rate=90,2437
+void *handle;94,2636
+int writes;95,2650
+static BOOL ESD_Link(98,2670
+static void ESD_Unlink(113,3000
+static ssize_t esd_writebuf(128,3236
+static void ESD_CommandLine(146,3540
+static BOOL ESD_IsThere(156,3696
+static BOOL ESD_Init_internal(182,4228
+static BOOL ESD_Init(207,4830
+static void ESD_Exit_internal(218,4989
+static void ESD_Exit(229,5151
+static void ESD_Update_internal(237,5249
+static void ESD_Update(265,6017
+static void ESD_Pause(270,6114
+static BOOL ESD_PlayStart(275,6212
+static void ESD_PlayStop(296,6829
+static BOOL ESD_Reset(309,7047
+MIKMODAPI MDRIVER drv_esd=315,7131
+
+drivers/drv_hp.c,341
+#define BUFFERSIZE 52,1389
+static	int fd=54,1412
+static	SBYTE *audiobuffer=55,1430
+static	int buffersize=56,1462
+static	int headphone=57,1499
+static void HP_CommandLine(59,1524
+static BOOL HP_IsThere(79,1844
+static BOOL HP_Init(90,1987
+static void HP_Exit(145,3055
+static void HP_Update(159,3228
+MIKMODAPI MDRIVER drv_hp=164,3323
+
+drivers/drv_mac.c,416
+#define SOUND_BUFFER_SIZE 51,1433
+static SndChannelPtr         soundChannel=53,1466
+static SndDoubleBufferHeader doubleHeader;54,1547
+static pascal void MyDoubleBackProc(56,1629
+static BOOL MAC_IsThere(88,2349
+static BOOL MAC_Init(99,2544
+static void MAC_Exit(211,5328
+static BOOL MAC_PlayStart(229,5689
+static void MAC_PlayStop(245,6013
+static void MAC_Update(262,6259
+MIKMODAPI MDRIVER drv_mac=267,6302
+
+drivers/drv_nos.c,212
+#define ZEROLEN 45,1259
+static	SBYTE *zerobuf=47,1282
+static BOOL NS_IsThere(49,1311
+static BOOL NS_Init(54,1356
+static void NS_Exit(60,1444
+static void NS_Update(66,1507
+MIKMODAPI MDRIVER drv_nos=72,1588
+
+drivers/drv_os2.c,782
+#define INCL_DOS36,1220
+#define INCL_OS2MM37,1237
+#define PPFN 40,1313
+#define FRAGMENTS 49,1437
+static ULONG DeviceIndex 52,1482
+static ULONG BufferSize 53,1512
+static ULONG DeviceID 54,1549
+static PVOID AudioBuffer 55,1576
+static TID ThreadID 56,1609
+static BOOL FinishPlayback;57,1643
+static HEV Play 58,1708
+static HEV Update 59,1770
+static HTIMER Timer 60,1830
+} PLAYLISTSTRUCTURE;PLAYLISTSTRUCTURE66,1968
+static PLAYLISTSTRUCTURE PlayList[68,1990
+void OS2_UpdateBufferThread(72,2093
+static void OS2_CommandLine(111,3242
+static BOOL OS2_IsPresent(131,3649
+static BOOL OS2_Init(151,4218
+static void OS2_Exit(265,7529
+static BOOL OS2_PlayStart(297,8111
+static void OS2_PlayStop(322,8667
+static void OS2_Update(334,8917
+MIKMODAPI MDRIVER drv_os2 339,9013
+
+drivers/drv_oss.c,879
+#define AFMT_S16_LE 68,1834
+#define AFMT_S16_BE 71,1884
+#define AFMT_U8 74,1932
+#define SNDCTL_DSP_SETFMT 77,1983
+#define AFMT_S16_NE 84,2234
+#define AFMT_S16_NE 86,2272
+static	int sndfd=90,2319
+static	SBYTE *audiobuffer=91,2340
+static	int buffersize;92,2372
+static	int play_precision;93,2395
+#define DEFAULT_CARD 95,2423
+static	int card=96,2446
+#define DEFAULT_FRAGSIZE 100,2508
+#define DEFAULT_NUMFRAGS 101,2536
+static	int fragsize=103,2565
+static	int numfrags=104,2603
+static void OSS_CommandLine(108,2650
+static char *OSS_GetDeviceName(131,3157
+static BOOL OSS_IsThere(147,3547
+static BOOL OSS_Init_internal(161,3920
+static BOOL OSS_Init(252,6297
+static void OSS_Exit_internal(284,7036
+static void OSS_Exit(290,7113
+static void OSS_PlayStop(300,7216
+static void OSS_Update(307,7300
+static BOOL OSS_Reset(341,8067
+MIKMODAPI MDRIVER drv_oss=348,8183
+
+drivers/drv_pipe.c,415
+#define BUFFERSIZE 52,1385
+static	MWRITER *pipeout=54,1411
+static	FILE *pipefile=55,1441
+static	int pipefd[57,1481
+static	pid_t pid;58,1511
+static	SBYTE *audiobuffer=60,1536
+static	CHAR *target=62,1569
+static void pipe_CommandLine(64,1596
+static BOOL pipe_IsThere(74,1735
+static BOOL pipe_Init(79,1782
+static void pipe_Exit(137,2846
+static void pipe_Update(170,3307
+MIKMODAPI MDRIVER drv_pipe=175,3420
+
+drivers/drv_raw.c,427
+#define BUFFERSIZE 47,1345
+#define FILENAME 48,1370
+#define O_BINARY 51,1417
+#define open 55,1487
+static	int rawout=58,1514
+static	SBYTE *audiobuffer=59,1536
+static	CHAR *filename=60,1568
+static void RAW_CommandLine(62,1597
+static BOOL RAW_IsThere(72,1739
+static BOOL RAW_Init(77,1785
+static void RAW_Exit(110,2459
+static void RAW_Update(120,2579
+static BOOL RAW_Reset(125,2679
+MIKMODAPI MDRIVER drv_raw=140,2959
+
+drivers/drv_sgi.c,477
+#define DEFAULT_SGI_FRAGSIZE 62,1829
+#define DEFAULT_SGI_BUFSIZE 63,1865
+static	ALconfig sgi_config;65,1902
+static	ALport sgi_port;66,1930
+static	int sample_factor;67,1954
+static	int sgi_fragsize=68,1980
+static	int sgi_bufsize=69,2026
+static	SBYTE *audiobuffer=70,2070
+static void SGI_CommandLine(72,2103
+static BOOL SGI_IsThere(87,2420
+static BOOL SGI_Init(93,2529
+static void SGI_Exit(176,4313
+static void SGI_Update(182,4381
+MIKMODAPI MDRIVER drv_sgi=188,4522
+
+drivers/drv_stdout.c,272
+#define BUFFERSIZE 40,1228
+static	SBYTE *audiobuffer=42,1254
+static BOOL stdout_IsThere(44,1287
+static BOOL stdout_Init(50,1385
+static void stdout_Exit(59,1546
+static void stdout_Update(71,1703
+static BOOL stdout_Reset(81,1850
+MIKMODAPI MDRIVER drv_stdout=87,1917
+
+drivers/drv_sun.c,870
+#define DEFAULT_FRAGSIZE 64,1629
+#define SUNOS468,1733
+#define SOLARIS70,1754
+#define SOUNDDEVICE 76,1826
+#define SOUNDDEVICE 78,1885
+#define AUDIO_ENCODING_PCM16 83,2014
+#define AUDIO_ENCODING_PCM8 86,2100
+#define AUDIO_ENCODING_SLINEAR_LE 89,2192
+#define AUDIO_ENCODING_ULINEAR_LE 92,2288
+#define AUDIO_SPEAKER 97,2422
+#define AUDIO_HEADPHONE 100,2480
+static int sndfd 103,2517
+static unsigned int port 104,2540
+static int play_encoding;105,2570
+static int play_precision;106,2596
+static int fragsize 107,2623
+static SBYTE *audiobuffer 108,2668
+static void Sun_CommandLine(110,2703
+static BOOL Sun_IsThere(132,3096
+static BOOL Sun_Init(149,3507
+static void Sun_Exit(331,8324
+static void Sun_Update(341,8444
+static void Sun_Pause(351,8658
+static BOOL Sun_PlayStart(359,8793
+static void Sun_PlayStop(371,9004
+MIKMODAPI MDRIVER drv_sun 384,9232
+
+drivers/drv_ultra.c,2904
+#define LIBGUS_VERSION_MAJOR 61,1606
+static void* libgus=118,4330
+#define RTLD_GLOBAL 120,4381
+#define libgus_cards	124,4454
+#define libgus_close	125,4489
+#define libgus_do_flush	126,4524
+#define libgus_do_tempo	127,4565
+#define libgus_do_voice_frequency	128,4606
+#define libgus_do_voice_pan	129,4664
+#define libgus_do_voice_start	130,4712
+#define libgus_do_voice_start_position	131,4763
+#define libgus_do_voice_volume	132,4830
+#define libgus_do_wait	133,4883
+#define libgus_get_handle	134,4922
+#define libgus_get_file_descriptor	135,4966
+#define libgus_info	136,5026
+#define libgus_memory_alloc	137,5060
+#define libgus_memory_free	138,5108
+#define libgus_memory_free_size	139,5154
+#define libgus_memory_pack	140,5209
+#define libgus_open	141,5255
+#define libgus_queue_flush	142,5289
+#define libgus_queue_read_set_size	143,5335
+#define libgus_queue_write_set_size	144,5395
+#define libgus_reset	145,5457
+#define libgus_select	146,5492
+#define libgus_timer_start	147,5529
+#define libgus_timer_stop	148,5575
+#define libgus_timer_tempo	149,5619
+#define MAX_INSTRUMENTS	152,5673
+#define GUS_CHANNELS	153,5736
+#define SIZE_OF_SEQBUF	154,5795
+#define ULTRA_PAN_MIDDLE	155,5864
+#define	CH_FREQ 157,5903
+#define CH_VOL 158,5921
+#define	CH_PAN 159,5939
+typedef struct GUS_SAMPLE GUS_SAMPLE163,6066
+} GUS_SAMPLE;GUS_SAMPLE170,6188
+typedef struct GUS_VOICE GUS_VOICE173,6272
+} GUS_VOICE;GUS_VOICE188,6477
+static	GUS_SAMPLE instrs[192,6525
+static	GUS_VOICE voices[193,6568
+static int ultra_dev=195,6608
+static int gf1flag=197,6666
+static void* ultra_h=199,6695
+static int nr_instrs=201,6729
+static int ultra_fd=202,6753
+static UWORD ultra_bpm;203,6777
+static BOOL Ultra_Link(206,6824
+static void Ultra_Unlink(250,9228
+static BOOL Ultra_IsThere(292,10442
+static BOOL loadsamples(307,10689
+static SWORD Ultra_SampleLoad(369,12336
+static void Ultra_SampleUnload(414,13261
+static ULONG Ultra_SampleSpace(439,13795
+static ULONG Ultra_SampleLength(453,14091
+static BOOL Ultra_Init_internal(461,14245
+static BOOL Ultra_Init(516,15751
+static void Ultra_Exit_internal(528,15940
+static void Ultra_Exit(544,16168
+static BOOL Ultra_Reset(553,16304
+static BOOL Ultra_SetNumVoices(559,16394
+static BOOL Ultra_PlayStart(565,16468
+static void Ultra_PlayStop(639,17935
+static void ultraplayer(659,18308
+static void Ultra_Update(724,20035
+static void Ultra_VoiceSetVolume(757,20649
+static UWORD Ultra_VoiceGetVolume(767,20871
+static void Ultra_VoiceSetFrequency(773,21010
+static ULONG Ultra_VoiceGetFrequency(783,21239
+static void Ultra_VoiceSetPanning(789,21392
+static ULONG Ultra_VoiceGetPanning(799,21616
+static void Ultra_VoicePlay(805,21752
+static void Ultra_VoiceStop(824,22262
+static BOOL Ultra_VoiceStopped(831,22396
+static SLONG Ultra_VoiceGetPosition(851,22818
+static ULONG Ultra_VoiceRealVolume(858,22968
+MIKMODAPI MDRIVER drv_ultra=864,23095
+
+drivers/drv_wav.c,444
+#define BUFFERSIZE 39,1228
+#define FILENAME 40,1253
+static	MWRITER *wavout=42,1283
+static	FILE *wavfile=43,1312
+static	SBYTE *audiobuffer=44,1339
+static	ULONG dumpsize;45,1371
+static	CHAR *filename=46,1394
+static void putheader(48,1423
+static void WAV_CommandLine(69,2206
+static BOOL WAV_IsThere(79,2348
+static BOOL WAV_Init(84,2394
+static void WAV_Exit(123,3195
+static void WAV_Update(140,3453
+MIKMODAPI MDRIVER drv_wav=149,3607
+
+drivers/drv_win.c,484
+#define NUMBUFFERS	47,1321
+#define BUFFERSIZE	48,1369
+HWAVEOUT	hwaveout;50,1430
+WAVEHDR		header[51,1449
+LPSTR		buffer[52,1478
+WORD		buffersout;53,1532
+WORD		nextbuffer;54,1604
+ULONG		buffersize;55,1655
+static int WIN_GetError(58,1753
+static BOOL WIN_IsThere(78,2237
+static void CALLBACK WIN_CallBack(83,2307
+static BOOL WIN_Init(88,2454
+static void WIN_Exit(134,3571
+static void WIN_Update(150,3890
+static void WIN_PlayStop(164,4223
+MIKMODAPI MDRIVER drv_win=170,4314
+
+include/mikmod_build.h,7506
+#define _MIKMOD_H_30,1109
+#define MIKMODAPI 45,1320
+#define MIKMODAPI 47,1366
+#define MIKMODAPI50,1419
+#define LIBMIKMOD_VERSION_MAJOR 57,1483
+#define LIBMIKMOD_VERSION_MINOR 58,1518
+#define LIBMIKMOD_REVISION 59,1553
+#define LIBMIKMOD_VERSION 61,1589
+#define WIN32_LEAN_AND_MEAN73,1833
+#define INCL_DOSSEMAPHORES79,1945
+typedef char CHAR;CHAR82,1995
+typedef signed char     SBYTE;SBYTE90,2073
+typedef unsigned char   UBYTE;UBYTE91,2130
+typedef signed short    SWORD;SWORD92,2189
+typedef unsigned short  UWORD;UWORD93,2247
+typedef signed int      SLONG;SLONG94,2307
+typedef unsigned int    ULONG;ULONG95,2365
+typedef int             BOOL;BOOL96,2425
+typedef signed char     SBYTE;SBYTE101,2520
+typedef unsigned char   UBYTE;UBYTE102,2577
+typedef signed short    SWORD;SWORD103,2636
+typedef unsigned short  UWORD;UWORD104,2694
+typedef signed long     SLONG;SLONG105,2754
+typedef unsigned long   ULONG;ULONG107,2870
+typedef int             BOOL;BOOL108,2930
+	MMERR_OPENING_FILE 117,3046
+	MMERR_OUT_OF_MEMORY,118,3071
+	MMERR_DYNAMIC_LINKING,119,3093
+	MMERR_SAMPLE_TOO_BIG,121,3118
+	MMERR_OUT_OF_HANDLES,122,3141
+	MMERR_UNKNOWN_WAVE_TYPE,123,3164
+	MMERR_LOADING_PATTERN,125,3191
+	MMERR_LOADING_TRACK,126,3215
+	MMERR_LOADING_HEADER,127,3237
+	MMERR_LOADING_SAMPLEINFO,128,3260
+	MMERR_NOT_A_MODULE,129,3287
+	MMERR_NOT_A_STREAM,130,3308
+	MMERR_MED_SYNTHSAMPLES,131,3329
+	MMERR_ITPACK_INVALID_DATA,132,3354
+	MMERR_DETECTING_DEVICE,134,3383
+	MMERR_INVALID_DEVICE,135,3408
+	MMERR_INITIALIZING_MIXER,136,3431
+	MMERR_OPENING_AUDIO,137,3458
+	MMERR_8BIT_ONLY,138,3480
+	MMERR_16BIT_ONLY,139,3498
+	MMERR_STEREO_ONLY,140,3517
+	MMERR_ULAW,141,3537
+	MMERR_NON_BLOCK,142,3550
+	MMERR_AF_AUDIO_PORT,144,3569
+	MMERR_AIX_CONFIG_INIT,146,3592
+	MMERR_AIX_CONFIG_CONTROL,147,3616
+	MMERR_AIX_CONFIG_START,148,3643
+	MMERR_GUS_SETTINGS,150,3669
+	MMERR_GUS_RESET,151,3690
+	MMERR_GUS_TIMER,152,3708
+	MMERR_HP_SETSAMPLESIZE,154,3727
+	MMERR_HP_SETSPEED,155,3752
+	MMERR_HP_CHANNELS,156,3772
+	MMERR_HP_AUDIO_OUTPUT,157,3792
+	MMERR_HP_AUDIO_DESC,158,3816
+	MMERR_HP_BUFFERSIZE,159,3838
+	MMERR_OSS_SETFRAGMENT,161,3861
+	MMERR_OSS_SETSAMPLESIZE,162,3885
+	MMERR_OSS_SETSTEREO,163,3911
+	MMERR_OSS_SETSPEED,164,3933
+	MMERR_SGI_SPEED,166,3955
+	MMERR_SGI_16BIT,167,3973
+	MMERR_SGI_8BIT,168,3991
+	MMERR_SGI_STEREO,169,4008
+	MMERR_SGI_MONO,170,4027
+	MMERR_SUN_INIT,172,4045
+	MMERR_OS2_MIXSETUP,174,4063
+	MMERR_OS2_SEMAPHORE,175,4084
+	MMERR_OS2_TIMER,176,4106
+	MMERR_OS2_THREAD,177,4124
+	MMERR_DS_PRIORITY,179,4144
+	MMERR_DS_BUFFER,180,4164
+	MMERR_DS_FORMAT,181,4182
+	MMERR_DS_NOTIFY,182,4200
+	MMERR_DS_EVENT,183,4218
+	MMERR_DS_THREAD,184,4235
+	MMERR_DS_UPDATE,185,4253
+	MMERR_WINMM_HANDLE,187,4272
+	MMERR_WINMM_ALLOCATED,188,4293
+	MMERR_WINMM_DEVICEID,189,4317
+	MMERR_WINMM_FORMAT,190,4340
+	MMERR_WINMM_UNKNOWN,191,4361
+	MMERR_MAC_SPEED,193,4384
+	MMERR_MAC_START,194,4402
+	MMERR_MAX196,4421
+typedef void (MikMod_handler)MikMod_handler203,4473
+typedef MikMod_handler *MikMod_handler_t;MikMod_handler_t204,4510
+MIKMODAPI extern int  MikMod_errno;206,4553
+MIKMODAPI extern BOOL MikMod_critical;207,4589
+typedef struct MREADER MREADER241,5620
+} MREADER;MREADER247,5825
+typedef struct MWRITER MWRITER249,5837
+} MWRITER;MWRITER254,6016
+#define SFX_CRITICAL 261,6106
+#define SF_16BITS 264,6181
+#define SF_STEREO 265,6212
+#define SF_SIGNED 266,6243
+#define SF_BIG_ENDIAN 267,6274
+#define SF_DELTA 268,6305
+#define SF_ITPACKED	269,6336
+#define	SF_FORMATMASK	271,6365
+#define SF_LOOP 275,6425
+#define SF_BIDI 276,6456
+#define SF_REVERSE 277,6487
+#define SF_SUSTAIN 278,6518
+#define SF_PLAYBACKMASK	280,6550
+#define SF_OWNPAN	284,6616
+#define SF_UST_LOOP 285,6642
+#define SF_EXTRAPLAYBACKMASK	287,6674
+#define PAN_LEFT 290,6735
+#define PAN_CENTER 291,6760
+#define PAN_RIGHT 292,6785
+#define PAN_SURROUND 293,6810
+typedef struct SAMPLE SAMPLE295,6875
+} SAMPLE;SAMPLE321,8100
+#define INSTNOTES 353,9162
+typedef struct ENVPT ENVPT356,9206
+} ENVPT;ENVPT359,9253
+#define ENVPOINTS 362,9290
+typedef struct INSTRUMENT INSTRUMENT365,9339
+} INSTRUMENT;INSTRUMENT408,10502
+#define UF_XMPERIODS 414,10573
+#define UF_LINEAR 415,10631
+#define UF_INST 416,10707
+#define UF_NNA 417,10762
+#define UF_S3MSLIDES 418,10843
+#define UF_BGSLIDES 419,10904
+#define UF_HIGHBPM 420,10979
+#define UF_NOWRAP 421,11035
+#define UF_ARPMEM 422,11116
+#define UF_FT2QUIRKS 423,11175
+typedef struct MODULE MODULE425,11241
+} MODULE;MODULE487,14396
+MIKMODAPI extern struct MLOADER load_669;499,14635
+MIKMODAPI extern struct MLOADER load_amf;500,14726
+MIKMODAPI extern struct MLOADER load_dsm;501,14818
+MIKMODAPI extern struct MLOADER load_far;502,14894
+MIKMODAPI extern struct MLOADER load_gdm;503,14980
+MIKMODAPI extern struct MLOADER load_it;504,15068
+MIKMODAPI extern struct MLOADER load_imf;505,15149
+MIKMODAPI extern struct MLOADER load_med;506,15228
+MIKMODAPI extern struct MLOADER load_m15;507,15314
+MIKMODAPI extern struct MLOADER load_mod;508,15389
+MIKMODAPI extern struct MLOADER load_mtm;509,15474
+MIKMODAPI extern struct MLOADER load_okt;510,15560
+MIKMODAPI extern struct MLOADER load_stm;511,15624
+MIKMODAPI extern struct MLOADER load_stx;512,15705
+MIKMODAPI extern struct MLOADER load_s3m;513,15780
+MIKMODAPI extern struct MLOADER load_ult;514,15861
+MIKMODAPI extern struct MLOADER load_uni;515,15931
+MIKMODAPI extern struct MLOADER load_xm;516,16021
+typedef void (MikMod_player)MikMod_player547,17358
+typedef MikMod_player *MikMod_player_t;MikMod_player_t548,17394
+#define MUTE_EXCLUSIVE 552,17509
+#define MUTE_INCLUSIVE 553,17539
+	MD_MUSIC 560,17607
+	MD_SNDFX561,17622
+	MD_HARDWARE 565,17643
+	MD_SOFTWARE566,17661
+#define DMODE_16BITS 572,17766
+#define DMODE_STEREO 573,17825
+#define DMODE_SOFT_SNDFX 574,17884
+#define DMODE_SOFT_MUSIC 575,17963
+#define DMODE_HQMIXER 576,18034
+#define DMODE_SURROUND 578,18150
+#define DMODE_INTERP 579,18210
+#define DMODE_REVERSE 580,18269
+typedef struct MDRIVER MDRIVER583,18340
+} MDRIVER;MDRIVER618,19689
+MIKMODAPI extern UBYTE md_volume;621,19780
+MIKMODAPI extern UBYTE md_musicvolume;622,19853
+MIKMODAPI extern UBYTE md_sndfxvolume;623,19913
+MIKMODAPI extern UBYTE md_reverb;624,19982
+MIKMODAPI extern UBYTE md_pansep;625,20049
+MIKMODAPI extern UWORD md_device;631,20387
+MIKMODAPI extern UWORD md_mixfreq;632,20439
+MIKMODAPI extern UWORD md_mode;633,20501
+MIKMODAPI extern MDRIVER* md_driver;636,20629
+MIKMODAPI extern struct MDRIVER drv_nos;640,20724
+MIKMODAPI extern struct MDRIVER drv_pipe;641,20783
+MIKMODAPI extern struct MDRIVER drv_raw;642,20846
+MIKMODAPI extern struct MDRIVER drv_stdout;643,20929
+MIKMODAPI extern struct MDRIVER drv_wav;644,20996
+MIKMODAPI extern struct MDRIVER drv_ultra;646,21086
+MIKMODAPI extern struct MDRIVER drv_sam9407;647,21160
+MIKMODAPI extern struct MDRIVER drv_AF;649,21233
+MIKMODAPI extern struct MDRIVER drv_aix;650,21303
+MIKMODAPI extern struct MDRIVER drv_alsa;651,21370
+MIKMODAPI extern struct MDRIVER drv_esd;652,21461
+MIKMODAPI extern struct MDRIVER drv_hp;653,21545
+MIKMODAPI extern struct MDRIVER drv_oss;654,21614
+MIKMODAPI extern struct MDRIVER drv_sgi;655,21700
+MIKMODAPI extern struct MDRIVER drv_sun;656,21768
+MIKMODAPI extern struct MDRIVER drv_dart;658,21851
+MIKMODAPI extern struct MDRIVER drv_os2;659,21928
+MIKMODAPI extern struct MDRIVER drv_ds;661,21991
+MIKMODAPI extern struct MDRIVER drv_win;662,22066
+MIKMODAPI extern struct MDRIVER drv_mac;664,22145
+
+include/mikmod.h,7506
+#define _MIKMOD_H_30,1109
+#define MIKMODAPI 45,1320
+#define MIKMODAPI 47,1366
+#define MIKMODAPI50,1419
+#define LIBMIKMOD_VERSION_MAJOR 57,1483
+#define LIBMIKMOD_VERSION_MINOR 58,1518
+#define LIBMIKMOD_REVISION 59,1553
+#define LIBMIKMOD_VERSION 61,1589
+#define WIN32_LEAN_AND_MEAN73,1833
+#define INCL_DOSSEMAPHORES79,1945
+typedef char CHAR;CHAR82,1995
+typedef signed char     SBYTE;SBYTE90,2073
+typedef unsigned char   UBYTE;UBYTE91,2130
+typedef signed short    SWORD;SWORD92,2189
+typedef unsigned short  UWORD;UWORD93,2247
+typedef signed int      SLONG;SLONG94,2307
+typedef unsigned int    ULONG;ULONG95,2365
+typedef int             BOOL;BOOL96,2425
+typedef signed char     SBYTE;SBYTE101,2520
+typedef unsigned char   UBYTE;UBYTE102,2577
+typedef signed short    SWORD;SWORD103,2636
+typedef unsigned short  UWORD;UWORD104,2694
+typedef signed long     SLONG;SLONG105,2754
+typedef unsigned long   ULONG;ULONG107,2870
+typedef int             BOOL;BOOL108,2930
+	MMERR_OPENING_FILE 117,3046
+	MMERR_OUT_OF_MEMORY,118,3071
+	MMERR_DYNAMIC_LINKING,119,3093
+	MMERR_SAMPLE_TOO_BIG,121,3118
+	MMERR_OUT_OF_HANDLES,122,3141
+	MMERR_UNKNOWN_WAVE_TYPE,123,3164
+	MMERR_LOADING_PATTERN,125,3191
+	MMERR_LOADING_TRACK,126,3215
+	MMERR_LOADING_HEADER,127,3237
+	MMERR_LOADING_SAMPLEINFO,128,3260
+	MMERR_NOT_A_MODULE,129,3287
+	MMERR_NOT_A_STREAM,130,3308
+	MMERR_MED_SYNTHSAMPLES,131,3329
+	MMERR_ITPACK_INVALID_DATA,132,3354
+	MMERR_DETECTING_DEVICE,134,3383
+	MMERR_INVALID_DEVICE,135,3408
+	MMERR_INITIALIZING_MIXER,136,3431
+	MMERR_OPENING_AUDIO,137,3458
+	MMERR_8BIT_ONLY,138,3480
+	MMERR_16BIT_ONLY,139,3498
+	MMERR_STEREO_ONLY,140,3517
+	MMERR_ULAW,141,3537
+	MMERR_NON_BLOCK,142,3550
+	MMERR_AF_AUDIO_PORT,144,3569
+	MMERR_AIX_CONFIG_INIT,146,3592
+	MMERR_AIX_CONFIG_CONTROL,147,3616
+	MMERR_AIX_CONFIG_START,148,3643
+	MMERR_GUS_SETTINGS,150,3669
+	MMERR_GUS_RESET,151,3690
+	MMERR_GUS_TIMER,152,3708
+	MMERR_HP_SETSAMPLESIZE,154,3727
+	MMERR_HP_SETSPEED,155,3752
+	MMERR_HP_CHANNELS,156,3772
+	MMERR_HP_AUDIO_OUTPUT,157,3792
+	MMERR_HP_AUDIO_DESC,158,3816
+	MMERR_HP_BUFFERSIZE,159,3838
+	MMERR_OSS_SETFRAGMENT,161,3861
+	MMERR_OSS_SETSAMPLESIZE,162,3885
+	MMERR_OSS_SETSTEREO,163,3911
+	MMERR_OSS_SETSPEED,164,3933
+	MMERR_SGI_SPEED,166,3955
+	MMERR_SGI_16BIT,167,3973
+	MMERR_SGI_8BIT,168,3991
+	MMERR_SGI_STEREO,169,4008
+	MMERR_SGI_MONO,170,4027
+	MMERR_SUN_INIT,172,4045
+	MMERR_OS2_MIXSETUP,174,4063
+	MMERR_OS2_SEMAPHORE,175,4084
+	MMERR_OS2_TIMER,176,4106
+	MMERR_OS2_THREAD,177,4124
+	MMERR_DS_PRIORITY,179,4144
+	MMERR_DS_BUFFER,180,4164
+	MMERR_DS_FORMAT,181,4182
+	MMERR_DS_NOTIFY,182,4200
+	MMERR_DS_EVENT,183,4218
+	MMERR_DS_THREAD,184,4235
+	MMERR_DS_UPDATE,185,4253
+	MMERR_WINMM_HANDLE,187,4272
+	MMERR_WINMM_ALLOCATED,188,4293
+	MMERR_WINMM_DEVICEID,189,4317
+	MMERR_WINMM_FORMAT,190,4340
+	MMERR_WINMM_UNKNOWN,191,4361
+	MMERR_MAC_SPEED,193,4384
+	MMERR_MAC_START,194,4402
+	MMERR_MAX196,4421
+typedef void (MikMod_handler)MikMod_handler203,4473
+typedef MikMod_handler *MikMod_handler_t;MikMod_handler_t204,4510
+MIKMODAPI extern int  MikMod_errno;206,4553
+MIKMODAPI extern BOOL MikMod_critical;207,4589
+typedef struct MREADER MREADER241,5620
+} MREADER;MREADER247,5825
+typedef struct MWRITER MWRITER249,5837
+} MWRITER;MWRITER254,6016
+#define SFX_CRITICAL 261,6106
+#define SF_16BITS 264,6181
+#define SF_STEREO 265,6212
+#define SF_SIGNED 266,6243
+#define SF_BIG_ENDIAN 267,6274
+#define SF_DELTA 268,6305
+#define SF_ITPACKED	269,6336
+#define	SF_FORMATMASK	271,6365
+#define SF_LOOP 275,6425
+#define SF_BIDI 276,6456
+#define SF_REVERSE 277,6487
+#define SF_SUSTAIN 278,6518
+#define SF_PLAYBACKMASK	280,6550
+#define SF_OWNPAN	284,6616
+#define SF_UST_LOOP 285,6642
+#define SF_EXTRAPLAYBACKMASK	287,6674
+#define PAN_LEFT 290,6735
+#define PAN_CENTER 291,6760
+#define PAN_RIGHT 292,6785
+#define PAN_SURROUND 293,6810
+typedef struct SAMPLE SAMPLE295,6875
+} SAMPLE;SAMPLE321,8100
+#define INSTNOTES 353,9162
+typedef struct ENVPT ENVPT356,9206
+} ENVPT;ENVPT359,9253
+#define ENVPOINTS 362,9290
+typedef struct INSTRUMENT INSTRUMENT365,9339
+} INSTRUMENT;INSTRUMENT408,10502
+#define UF_XMPERIODS 414,10573
+#define UF_LINEAR 415,10631
+#define UF_INST 416,10707
+#define UF_NNA 417,10762
+#define UF_S3MSLIDES 418,10843
+#define UF_BGSLIDES 419,10904
+#define UF_HIGHBPM 420,10979
+#define UF_NOWRAP 421,11035
+#define UF_ARPMEM 422,11116
+#define UF_FT2QUIRKS 423,11175
+typedef struct MODULE MODULE425,11241
+} MODULE;MODULE487,14396
+MIKMODAPI extern struct MLOADER load_669;499,14635
+MIKMODAPI extern struct MLOADER load_amf;500,14726
+MIKMODAPI extern struct MLOADER load_dsm;501,14818
+MIKMODAPI extern struct MLOADER load_far;502,14894
+MIKMODAPI extern struct MLOADER load_gdm;503,14980
+MIKMODAPI extern struct MLOADER load_it;504,15068
+MIKMODAPI extern struct MLOADER load_imf;505,15149
+MIKMODAPI extern struct MLOADER load_med;506,15228
+MIKMODAPI extern struct MLOADER load_m15;507,15314
+MIKMODAPI extern struct MLOADER load_mod;508,15389
+MIKMODAPI extern struct MLOADER load_mtm;509,15474
+MIKMODAPI extern struct MLOADER load_okt;510,15560
+MIKMODAPI extern struct MLOADER load_stm;511,15624
+MIKMODAPI extern struct MLOADER load_stx;512,15705
+MIKMODAPI extern struct MLOADER load_s3m;513,15780
+MIKMODAPI extern struct MLOADER load_ult;514,15861
+MIKMODAPI extern struct MLOADER load_uni;515,15931
+MIKMODAPI extern struct MLOADER load_xm;516,16021
+typedef void (MikMod_player)MikMod_player547,17358
+typedef MikMod_player *MikMod_player_t;MikMod_player_t548,17394
+#define MUTE_EXCLUSIVE 552,17509
+#define MUTE_INCLUSIVE 553,17539
+	MD_MUSIC 560,17607
+	MD_SNDFX561,17622
+	MD_HARDWARE 565,17643
+	MD_SOFTWARE566,17661
+#define DMODE_16BITS 572,17766
+#define DMODE_STEREO 573,17825
+#define DMODE_SOFT_SNDFX 574,17884
+#define DMODE_SOFT_MUSIC 575,17963
+#define DMODE_HQMIXER 576,18034
+#define DMODE_SURROUND 578,18150
+#define DMODE_INTERP 579,18210
+#define DMODE_REVERSE 580,18269
+typedef struct MDRIVER MDRIVER583,18340
+} MDRIVER;MDRIVER618,19689
+MIKMODAPI extern UBYTE md_volume;621,19780
+MIKMODAPI extern UBYTE md_musicvolume;622,19853
+MIKMODAPI extern UBYTE md_sndfxvolume;623,19913
+MIKMODAPI extern UBYTE md_reverb;624,19982
+MIKMODAPI extern UBYTE md_pansep;625,20049
+MIKMODAPI extern UWORD md_device;631,20387
+MIKMODAPI extern UWORD md_mixfreq;632,20439
+MIKMODAPI extern UWORD md_mode;633,20501
+MIKMODAPI extern MDRIVER* md_driver;636,20629
+MIKMODAPI extern struct MDRIVER drv_nos;640,20724
+MIKMODAPI extern struct MDRIVER drv_pipe;641,20783
+MIKMODAPI extern struct MDRIVER drv_raw;642,20846
+MIKMODAPI extern struct MDRIVER drv_stdout;643,20929
+MIKMODAPI extern struct MDRIVER drv_wav;644,20996
+MIKMODAPI extern struct MDRIVER drv_ultra;646,21086
+MIKMODAPI extern struct MDRIVER drv_sam9407;647,21160
+MIKMODAPI extern struct MDRIVER drv_AF;649,21233
+MIKMODAPI extern struct MDRIVER drv_aix;650,21303
+MIKMODAPI extern struct MDRIVER drv_alsa;651,21370
+MIKMODAPI extern struct MDRIVER drv_esd;652,21461
+MIKMODAPI extern struct MDRIVER drv_hp;653,21545
+MIKMODAPI extern struct MDRIVER drv_oss;654,21614
+MIKMODAPI extern struct MDRIVER drv_sgi;655,21700
+MIKMODAPI extern struct MDRIVER drv_sun;656,21768
+MIKMODAPI extern struct MDRIVER drv_dart;658,21851
+MIKMODAPI extern struct MDRIVER drv_os2;659,21928
+MIKMODAPI extern struct MDRIVER drv_ds;661,21991
+MIKMODAPI extern struct MDRIVER drv_win;662,22066
+MIKMODAPI extern struct MDRIVER drv_mac;664,22145
+
+include/mikmod_internals.h,5793
+#define _MIKMOD_INTERNALS_H30,1133
+#define strcasecmp(strcasecmp41,1325
+typedef long		SLONGLONG;SLONGLONG54,1539
+#define NATIVE_64BIT_INT55,1564
+typedef __int64		SLONGLONG;SLONGLONG57,1616
+typedef LONGLONG	SLONGLONG;SLONGLONG59,1689
+typedef long long	SLONGLONG;SLONGLONG61,1723
+#define _mm_errno 66,1792
+#define _mm_critical 67,1823
+extern MikMod_handler_t _mm_errorhandler;68,1860
+#define _mm_free(_mm_free74,2011
+#define _POSIX_THREADS80,2161
+#define DECLARE_MUTEX(DECLARE_MUTEX83,2212
+#define MUTEX_LOCK(MUTEX_LOCK85,2283
+#define MUTEX_UNLOCK(MUTEX_UNLOCK87,2350
+#define DECLARE_MUTEX(DECLARE_MUTEX90,2461
+#define MUTEX_LOCK(MUTEX_LOCK92,2521
+#define MUTEX_UNLOCK(MUTEX_UNLOCK95,2631
+#define DECLARE_MUTEX(DECLARE_MUTEX100,2765
+#define MUTEX_LOCK(MUTEX_LOCK102,2827
+#define MUTEX_UNLOCK(MUTEX_UNLOCK105,2927
+#define DECLARE_MUTEX(DECLARE_MUTEX109,3019
+#define MUTEX_LOCK(MUTEX_LOCK110,3047
+#define MUTEX_UNLOCK(MUTEX_UNLOCK111,3072
+#define _mm_write_SBYTE(_mm_write_SBYTE127,3416
+#define _mm_write_UBYTE(_mm_write_UBYTE128,3462
+#define _mm_read_SBYTE(_mm_read_SBYTE130,3509
+#define _mm_read_UBYTE(_mm_read_UBYTE131,3552
+#define _mm_write_SBYTES(_mm_write_SBYTES133,3596
+#define _mm_write_UBYTES(_mm_write_UBYTES134,3652
+#define _mm_read_SBYTES(_mm_read_SBYTES135,3708
+#define _mm_read_UBYTES(_mm_read_UBYTES136,3763
+#define _mm_fseek(_mm_fseek138,3819
+#define _mm_ftell(_mm_ftell139,3859
+#define _mm_rewind(_mm_rewind140,3891
+#define _mm_eof(_mm_eof142,3938
+typedef struct SAMPLOAD SAMPLOAD195,5929
+} SAMPLOAD;SAMPLOAD205,6243
+#define OCTAVE 223,6859
+#define UniInstrument(UniInstrument238,7310
+#define UniNote(UniNote239,7363
+	UNI_NOTE 247,7551
+	UNI_INSTRUMENT,249,7591
+	UNI_PTEFFECT0,251,7634
+	UNI_PTEFFECT1,252,7669
+	UNI_PTEFFECT2,253,7704
+	UNI_PTEFFECT3,254,7741
+	UNI_PTEFFECT4,255,7781
+	UNI_PTEFFECT5,256,7815
+	UNI_PTEFFECT6,257,7857
+	UNI_PTEFFECT7,258,7899
+	UNI_PTEFFECT8,259,7933
+	UNI_PTEFFECT9,260,7963
+	UNI_PTEFFECTA,261,8003
+	UNI_PTEFFECTB,262,8042
+	UNI_PTEFFECTC,263,8081
+	UNI_PTEFFECTD,264,8119
+	UNI_PTEFFECTE,265,8159
+	UNI_PTEFFECTF,266,8202
+	UNI_S3MEFFECTA,268,8268
+	UNI_S3MEFFECTD,269,8304
+	UNI_S3MEFFECTE,270,8343
+	UNI_S3MEFFECTF,271,8380
+	UNI_S3MEFFECTI,272,8415
+	UNI_S3MEFFECTQ,273,8448
+	UNI_S3MEFFECTR,274,8481
+	UNI_S3MEFFECTT,275,8515
+	UNI_S3MEFFECTU,276,8551
+	UNI_KEYOFF,277,8590
+	UNI_KEYFADE,279,8653
+	UNI_VOLEFFECTS,280,8689
+	UNI_XMEFFECT4,281,8737
+	UNI_XMEFFECTA,282,8771
+	UNI_XMEFFECTE1,283,8810
+	UNI_XMEFFECTE2,284,8850
+	UNI_XMEFFECTEA,285,8892
+	UNI_XMEFFECTEB,286,8939
+	UNI_XMEFFECTG,287,8988
+	UNI_XMEFFECTH,288,9032
+	UNI_XMEFFECTL,289,9078
+	UNI_XMEFFECTP,290,9126
+	UNI_XMEFFECTX1,291,9162
+	UNI_XMEFFECTX2,292,9208
+	UNI_ITEFFECTG,294,9287
+	UNI_ITEFFECTH,295,9327
+	UNI_ITEFFECTI,296,9361
+	UNI_ITEFFECTM,297,9415
+	UNI_ITEFFECTN,298,9460
+	UNI_ITEFFECTP,299,9519
+	UNI_ITEFFECTT,300,9579
+	UNI_ITEFFECTU,301,9617
+	UNI_ITEFFECTW,302,9656
+	UNI_ITEFFECTY,303,9714
+	UNI_ITEFFECTZ,304,9750
+	UNI_ITEFFECTS0,305,9793
+	UNI_ULTEFFECT9,307,9838
+	UNI_MEDSPEED,309,9906
+	UNI_MEDEFFECTF1,310,9921
+	UNI_MEDEFFECTF2,311,9963
+	UNI_MEDEFFECTF3,312,10000
+	UNI_LAST314,10049
+extern UWORD unioperands[317,10063
+	SS_GLISSANDO 321,10143
+	SS_FINETUNE,322,10162
+	SS_VIBWAVE,323,10176
+	SS_TREMWAVE,324,10189
+	SS_PANWAVE,325,10203
+	SS_FRAMEDELAY,326,10216
+	SS_S7EFFECTS,327,10232
+	SS_PANNING,328,10247
+	SS_SURROUND,329,10260
+	SS_HIOFFSET,330,10274
+	SS_PATLOOP,331,10288
+	SS_NOTECUT,332,10301
+	SS_NOTEDELAY,333,10314
+	SS_PATDELAY334,10329
+	VOL_VOLUME 339,10384
+	VOL_PANNING,340,10401
+	VOL_VOLSLIDE,341,10415
+	VOL_PITCHSLIDEDN,342,10430
+	VOL_PITCHSLIDEUP,343,10449
+	VOL_PORTAMENTO,344,10468
+	VOL_VIBRATO345,10485
+#define FILT_CUT 350,10540
+#define FILT_RESONANT 351,10567
+typedef struct FILTER FILTER353,10595
+} FILTER;FILTER355,10641
+#define IF_OWNPAN 360,10711
+#define IF_PITCHPAN 361,10737
+#define EF_ON 364,10786
+#define EF_SUSTAIN 365,10812
+#define EF_LOOP 366,10838
+#define EF_VOLENV 367,10864
+#define NNA_CUT 370,10919
+#define NNA_CONTINUE 371,10945
+#define NNA_OFF 372,10971
+#define NNA_FADE 373,10997
+#define NNA_MASK 375,11024
+#define DCT_OFF 377,11051
+#define DCT_NOTE 378,11077
+#define DCT_SAMPLE 379,11128
+#define DCT_INST 380,11179
+#define DCA_CUT 382,11217
+#define DCA_OFF 383,11243
+#define DCA_FADE 384,11269
+#define KEY_KICK 386,11296
+#define KEY_OFF 387,11322
+#define KEY_FADE 388,11348
+#define KEY_KILL 389,11374
+#define KICK_ABSENT 391,11418
+#define KICK_NOTE 392,11444
+#define KICK_KEYOFF 393,11470
+#define KICK_ENV 394,11496
+#define AV_IT 396,11523
+#define POS_NONE 400,11606
+typedef struct ENVPR ENVPR402,11667
+} ENVPR;ENVPR413,12179
+typedef struct MP_CONTROL MP_CONTROL415,12189
+} MP_CONTROL;MP_CONTROL505,16245
+typedef struct MP_VOICE MP_VOICE509,16352
+} MP_VOICE;MP_VOICE544,17779
+typedef struct MLOADER MLOADER548,17817
+} MLOADER;MLOADER557,18053
+extern MREADER* modreader;560,18097
+extern UWORD   finetune[561,18124
+extern MODULE  of;562,18153
+extern UWORD   npertab[563,18223
+extern SBYTE   remap[565,18299
+extern UBYTE*  poslookup;566,18369
+extern UBYTE   poslookupcnt;568,18508
+extern UWORD*  origpositions;569,18537
+extern BOOL    filters;571,18568
+extern UBYTE   activemacro;572,18634
+extern UBYTE   filtermacros[573,18709
+extern FILTER  filtersettings[574,18772
+extern int*    noteindex;576,18840
+#define STM_NTRACKERS 601,19618
+extern CHAR *STM_Signatures[602,19642
+#define MAXSAMPLEHANDLES 613,19925
+extern UWORD md_bpm;616,20034
+extern UBYTE md_numchn;621,20281
+extern UBYTE md_sngchn;622,20354
+extern UBYTE md_sfxchn;623,20411
+extern UBYTE md_hardchn;624,20477
+extern UBYTE md_softchn;625,20544
+#define MISSING(MISSING655,21433
+
+loaders/load_669.c,517
+typedef struct S69HEADER S69HEADER40,1230
+} S69HEADER;S69HEADER49,1403
+typedef struct S69SAMPLE S69SAMPLE52,1442
+} S69SAMPLE;S69SAMPLE57,1536
+typedef struct S69NOTE S69NOTE60,1569
+} S69NOTE;S69NOTE62,1608
+static	S69NOTE* s69pat=67,1676
+static	S69HEADER* mh=69,1725
+static	CHAR* S69_Version[72,1784
+BOOL S69_Test(79,1879
+BOOL S69_Init(113,2743
+void S69_Cleanup(121,2913
+static BOOL S69_LoadPatterns(127,2975
+BOOL S69_Load(236,5440
+CHAR *S69_LoadTitle(333,8178
+MIKMODAPI MLOADER load_669=345,8370
+
+loaders/load_amf.c,583
+typedef struct AMFHEADER AMFHEADER39,1224
+} AMFHEADER;AMFHEADER50,1650
+typedef struct AMFSAMPLE AMFSAMPLE52,1664
+} AMFSAMPLE;AMFSAMPLE62,1837
+typedef struct AMFNOTE AMFNOTE64,1851
+} AMFNOTE;AMFNOTE68,1947
+static AMFHEADER *mh 72,1993
+#define AMFTEXTLEN 73,2022
+static CHAR AMF_Version[74,2044
+static AMFNOTE *track 75,2110
+BOOL AMF_Test(79,2170
+BOOL AMF_Init(91,2376
+void AMF_Cleanup(99,2541
+static BOOL AMF_UnpackTrack(105,2602
+static UBYTE* AMF_ConvertTrack(170,4110
+BOOL AMF_Load(314,7731
+CHAR *AMF_LoadTitle(499,12545
+MIKMODAPI MLOADER load_amf=511,12737
+
+loaders/load_dsm.c,879
+#define DSM_MAXCHAN 39,1231
+#define DSM_MAXORDERS 40,1256
+typedef struct DSMSONG DSMSONG42,1285
+} DSMSONG;DSMSONG57,1558
+typedef struct DSMINST DSMINST59,1570
+} DSMINST;DSMINST70,1762
+typedef struct DSMNOTE DSMNOTE72,1774
+} DSMNOTE;DSMNOTE74,1828
+#define DSM_SURROUND 76,1840
+static	CHAR* SONGID=80,1903
+static	CHAR* INSTID=81,1931
+static	CHAR* PATTID=82,1959
+static	UBYTE blockid[84,1988
+static	ULONG blockln;85,2013
+static	ULONG blocklp;86,2035
+static	DSMSONG* mh=87,2057
+static	DSMNOTE* dsmbuf=88,2082
+static	CHAR DSM_Version[90,2112
+static	unsigned char DSMSIG[92,2158
+BOOL DSM_Test(96,2256
+BOOL DSM_Init(106,2422
+void DSM_Cleanup(113,2599
+static BOOL GetBlockHeader(119,2661
+static BOOL DSM_ReadPattern(148,3346
+static UBYTE *DSM_ConvertTrack(181,4033
+BOOL DSM_Load(222,4833
+CHAR *DSM_LoadTitle(322,7595
+MIKMODAPI MLOADER load_dsm=334,7791
+
+loaders/load_far.c,668
+typedef struct FARHEADER1 FARHEADER139,1220
+} FARHEADER1;FARHEADER151,1528
+typedef struct FARHEADER2 FARHEADER253,1543
+} FARHEADER2;FARHEADER259,1656
+typedef struct FARSAMPLE FARSAMPLE61,1671
+} FARSAMPLE;FARSAMPLE70,1824
+typedef struct FARNOTE FARNOTE72,1838
+} FARNOTE;FARNOTE74,1888
+static	CHAR FAR_Version[78,1934
+static	FARHEADER1 *mh1 79,1975
+static	FARHEADER2 *mh2 80,2006
+static	FARNOTE *pat 81,2037
+static	unsigned char FARSIG[83,2066
+BOOL FAR_Test(87,2158
+BOOL FAR_Init(96,2324
+void FAR_Cleanup(105,2568
+static UBYTE *FAR_ConvertTrack(112,2644
+BOOL FAR_Load(158,3628
+CHAR *FAR_LoadTitle(304,7566
+MIKMODAPI MLOADER load_far=316,7761
+
+loaders/load_gdm.c,585
+typedef struct GDMNOTE GDMNOTE46,1384
+} GDMNOTE;GDMNOTE53,1490
+typedef GDMNOTE GDMTRACK[GDMTRACK55,1502
+typedef struct GDMHEADER GDMHEADER57,1533
+} GDMHEADER;GDMHEADER88,2067
+typedef struct GDMSAMPLE GDMSAMPLE90,2081
+} GDMSAMPLE;GDMSAMPLE101,2261
+static GDMHEADER *mh=103,2275
+static GDMNOTE *gdmbuf=104,2330
+CHAR GDM_Version[106,2400
+BOOL GDM_Test(108,2446
+BOOL GDM_Init(126,2784
+void GDM_Cleanup(134,2955
+BOOL GDM_ReadPattern(140,3017
+UBYTE *GDM_ConvertTrack(192,3960
+BOOL GDM_Load(339,8290
+CHAR *GDM_LoadTitle(530,12893
+MIKMODAPI MLOADER load_gdm=540,13049
+
+loaders/load_imf.c,1129
+typedef struct IMFHEADER IMFHEADER40,1242
+} IMFHEADER;IMFHEADER51,1442
+typedef struct IMFCHANNEL IMFCHANNEL54,1479
+} IMFCHANNEL;IMFCHANNEL60,1581
+#define IMFNOTECNT 63,1620
+#define IMFENVCNT 64,1651
+typedef struct IMFINSTHEADER IMFINSTHEADER65,1676
+} IMFINSTHEADER;IMFINSTHEADER89,2101
+typedef struct IMFWAVHEADER IMFWAVHEADER92,2139
+} IMFWAVHEADER;IMFWAVHEADER101,2301
+typedef struct IMFNOTE IMFNOTE103,2318
+} IMFNOTE;IMFNOTE105,2380
+static	CHAR IMF_Version[109,2426
+static	IMFNOTE *imfpat=111,2470
+static	IMFHEADER *mh=112,2499
+BOOL IMF_Test(116,2556
+BOOL IMF_Init(126,2728
+void IMF_Cleanup(134,2898
+static BOOL IMF_ReadPattern(142,2976
+static void IMF_ProcessCmd(191,3895
+static UBYTE* IMF_ConvertTrack(342,7950
+BOOL IMF_Load(369,8488
+#define IMF_SMPINCR 371,8518
+#define IMF_FinishLoadingEnvelope(IMF_FinishLoadingEnvelope500,11934
+#define IMF_FinishLoadingEnvelope(IMF_FinishLoadingEnvelope510,12322
+#define IMF_ProcessEnvelope(IMF_ProcessEnvelope548,13484
+#define IMF_ProcessEnvelope(IMF_ProcessEnvelope564,14178
+CHAR *IMF_LoadTitle(698,17836
+MIKMODAPI MLOADER load_imf=710,18028
+
+loaders/load_it.c,1210
+typedef struct ITHEADER ITHEADER41,1256
+} ITHEADER;ITHEADER63,1844
+typedef struct ITSAMPLE ITSAMPLE66,1882
+} ITSAMPLE;ITSAMPLE86,2309
+#define ITENVCNT 90,2352
+#define ITNOTECNT 91,2372
+typedef struct ITINSTHEADER ITINSTHEADER92,2394
+} ITINSTHEADER;ITINSTHEADER139,4562
+typedef struct ITNOTE ITNOTE143,4623
+} ITNOTE;ITNOTE145,4679
+static ULONG *paraptr=149,4719
+static ITHEADER *mh=150,4785
+static ITNOTE *itpat=151,4811
+static UBYTE *mask=152,4883
+static ITNOTE *last=153,4959
+static int numtrk=154,5030
+static int old_effect;155,5051
+static CHAR* IT_Version[157,5120
+static UBYTE portatable[167,5404
+BOOL IT_Test(171,5494
+BOOL IT_Init(180,5628
+void IT_Cleanup(191,5980
+static BOOL IT_GetNumChannels(213,6531
+static UBYTE* IT_ConvertTrack(238,7082
+static BOOL IT_ReadPattern(307,9062
+static void LoadMidiString(364,10276
+static void IT_LoadMidiConfiguration(379,10602
+BOOL IT_Load(426,11836
+#define IT_LoadEnvelope(IT_LoadEnvelope713,20448
+#define IT_LoadEnvelope(IT_LoadEnvelope726,21036
+#define IT_ProcessEnvelope(IT_ProcessEnvelope801,23149
+#define IT_ProcessEnvelope(IT_ProcessEnvelope817,23817
+CHAR *IT_LoadTitle(955,27653
+MIKMODAPI MLOADER load_it=967,27847
+
+loaders/load_m15.c,807
+typedef struct MSAMPINFO MSAMPINFO41,1290
+} MSAMPINFO;MSAMPINFO48,1450
+typedef struct MODULEHEADER MODULEHEADER50,1464
+} MODULEHEADER;MODULEHEADER56,1777
+typedef struct MODNOTE MODNOTE58,1794
+} MODNOTE;MODNOTE60,1835
+static MODULEHEADER *mh 64,1881
+static MODNOTE *patbuf 65,1913
+static BOOL ust_loader 66,1944
+#define REJECT 69,2066
+static char *signatures[70,2083
+static int siglen[74,2201
+static BOOL LoadModuleHeader(78,2264
+static int CheckPatternType(136,4262
+static BOOL M15_Test(165,4783
+static BOOL M15_Init(231,6440
+static void M15_Cleanup(237,6552
+static void M15_ConvertNote(255,6964
+static UBYTE *M15_ConvertTrack(339,8902
+static BOOL M15_LoadPatterns(353,9140
+static BOOL M15_Load(378,9795
+static CHAR *M15_LoadTitle(465,11834
+MIKMODAPI MLOADER load_m15=477,12061
+
+loaders/load_med.c,1449
+typedef struct MEDHEADER MEDHEADER46,1313
+} MEDHEADER;MEDHEADER65,1918
+typedef struct MEDSAMPLE MEDSAMPLE67,1932
+} MEDSAMPLE;MEDSAMPLE73,2146
+typedef struct MEDSONG MEDSONG75,2160
+} MEDSONG;MEDSONG88,2634
+typedef struct MEDEXP MEDEXP90,2646
+} MEDEXP;MEDEXP108,3148
+typedef struct MMD0NOTE MMD0NOTE110,3159
+} MMD0NOTE;MMD0NOTE112,3201
+typedef struct MMD1NOTE MMD1NOTE114,3214
+} MMD1NOTE;MMD1NOTE116,3259
+typedef struct MEDINSTHEADER MEDINSTHEADER118,3272
+} MEDINSTHEADER;MEDINSTHEADER122,3362
+typedef struct MEDINSTEXT MEDINSTEXT124,3380
+} MEDINSTEXT;MEDINSTEXT129,3478
+typedef struct MEDINSTINFO MEDINSTINFO131,3493
+} MEDINSTINFO;MEDINSTINFO133,3539
+#define MMD0_string 137,3589
+#define MMD1_string 138,3620
+static MEDHEADER *mh 140,3652
+static MEDSONG *ms 141,3681
+static MEDEXP *me 142,3708
+static ULONG *ba 143,3734
+static MMD0NOTE *mmd0pat 144,3759
+static MMD1NOTE *mmd1pat 145,3792
+static BOOL decimalvolumes;147,3826
+static BOOL bpmtempos;148,3854
+#define d0note(d0note150,3878
+#define d1note(d1note151,3942
+static CHAR MED_Version[153,4007
+BOOL MED_Test(157,4083
+BOOL MED_Init(168,4258
+void MED_Cleanup(179,4491
+static void EffectCvt(189,4619
+static UBYTE *MED_Convert1(266,6349
+static UBYTE *MED_Convert0(291,6747
+static BOOL LoadMEDPatterns(320,7221
+static BOOL LoadMMD1Patterns(371,8526
+BOOL MED_Load(424,9937
+CHAR *MED_LoadTitle(680,17046
+MIKMODAPI MLOADER load_med 705,17582
+
+loaders/load_mod.c,992
+typedef struct MSAMPINFO MSAMPINFO44,1321
+} MSAMPINFO;MSAMPINFO51,1481
+typedef struct MODULEHEADER MODULEHEADER53,1495
+} MODULEHEADER;MODULEHEADER60,1849
+typedef struct MODTYPE MODTYPE62,1866
+} MODTYPE;MODTYPE66,1934
+typedef struct MODNOTE MODNOTE68,1946
+} MODNOTE;MODNOTE70,1990
+#define MODULEHEADERSIZE 74,2036
+static CHAR protracker[76,2068
+static CHAR startrekker[77,2109
+static CHAR fasttracker[78,2152
+static CHAR oktalyser[79,2195
+static CHAR oktalyzer[80,2234
+static CHAR taketracker[81,2273
+static CHAR orpheus[82,2316
+static MODULEHEADER *mh 84,2371
+static MODNOTE *patbuf 85,2403
+static int modtype 86,2434
+static BOOL MOD_CheckType(92,2601
+static BOOL MOD_Test(159,4001
+static BOOL MOD_Init(174,4240
+static void MOD_Cleanup(181,4358
+static void ConvertNote(200,4770
+static UBYTE *ConvertTrack(280,6738
+static BOOL ML_LoadPatterns(294,6985
+static BOOL MOD_Load(322,7717
+static CHAR *MOD_LoadTitle(431,10569
+MIKMODAPI MLOADER load_mod 445,10813
+
+loaders/load_mtm.c,537
+typedef struct MTMHEADER MTMHEADER39,1208
+} MTMHEADER;MTMHEADER52,1826
+typedef struct MTMSAMPLE MTMSAMPLE54,1840
+} MTMSAMPLE;MTMSAMPLE62,1985
+typedef struct MTMNOTE MTMNOTE64,1999
+} MTMNOTE;MTMNOTE66,2038
+static MTMHEADER *mh 70,2084
+static MTMNOTE *mtmtrk 71,2113
+static UWORD pat[72,2144
+static CHAR MTM_Version[74,2167
+BOOL MTM_Test(78,2232
+BOOL MTM_Init(87,2366
+void MTM_Cleanup(95,2532
+static UBYTE* MTM_Convert(101,2594
+BOOL MTM_Load(131,3186
+CHAR *MTM_LoadTitle(250,6316
+MIKMODAPI MLOADER load_mtm=262,6508
+
+loaders/load_okt.c,594
+typedef struct OKTSAMPLE OKTSAMPLE52,1483
+} OKTSAMPLE;OKTSAMPLE58,1589
+typedef struct OKTNOTE OKTNOTE60,1603
+} OKTNOTE;OKTNOTE62,1656
+static OKTNOTE *okttrk 66,1702
+BOOL OKT_Test(70,1763
+static UBYTE *OKT_ConvertTrack(94,2541
+static void OKT_doCMOD(158,4090
+static BOOL OKT_doSAMP(177,4575
+static void OKT_doSPEE(229,5726
+static void OKT_doSLEN(237,5861
+static void OKT_doPLEN(243,5975
+static BOOL OKT_doPATT(249,6074
+static BOOL OKT_doPBOD(265,6309
+static void OKT_doSBOD(306,7365
+BOOL OKT_Load(311,7457
+CHAR *OKT_LoadTitle(428,10000
+MIKMODAPI MLOADER load_okt 435,10087
+
+loaders/load_s3m.c,696
+typedef struct S3MHEADER S3MHEADER40,1237
+} S3MHEADER;S3MHEADER61,1604
+typedef struct S3MSAMPLE S3MSAMPLE64,1643
+} S3MSAMPLE;S3MSAMPLE80,1907
+typedef struct S3MNOTE S3MNOTE82,1921
+} S3MNOTE;S3MNOTE84,1975
+static S3MNOTE   *s3mbuf 88,2021
+static S3MHEADER *mh 89,2095
+static UWORD     *paraptr 90,2129
+#define NUMTRACKERS 93,2229
+static CHAR* S3M_Version[94,2251
+static int numeric[103,2544
+BOOL S3M_Test(107,2621
+BOOL S3M_Init(117,2793
+void S3M_Cleanup(127,3055
+static BOOL S3M_GetNumChannels(147,3714
+static BOOL S3M_ReadPattern(170,4198
+static UBYTE* S3M_ConvertTrack(211,4902
+BOOL S3M_Load(239,5407
+CHAR *S3M_LoadTitle(428,11091
+MIKMODAPI MLOADER load_s3m=440,11283
+
+loaders/load_stm.c,603
+typedef struct STMSAMPLE STMSAMPLE40,1251
+} STMSAMPLE;STMSAMPLE53,1642
+typedef struct STMHEADER STMHEADER56,1669
+} STMHEADER;STMHEADER69,2137
+typedef struct STMNOTE STMNOTE71,2151
+} STMNOTE;STMNOTE73,2210
+static STMNOTE *stmbuf 77,2256
+static STMHEADER *mh 78,2287
+static CHAR* STM_Version[81,2343
+BOOL STM_Test(89,2502
+BOOL STM_Init(109,2863
+static void STM_Cleanup(117,3032
+static void STM_ConvertNote(123,3101
+static UBYTE *STM_ConvertTrack(199,5274
+static BOOL STM_LoadPatterns(212,5440
+BOOL STM_Load(239,6091
+CHAR *STM_LoadTitle(341,9306
+MIKMODAPI MLOADER load_stm=353,9498
+
+loaders/load_stx.c,598
+typedef struct STXHEADER STXHEADER46,1294
+} STXHEADER;STXHEADER67,1675
+typedef struct STXSAMPLE STXSAMPLE70,1714
+} STXSAMPLE;STXSAMPLE86,1978
+typedef struct STXNOTE STXNOTE88,1992
+} STXNOTE;STXNOTE90,2046
+static STXNOTE   *stxbuf 94,2092
+static STXHEADER *mh 95,2166
+static UWORD     *paraptr 96,2200
+static BOOL STX_Test(100,2303
+static BOOL STX_Init(118,2656
+static void STX_Cleanup(128,2924
+static BOOL STX_ReadPattern(136,3035
+static UBYTE* STX_ConvertTrack(177,3739
+static BOOL STX_Load(255,5652
+static CHAR *STX_LoadTitle(409,10373
+MIKMODAPI MLOADER load_stx=421,10572
+
+loaders/load_ult.c,599
+typedef struct ULTHEADER ULTHEADER40,1236
+} ULTHEADER;ULTHEADER44,1317
+typedef struct ULTSAMPLE ULTSAMPLE47,1356
+} ULTSAMPLE;ULTSAMPLE58,1554
+typedef struct ULTEVENT ULTEVENT60,1568
+} ULTEVENT;ULTEVENT62,1628
+#define ULTS_16BITS 66,1675
+#define ULTS_LOOP 67,1701
+#define ULTS_REVERSE 68,1727
+#define ULT_VERSION_LEN 70,1755
+static	CHAR ULT_Version[71,1782
+static	ULTEVENT ev;73,1846
+BOOL ULT_Test(77,1896
+BOOL ULT_Init(87,2085
+void ULT_Cleanup(92,2121
+static UBYTE ReadUltEvent(96,2149
+BOOL ULT_Load(115,2572
+CHAR *ULT_LoadTitle(292,6928
+MIKMODAPI MLOADER load_ult=304,7121
+
+loaders/load_uni.c,846
+typedef struct UNIHEADER UNIHEADER39,1255
+} UNIHEADER;UNIHEADER56,1532
+typedef struct UNISMP05 UNISMP0558,1546
+} UNISMP05;UNISMP0572,1783
+static UWORD universion;76,1830
+static UNIHEADER mh;77,1855
+#define UNI_SMPINCR 79,1877
+static UNISMP05 *wh=80,1900
+static char* readstring(84,1964
+BOOL UNI_Test(98,2158
+BOOL UNI_Init(115,2472
+void UNI_Cleanup(120,2508
+static UBYTE* readtrack(126,2560
+static BOOL loadsmp6(206,4026
+static BOOL loadinstr6(277,6264
+#define UNI_LoadEnvelope6(UNI_LoadEnvelope6297,6936
+#define UNI_LoadEnvelope6(UNI_LoadEnvelope6309,7487
+static BOOL loadinstr5(344,8507
+#define UNI_LoadEnvelope5(UNI_LoadEnvelope5362,8914
+#define UNI_LoadEnvelope5(UNI_LoadEnvelope5374,9423
+static BOOL loadsmp5(442,11326
+BOOL UNI_Load(486,12329
+CHAR *UNI_LoadTitle(660,16958
+MIKMODAPI MLOADER load_uni=675,17225
+
+loaders/load_xm.c,1110
+typedef struct XMHEADER XMHEADER39,1220
+} XMHEADER;XMHEADER54,1938
+typedef struct XMINSTHEADER XMINSTHEADER56,1951
+} XMINSTHEADER;XMINSTHEADER62,2178
+#define XMENVCNT 64,2195
+#define XMNOTECNT 65,2219
+typedef struct XMPATCHHEADER XMPATCHHEADER66,2248
+} XMPATCHHEADER;XMPATCHHEADER85,3207
+typedef struct XMWAVHEADER XMWAVHEADER87,3225
+} XMWAVHEADER;XMWAVHEADER102,3868
+typedef struct XMPATHEADER XMPATHEADER104,3884
+} XMPATHEADER;XMPATHEADER109,4111
+typedef struct XMNOTE XMNOTE111,4127
+} XMNOTE;XMNOTE113,4180
+static	XMNOTE *xmpat=117,4225
+static	XMHEADER *mh=118,4252
+#define XM_SMPINCR 121,4330
+static	ULONG *nextwav=122,4352
+static	XMWAVHEADER *wh=123,4380
+BOOL XM_Test(127,4447
+BOOL XM_Init(137,4624
+void XM_Cleanup(143,4721
+static int XM_ReadNote(148,4763
+static UBYTE* XM_Convert(172,5434
+static BOOL LoadPatterns(309,8997
+static BOOL LoadInstruments(391,10854
+#define XM_ProcessEnvelope(XM_ProcessEnvelope463,13319
+#define XM_ProcessEnvelope(XM_ProcessEnvelope483,14174
+BOOL XM_Load(588,17538
+CHAR *XM_LoadTitle(733,21579
+MIKMODAPI MLOADER load_xm=745,21771
+
+macintosh/cwmikmodheaders.h,72
+#define MSL_USE_PRECOMPILED_HEADERS	4,59
+#define HAVE_CONFIG_H 13,213
+
+macintosh/config.h,82
+#define DRV_MAC20,517
+#define HAVE_FCNTL_H39,1101
+#define HAVE_UNISTD_H48,1335
+
+macintosh/mikmod_build.h,0
+
+macintosh/mikmod.h,7506
+#define _MIKMOD_H_30,1109
+#define MIKMODAPI 45,1320
+#define MIKMODAPI 47,1366
+#define MIKMODAPI50,1419
+#define LIBMIKMOD_VERSION_MAJOR 57,1483
+#define LIBMIKMOD_VERSION_MINOR 58,1518
+#define LIBMIKMOD_REVISION 59,1553
+#define LIBMIKMOD_VERSION 61,1589
+#define WIN32_LEAN_AND_MEAN73,1833
+#define INCL_DOSSEMAPHORES79,1945
+typedef char CHAR;CHAR82,1995
+typedef signed char     SBYTE;SBYTE90,2073
+typedef unsigned char   UBYTE;UBYTE91,2130
+typedef signed short    SWORD;SWORD92,2189
+typedef unsigned short  UWORD;UWORD93,2247
+typedef signed int      SLONG;SLONG94,2307
+typedef unsigned int    ULONG;ULONG95,2365
+typedef int             BOOL;BOOL96,2425
+typedef signed char     SBYTE;SBYTE101,2520
+typedef unsigned char   UBYTE;UBYTE102,2577
+typedef signed short    SWORD;SWORD103,2636
+typedef unsigned short  UWORD;UWORD104,2694
+typedef signed long     SLONG;SLONG105,2754
+typedef unsigned long   ULONG;ULONG107,2870
+typedef int             BOOL;BOOL108,2930
+	MMERR_OPENING_FILE 117,3046
+	MMERR_OUT_OF_MEMORY,118,3071
+	MMERR_DYNAMIC_LINKING,119,3093
+	MMERR_SAMPLE_TOO_BIG,121,3118
+	MMERR_OUT_OF_HANDLES,122,3141
+	MMERR_UNKNOWN_WAVE_TYPE,123,3164
+	MMERR_LOADING_PATTERN,125,3191
+	MMERR_LOADING_TRACK,126,3215
+	MMERR_LOADING_HEADER,127,3237
+	MMERR_LOADING_SAMPLEINFO,128,3260
+	MMERR_NOT_A_MODULE,129,3287
+	MMERR_NOT_A_STREAM,130,3308
+	MMERR_MED_SYNTHSAMPLES,131,3329
+	MMERR_ITPACK_INVALID_DATA,132,3354
+	MMERR_DETECTING_DEVICE,134,3383
+	MMERR_INVALID_DEVICE,135,3408
+	MMERR_INITIALIZING_MIXER,136,3431
+	MMERR_OPENING_AUDIO,137,3458
+	MMERR_8BIT_ONLY,138,3480
+	MMERR_16BIT_ONLY,139,3498
+	MMERR_STEREO_ONLY,140,3517
+	MMERR_ULAW,141,3537
+	MMERR_NON_BLOCK,142,3550
+	MMERR_AF_AUDIO_PORT,144,3569
+	MMERR_AIX_CONFIG_INIT,146,3592
+	MMERR_AIX_CONFIG_CONTROL,147,3616
+	MMERR_AIX_CONFIG_START,148,3643
+	MMERR_GUS_SETTINGS,150,3669
+	MMERR_GUS_RESET,151,3690
+	MMERR_GUS_TIMER,152,3708
+	MMERR_HP_SETSAMPLESIZE,154,3727
+	MMERR_HP_SETSPEED,155,3752
+	MMERR_HP_CHANNELS,156,3772
+	MMERR_HP_AUDIO_OUTPUT,157,3792
+	MMERR_HP_AUDIO_DESC,158,3816
+	MMERR_HP_BUFFERSIZE,159,3838
+	MMERR_OSS_SETFRAGMENT,161,3861
+	MMERR_OSS_SETSAMPLESIZE,162,3885
+	MMERR_OSS_SETSTEREO,163,3911
+	MMERR_OSS_SETSPEED,164,3933
+	MMERR_SGI_SPEED,166,3955
+	MMERR_SGI_16BIT,167,3973
+	MMERR_SGI_8BIT,168,3991
+	MMERR_SGI_STEREO,169,4008
+	MMERR_SGI_MONO,170,4027
+	MMERR_SUN_INIT,172,4045
+	MMERR_OS2_MIXSETUP,174,4063
+	MMERR_OS2_SEMAPHORE,175,4084
+	MMERR_OS2_TIMER,176,4106
+	MMERR_OS2_THREAD,177,4124
+	MMERR_DS_PRIORITY,179,4144
+	MMERR_DS_BUFFER,180,4164
+	MMERR_DS_FORMAT,181,4182
+	MMERR_DS_NOTIFY,182,4200
+	MMERR_DS_EVENT,183,4218
+	MMERR_DS_THREAD,184,4235
+	MMERR_DS_UPDATE,185,4253
+	MMERR_WINMM_HANDLE,187,4272
+	MMERR_WINMM_ALLOCATED,188,4293
+	MMERR_WINMM_DEVICEID,189,4317
+	MMERR_WINMM_FORMAT,190,4340
+	MMERR_WINMM_UNKNOWN,191,4361
+	MMERR_MAC_SPEED,193,4384
+	MMERR_MAC_START,194,4402
+	MMERR_MAX196,4421
+typedef void (MikMod_handler)MikMod_handler203,4473
+typedef MikMod_handler *MikMod_handler_t;MikMod_handler_t204,4510
+MIKMODAPI extern int  MikMod_errno;206,4553
+MIKMODAPI extern BOOL MikMod_critical;207,4589
+typedef struct MREADER MREADER241,5620
+} MREADER;MREADER247,5825
+typedef struct MWRITER MWRITER249,5837
+} MWRITER;MWRITER254,6016
+#define SFX_CRITICAL 261,6106
+#define SF_16BITS 264,6181
+#define SF_STEREO 265,6212
+#define SF_SIGNED 266,6243
+#define SF_BIG_ENDIAN 267,6274
+#define SF_DELTA 268,6305
+#define SF_ITPACKED	269,6336
+#define	SF_FORMATMASK	271,6365
+#define SF_LOOP 275,6425
+#define SF_BIDI 276,6456
+#define SF_REVERSE 277,6487
+#define SF_SUSTAIN 278,6518
+#define SF_PLAYBACKMASK	280,6550
+#define SF_OWNPAN	284,6616
+#define SF_UST_LOOP 285,6642
+#define SF_EXTRAPLAYBACKMASK	287,6674
+#define PAN_LEFT 290,6735
+#define PAN_CENTER 291,6760
+#define PAN_RIGHT 292,6785
+#define PAN_SURROUND 293,6810
+typedef struct SAMPLE SAMPLE295,6875
+} SAMPLE;SAMPLE321,8100
+#define INSTNOTES 353,9162
+typedef struct ENVPT ENVPT356,9206
+} ENVPT;ENVPT359,9253
+#define ENVPOINTS 362,9290
+typedef struct INSTRUMENT INSTRUMENT365,9339
+} INSTRUMENT;INSTRUMENT408,10502
+#define UF_XMPERIODS 414,10573
+#define UF_LINEAR 415,10631
+#define UF_INST 416,10707
+#define UF_NNA 417,10762
+#define UF_S3MSLIDES 418,10843
+#define UF_BGSLIDES 419,10904
+#define UF_HIGHBPM 420,10979
+#define UF_NOWRAP 421,11035
+#define UF_ARPMEM 422,11116
+#define UF_FT2QUIRKS 423,11175
+typedef struct MODULE MODULE425,11241
+} MODULE;MODULE487,14396
+MIKMODAPI extern struct MLOADER load_669;499,14635
+MIKMODAPI extern struct MLOADER load_amf;500,14726
+MIKMODAPI extern struct MLOADER load_dsm;501,14818
+MIKMODAPI extern struct MLOADER load_far;502,14894
+MIKMODAPI extern struct MLOADER load_gdm;503,14980
+MIKMODAPI extern struct MLOADER load_it;504,15068
+MIKMODAPI extern struct MLOADER load_imf;505,15149
+MIKMODAPI extern struct MLOADER load_med;506,15228
+MIKMODAPI extern struct MLOADER load_m15;507,15314
+MIKMODAPI extern struct MLOADER load_mod;508,15389
+MIKMODAPI extern struct MLOADER load_mtm;509,15474
+MIKMODAPI extern struct MLOADER load_okt;510,15560
+MIKMODAPI extern struct MLOADER load_stm;511,15624
+MIKMODAPI extern struct MLOADER load_stx;512,15705
+MIKMODAPI extern struct MLOADER load_s3m;513,15780
+MIKMODAPI extern struct MLOADER load_ult;514,15861
+MIKMODAPI extern struct MLOADER load_uni;515,15931
+MIKMODAPI extern struct MLOADER load_xm;516,16021
+typedef void (MikMod_player)MikMod_player547,17358
+typedef MikMod_player *MikMod_player_t;MikMod_player_t548,17394
+#define MUTE_EXCLUSIVE 552,17509
+#define MUTE_INCLUSIVE 553,17539
+	MD_MUSIC 560,17607
+	MD_SNDFX561,17622
+	MD_HARDWARE 565,17643
+	MD_SOFTWARE566,17661
+#define DMODE_16BITS 572,17766
+#define DMODE_STEREO 573,17825
+#define DMODE_SOFT_SNDFX 574,17884
+#define DMODE_SOFT_MUSIC 575,17963
+#define DMODE_HQMIXER 576,18034
+#define DMODE_SURROUND 578,18150
+#define DMODE_INTERP 579,18210
+#define DMODE_REVERSE 580,18269
+typedef struct MDRIVER MDRIVER583,18340
+} MDRIVER;MDRIVER618,19689
+MIKMODAPI extern UBYTE md_volume;621,19780
+MIKMODAPI extern UBYTE md_musicvolume;622,19853
+MIKMODAPI extern UBYTE md_sndfxvolume;623,19913
+MIKMODAPI extern UBYTE md_reverb;624,19982
+MIKMODAPI extern UBYTE md_pansep;625,20049
+MIKMODAPI extern UWORD md_device;631,20387
+MIKMODAPI extern UWORD md_mixfreq;632,20439
+MIKMODAPI extern UWORD md_mode;633,20501
+MIKMODAPI extern MDRIVER* md_driver;636,20629
+MIKMODAPI extern struct MDRIVER drv_nos;640,20724
+MIKMODAPI extern struct MDRIVER drv_pipe;641,20783
+MIKMODAPI extern struct MDRIVER drv_raw;642,20846
+MIKMODAPI extern struct MDRIVER drv_stdout;643,20929
+MIKMODAPI extern struct MDRIVER drv_wav;644,20996
+MIKMODAPI extern struct MDRIVER drv_ultra;646,21086
+MIKMODAPI extern struct MDRIVER drv_sam9407;647,21160
+MIKMODAPI extern struct MDRIVER drv_AF;649,21233
+MIKMODAPI extern struct MDRIVER drv_aix;650,21303
+MIKMODAPI extern struct MDRIVER drv_alsa;651,21370
+MIKMODAPI extern struct MDRIVER drv_esd;652,21461
+MIKMODAPI extern struct MDRIVER drv_hp;653,21545
+MIKMODAPI extern struct MDRIVER drv_oss;654,21614
+MIKMODAPI extern struct MDRIVER drv_sgi;655,21700
+MIKMODAPI extern struct MDRIVER drv_sun;656,21768
+MIKMODAPI extern struct MDRIVER drv_dart;658,21851
+MIKMODAPI extern struct MDRIVER drv_os2;659,21928
+MIKMODAPI extern struct MDRIVER drv_ds;661,21991
+MIKMODAPI extern struct MDRIVER drv_win;662,22066
+MIKMODAPI extern struct MDRIVER drv_mac;664,22145
+
+macintosh/strcasecmp.c,21
+int strcasecmp(2,19
+
+macintosh/strdup.c,18
+char* strdup(1,0
+
+mmio/mmalloc.c,52
+void* _mm_malloc(36,1225
+void* _mm_calloc(48,1457
+
+mmio/mmerror.c,302
+CHAR *_mm_errmsg[43,1390
+MIKMODAPI char *MikMod_strerror(167,4400
+MikMod_handler_t _mm_errorhandler 174,4560
+MIKMODAPI int  _mm_errno 175,4602
+MIKMODAPI BOOL _mm_critical 176,4632
+MikMod_handler_t _mm_registererrorhandler(178,4666
+MIKMODAPI MikMod_handler_t MikMod_RegisterErrorHandler(186,4824
+
+mmio/mmio.c,1836
+#define COPY_BUFSIZE 64,2144
+static long _mm_iobase=66,2172
+FILE* _mm_fopen(68,2213
+BOOL _mm_FileExists(79,2397
+void _mm_iobase_setcur(90,2569
+void _mm_iobase_revert(97,2764
+typedef struct MFILEREADER MFILEREADER104,2852
+} MFILEREADER;MFILEREADER107,2911
+static BOOL _mm_FileReader_Eof(109,2927
+static BOOL _mm_FileReader_Read(114,3024
+static int _mm_FileReader_Get(119,3156
+static BOOL _mm_FileReader_Seek(124,3253
+static long _mm_FileReader_Tell(130,3432
+MREADER *_mm_new_file_reader(135,3542
+void _mm_delete_file_reader 149,3925
+typedef struct MFILEWRITER MFILEWRITER156,4031
+} MFILEWRITER;MFILEWRITER159,4090
+static BOOL _mm_FileWriter_Seek(161,4106
+static long _mm_FileWriter_Tell(166,4242
+static BOOL _mm_FileWriter_Write(171,4341
+static BOOL _mm_FileWriter_Put(176,4483
+MWRITER *_mm_new_file_writer(181,4597
+void _mm_delete_file_writer 194,4945
+void _mm_write_string(201,5056
+void _mm_write_M_UWORD(207,5167
+void _mm_write_I_UWORD(213,5293
+void _mm_write_M_ULONG(219,5419
+void _mm_write_I_ULONG(225,5552
+void _mm_write_M_SWORD(231,5685
+void _mm_write_I_SWORD(236,5781
+void _mm_write_M_SLONG(241,5877
+void _mm_write_I_SLONG(246,5973
+#define DEFINE_MULTIPLE_WRITE_FUNCTION(DEFINE_MULTIPLE_WRITE_FUNCTION252,6110
+#define DEFINE_MULTIPLE_WRITE_FUNCTION(DEFINE_MULTIPLE_WRITE_FUNCTION259,6364
+DEFINE_MULTIPLE_WRITE_FUNCTION(267,6624
+UWORD _mm_read_M_UWORD(284,7136
+UWORD _mm_read_I_UWORD(291,7280
+ULONG _mm_read_M_ULONG(298,7424
+ULONG _mm_read_I_ULONG(305,7573
+SWORD _mm_read_M_SWORD(312,7722
+SWORD _mm_read_I_SWORD(317,7809
+SLONG _mm_read_M_SLONG(322,7896
+SLONG _mm_read_I_SLONG(327,7983
+#define DEFINE_MULTIPLE_READ_FUNCTION(DEFINE_MULTIPLE_READ_FUNCTION333,8111
+#define DEFINE_MULTIPLE_READ_FUNCTION(DEFINE_MULTIPLE_READ_FUNCTION341,8403
+DEFINE_MULTIPLE_READ_FUNCTION(350,8702
+
+playercode/virtch_common.c,1180
+#define VC_PROC0(VC_PROC0107,4140
+#define VC_FUNC0(VC_FUNC0110,4228
+#define VC_PROC1(VC_PROC1113,4326
+#define VC_FUNC1(VC_FUNC1116,4422
+#define VC_PROC2(VC_PROC2119,4528
+#define VC_FUNC2(VC_FUNC2122,4638
+#define VC_PROC0(VC_PROC0125,4763
+#define VC_FUNC0(VC_FUNC0128,4859
+#define VC_PROC1(VC_PROC1131,4965
+#define VC_FUNC1(VC_FUNC1134,5069
+#define VC_PROC2(VC_PROC2137,5183
+#define VC_FUNC2(VC_FUNC2140,5301
+VC_FUNC0(144,5436
+VC_PROC1(165,6122
+#define _VIRTCH_COMMON_224,8101
+static ULONG samples2bytes(226,8126
+static ULONG bytes2samples(233,8276
+ULONG VC1_SilenceBytes(242,8529
+ULONG VC1_WriteBytes(260,9012
+void VC1_Exit(271,9204
+UWORD VC1_VoiceGetVolume(284,9388
+ULONG VC1_VoiceGetPanning(289,9456
+void VC1_VoiceSetFrequency(294,9525
+ULONG VC1_VoiceGetFrequency(299,9602
+void VC1_VoicePlay(304,9673
+void VC1_VoiceStop(315,9999
+BOOL VC1_VoiceStopped(320,10063
+SLONG VC1_VoiceGetPosition(325,10135
+void VC1_VoiceSetVolume(330,10220
+void VC1_VoiceSetPanning(338,10439
+void VC1_SampleUnload(348,10698
+SWORD VC1_SampleLoad(357,10847
+ULONG VC1_SampleSpace(405,11884
+ULONG VC1_SampleLength(410,11940
+ULONG VC1_VoiceRealVolume(417,12059
+
+playercode/mdreg.c,88
+void _mm_registeralldrivers(35,1207
+MIKMODAPI void MikMod_RegisterAllDrivers(103,2456
+
+playercode/mdriver.c,2852
+static	MDRIVER *firstdriver=49,1380
+MIKMODAPI	MDRIVER *md_driver=50,1414
+extern	MODULE *pf;51,1449
+MIKMODAPI	UWORD md_device 53,1496
+MIKMODAPI	UWORD md_mixfreq 54,1535
+MIKMODAPI	UWORD md_mode 55,1578
+MIKMODAPI	UBYTE md_pansep 58,1719
+MIKMODAPI	UBYTE md_reverb 59,1796
+MIKMODAPI	UBYTE md_volume 60,1848
+MIKMODAPI	UBYTE md_musicvolume 61,1924
+MIKMODAPI	UBYTE md_sndfxvolume 62,1986
+		UWORD md_bpm 63,2057
+		UBYTE md_numchn=66,2162
+		UBYTE md_hardchn=67,2207
+static	BOOL  isplaying=70,2290
+static	UBYTE *sfxinfo;71,2333
+static	int sfxpool;72,2356
+static	SAMPLE **md_sample 74,2377
+static	SWORD olddevice 77,2441
+static	void LimitHardVoices(81,2602
+static	void LimitSoftVoices(115,3466
+ULONG MD_SampleSpace(149,4288
+ULONG MD_SampleLength(159,4534
+MIKMODAPI CHAR* MikMod_InfoDriver(170,4797
+void _mm_registerdriver(191,5278
+MIKMODAPI void MikMod_RegisterDriver(202,5468
+MIKMODAPI int MikMod_DriverFromAlias(214,5755
+SWORD MD_SampleLoad(231,6040
+void MD_SampleUnload(247,6354
+MIKMODAPI MikMod_player_t MikMod_RegisterPlayer(252,6428
+MIKMODAPI void MikMod_Update(264,6626
+void Voice_SetVolume_internal(278,6839
+MIKMODAPI void Voice_SetVolume(294,7250
+MIKMODAPI UWORD Voice_GetVolume(301,7387
+void Voice_SetFrequency_internal(313,7590
+MIKMODAPI void Voice_SetFrequency(321,7827
+MIKMODAPI ULONG Voice_GetFrequency(328,7970
+void Voice_SetPanning_internal(340,8179
+MIKMODAPI void Voice_SetPanning(351,8476
+MIKMODAPI ULONG Voice_GetPanning(363,8762
+void Voice_Play_internal(375,8976
+MIKMODAPI void Voice_Play(391,9334
+void Voice_Stop_internal(400,9507
+MIKMODAPI void Voice_Stop(409,9749
+BOOL Voice_Stopped_internal(416,9862
+MIKMODAPI BOOL Voice_Stopped(422,9994
+MIKMODAPI SLONG Voice_GetPosition(433,10152
+MIKMODAPI ULONG Voice_RealVolume(449,10423
+static BOOL _mm_init(461,10659
+MIKMODAPI BOOL MikMod_Init(519,11883
+void MikMod_Exit_internal(532,12071
+MIKMODAPI void MikMod_Exit(547,12345
+static BOOL _mm_reset(558,12613
+MIKMODAPI BOOL MikMod_Reset(592,13295
+BOOL MikMod_SetNumVoices_internal(606,13558
+MIKMODAPI BOOL MikMod_SetNumVoices(654,14673
+BOOL MikMod_EnableOutput_internal(665,14854
+MIKMODAPI BOOL MikMod_EnableOutput(676,15025
+void MikMod_DisableOutput_internal(687,15183
+MIKMODAPI void MikMod_DisableOutput(695,15304
+BOOL MikMod_Active_internal(702,15425
+MIKMODAPI BOOL MikMod_Active(707,15483
+SBYTE Sample_Play_internal(723,15881
+MIKMODAPI SBYTE Sample_Play(762,16887
+MIKMODAPI long MikMod_GetVersion(773,17073
+#define INIT_MUTEX(INIT_MUTEX781,17195
+#define INIT_MUTEX(INIT_MUTEX784,17323
+#define INIT_MUTEX(INIT_MUTEX787,17394
+#define INIT_MUTEX(INIT_MUTEX790,17452
+MIKMODAPI BOOL MikMod_InitThreads(796,17523
+MIKMODAPI void MikMod_Unlock(823,18138
+MIKMODAPI void MikMod_Lock(829,18221
+CHAR *MD_GetAtom(837,18343
+BOOL MD_Access(873,19313
+BOOL MD_DropPrivileges(895,19855
+
+playercode/mdulaw.c,174
+static unsigned char ulaw_comp_table[53,1848
+#define st_linear_to_ulaw(st_linear_to_ulaw55,1889
+void unsignedtoulaw(58,2020
+static unsigned char ulaw_comp_table[72,2331
+
+playercode/mloader.c,1036
+		MREADER *modreader;41,1267
+		MODULE of;42,1289
+static	MLOADER *firstloader=44,1303
+UWORD finetune[46,1338
+MIKMODAPI CHAR* MikMod_InfoLoader(51,1446
+void _mm_registerloader(72,1904
+MIKMODAPI void MikMod_RegisterLoader(83,2085
+BOOL ReadComment(95,2358
+BOOL ReadLinedComment(116,2733
+BOOL AllocPositions(157,3720
+BOOL AllocPatterns(167,3891
+BOOL AllocTracks(188,4368
+BOOL AllocInstruments(198,4548
+BOOL AllocSamples(220,4986
+static BOOL ML_LoadSamples(239,5343
+CHAR *DupStr(252,5668
+static void ML_XFreeSample(278,6260
+static void ML_XFreeInstrument(285,6391
+static void ML_FreeEx(290,6476
+static MODULE *ML_AllocUniMod(321,7179
+void Player_Free_internal(328,7275
+MIKMODAPI void Player_Free(336,7376
+static CHAR* Player_LoadTitle_internal(343,7487
+MIKMODAPI CHAR* Player_LoadTitleFP(367,7919
+MIKMODAPI CHAR* Player_LoadTitle(381,8195
+MODULE* Player_LoadGeneric_internal(400,8577
+MIKMODAPI MODULE* Player_LoadGeneric(504,10815
+MIKMODAPI MODULE* Player_LoadFP(519,11176
+MIKMODAPI MODULE* Player_Load(533,11547
+
+playercode/mlreg.c,99
+void MikMod_RegisterAllLoaders_internal(35,1207
+MIKMODAPI void MikMod_RegisterAllLoaders(58,1833
+
+playercode/mlutil.c,565
+CHAR *STM_Signatures[42,1286
+CHAR *STM_Version[48,1368
+SBYTE  remap[56,1532
+UBYTE* poslookup=57,1594
+UBYTE  poslookupcnt;59,1718
+UWORD* origpositions=60,1739
+BOOL   filters;62,1767
+UBYTE  activemacro;63,1825
+UBYTE  filtermacros[64,1899
+FILTER filtersettings[65,1954
+int*   noteindex=69,2052
+static int noteindexcount=70,2124
+int *AllocLinear(72,2154
+void FreeLinear(81,2323
+int speed_to_finetune(90,2426
+void S3MIT_CreateOrders(118,3096
+void S3MIT_ProcessCmd(138,3582
+void UniEffect(290,7588
+void UniPTEffect(302,7818
+void UniVolEffect(313,8114
+
+playercode/mplayer.c,3428
+		MODULE *pf=52,1613
+static	SWORD mp_channel;53,1659
+static	MP_CONTROL *a;54,1715
+static  int explicitslides;55,1778
+static	UWORD oldperiods[57,1807
+static	UBYTE VibratoTable[64,2042
+static	UBYTE avibtab[69,2209
+static	ULONG lintab[81,2718
+#define LOGFAC 180,8316
+static	UWORD logtab[181,8336
+static	SBYTE PanbrelloTable[210,9562
+static int getrandom(230,10735
+static int MP_FindEmptyChannel(245,11154
+static SWORD Interpolate(277,11773
+UWORD getlinearperiod(283,11929
+static UWORD getlogperiod(291,12039
+static UWORD getoldperiod(307,12291
+static UWORD GetPeriod(323,12639
+static SWORD InterpolateEnv(331,12842
+static SWORD DoPan(336,12956
+static void StartEnvelope(345,13158
+static SWORD ProcessEnvelope(384,14474
+ULONG getfrequency(441,15885
+static void DoEEffects(451,16086
+static void DoVibrato(566,19212
+static void DoTremolo(601,19752
+static void DoVolSlide(638,20362
+static void DoToneSlide(651,20589
+static void DoArpeggio(675,21230
+static void DoS3MVolSlide(693,21517
+static void DoS3MSlideDn(723,22085
+static void DoS3MSlideUp(743,22408
+static void DoS3MTremor(763,22731
+static void DoS3MRetrig(783,23017
+static void DoS3MSpeed(835,24088
+static void DoS3MTempo(846,24249
+static void DoS3MFineVibrato(853,24359
+static void DoS3MTremolo(888,24876
+static void DoXMVolSlide(928,25523
+static void DoXMGlobalSlide(949,25833
+static void DoXMPanSlide(962,26114
+static void DoXMExtraFineSlideUp(983,26472
+static void DoXMExtraFineSlideDown(991,26583
+static void DoITChanVolSlide(1001,26737
+static void DoITGlobalSlide(1028,27139
+static void DoITPanSlide(1055,27578
+static void DoITTempo(1084,28051
+static void DoITVibrato(1098,28242
+static void DoITFineVibrato(1134,28765
+static void DoITTremor(1169,29281
+static void DoITPanbrello(1190,29563
+static void DoITToneSlide(1222,30107
+static void DoSSEffects(1254,31017
+static void DoVolEffects(1324,32743
+static void DoULTSampleOffset(1385,33858
+static void DoMEDSpeed(1399,34134
+static void pt_playeffects(1408,34254
+static void DoNNAEffects(1821,44565
+void pt_UpdateVoices(1888,46131
+void pt_Notes(2069,51216
+void pt_EffectsPass1(2197,54457
+void pt_NNA(2239,55393
+void pt_SetupVoices(2316,57132
+void pt_EffectsPass2(2372,58405
+void Player_HandleTick(2392,58748
+static void Player_Init_internal(2476,61079
+BOOL Player_Init(2505,61673
+void Player_Exit_internal(2525,62060
+void Player_Exit(2538,62282
+MIKMODAPI void Player_SetVolume(2545,62383
+MIKMODAPI MODULE* Player_GetModule(2553,62534
+MIKMODAPI void Player_Start(2564,62667
+void Player_Stop_internal(2585,63018
+MIKMODAPI void Player_Stop(2592,63138
+MIKMODAPI BOOL Player_Active(2599,63242
+MIKMODAPI void Player_NextPosition(2611,63403
+MIKMODAPI void Player_PrevPosition(2636,63799
+MIKMODAPI void Player_SetPosition(2661,64195
+static void Player_Unmute_internal(2691,64700
+MIKMODAPI void Player_Unmute(2720,65398
+static void Player_Mute_internal(2731,65578
+MIKMODAPI void Player_Mute(2761,66281
+static void Player_ToggleMute_internal(2772,66456
+MIKMODAPI void Player_ToggleMute(2803,67243
+MIKMODAPI BOOL Player_Muted(2814,67430
+MIKMODAPI int Player_GetChannelVoice(2826,67612
+MIKMODAPI UWORD Player_GetChannelPeriod(2838,67806
+BOOL Player_Paused_internal(2850,68008
+MIKMODAPI BOOL Player_Paused(2855,68072
+MIKMODAPI void Player_TogglePause(2866,68218
+MIKMODAPI void Player_SetSpeed(2874,68339
+MIKMODAPI void Player_SetTempo(2882,68480
+
+playercode/munitrk.c,669
+#define BUFPAGE 38,1243
+UWORD unioperands[40,1265
+static	UBYTE *rowstart;132,3995
+static	UBYTE *rowend;133,4046
+static	UBYTE *rowpc;134,4108
+void UniSetRow(137,4174
+UBYTE UniGetByte(144,4285
+UWORD UniGetWord(149,4350
+void UniSkipOpcode(154,4425
+UBYTE *UniFindRow(165,4652
+static	UBYTE *unibuf;183,5113
+static	UWORD unimax;184,5180
+static	UWORD unipc;186,5221
+static	UWORD unitt;187,5263
+static	UWORD lastp;188,5309
+void UniReset(191,5408
+static BOOL UniExpand(200,5661
+void UniWriteByte(220,6060
+void UniWriteWord(227,6188
+static BOOL MyCmp(235,6303
+void UniNewline(246,6540
+UBYTE* UniDup(272,7292
+BOOL UniInit(285,7480
+void UniCleanup(293,7601
+
+playercode/mwav.c,298
+typedef struct WAV WAV41,1239
+} WAV;WAV53,1459
+SAMPLE* Sample_LoadGeneric_internal(55,1467
+MIKMODAPI SAMPLE* Sample_LoadGeneric(139,3697
+MIKMODAPI SAMPLE* Sample_LoadFP(150,3876
+MIKMODAPI SAMPLE* Sample_Load(162,4094
+MIKMODAPI void Sample_Free(175,4315
+void Sample_Free_internal(183,4415
+
+playercode/npertab.c,23
+UWORD npertab[35,1206
+
+playercode/sloader.c,765
+static	int sl_rlength;36,1250
+static	SWORD sl_old;37,1273
+static	SWORD *sl_buffer=38,1294
+static	SAMPLOAD *musiclist=39,1324
+#define SLBUFSIZE 42,1415
+typedef struct ITPACK ITPACK45,1476
+} ITPACK;ITPACK50,1649
+BOOL SL_Init(52,1660
+void SL_Exit(64,1865
+static BOOL read_itcompr8(74,2050
+static BOOL read_itcompr16(148,3560
+static BOOL SL_LoadInternal(221,5000
+BOOL SL_Load(333,7499
+SAMPLOAD* SL_RegisterSample(340,7747
+static void FreeSampleList(374,8495
+static ULONG SampleTotal(386,8686
+static ULONG RealSpeed(400,8968
+static BOOL DitherSamples(405,9074
+BOOL SL_LoadSamples(467,10558
+void SL_Sample16to8(480,10776
+void SL_Sample8to16(486,10907
+void SL_SampleSigned(492,11037
+void SL_SampleUnsigned(498,11168
+void SL_HalveSample(504,11302
+
+playercode/virtch.c,2412
+#define BITSHIFT	62,1828
+#define REVERBERATION	63,1848
+#define FRACBITS 65,1879
+#define FRACMASK 66,1899
+#define TICKLSIZE 68,1937
+#define TICKWSIZE 69,1960
+#define TICKBSIZE 70,1993
+#define CLICK_SHIFT 72,2027
+#define CLICK_BUFFER 73,2050
+#define MIN(MIN76,2102
+typedef struct VINFO VINFO79,2151
+} VINFO;VINFO98,3008
+static	SWORD **Samples;100,3018
+static	VINFO *vinf=101,3042
+static	long tickleft,102,3072
+static	long tickleft,samplesthatfit,102,3072
+static	long tickleft,samplesthatfit,vc_memory=102,3072
+static	int vc_softchn;103,3121
+static	SLONGLONG idxsize,104,3144
+static	SLONGLONG idxsize,idxlpos,104,3144
+static	SLONGLONG idxsize,idxlpos,idxlend;104,3144
+static	SLONG *vc_tickbuf=105,3186
+static	UWORD vc_mode;106,3217
+static	int RVc1,110,3272
+static	int RVc1, RVc2,110,3272
+static	int RVc1, RVc2, RVc3,110,3272
+static	int RVc1, RVc2, RVc3, RVc4,110,3272
+static	int RVc1, RVc2, RVc3, RVc4, RVc5,110,3272
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6,110,3272
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6, RVc7,110,3272
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6, RVc7, RVc8;110,3272
+static	ULONG RVRindex;111,3331
+static	SLONG *RVbufL1=114,3386
+static	SLONG *RVbufR1=118,3560
+#define NATIVE 122,3720
+#define NATIVE 124,3751
+static SLONG Mix32MonoNormal(130,3871
+static SLONG Mix32StereoNormal(143,4115
+static SLONG Mix32SurroundNormal(157,4395
+static SLONG Mix32MonoInterp(176,4797
+static SLONG Mix32StereoInterp(197,5353
+static SLONG Mix32SurroundInterp(223,6104
+static SLONGLONG MixMonoNormal(259,6929
+static SLONGLONG MixStereoNormal(272,7183
+static SLONGLONG MixSurroundNormal(286,7473
+static SLONGLONG MixMonoInterp(305,7885
+static SLONGLONG MixStereoInterp(326,8450
+static SLONGLONG MixSurroundInterp(352,9205
+#define COMPUTE_LOC(COMPUTE_LOC388,10052
+#define COMPUTE_LECHO(COMPUTE_LECHO389,10102
+#define COMPUTE_RECHO(COMPUTE_RECHO390,10192
+static void MixReverb_Normal(392,10283
+static void MixReverb_Stereo(423,11212
+#define EXTRACT_SAMPLE(EXTRACT_SAMPLE464,12559
+#define CHECK_SAMPLE(CHECK_SAMPLE465,12624
+#define PUT_SAMPLE(PUT_SAMPLE466,12705
+static void Mix32To16(468,12742
+static void Mix32To8(490,13248
+static void AddChannel(513,13760
+#define _IN_VIRTCH_653,18193
+void VC1_WriteSamples(657,18260
+BOOL VC1_Init(727,20014
+BOOL VC1_PlayStart(749,20485
+void VC1_PlayStop(786,22109
+BOOL VC1_SetNumVoices(808,22728
+
+playercode/virtch2.c,3009
+#define MAXVOL_FACTOR 77,2460
+#define	REVERBERATION 78,2489
+#define SAMPLING_SHIFT 80,2519
+#define SAMPLING_FACTOR 81,2544
+#define	FRACBITS 83,2591
+#define FRACMASK 84,2611
+#define TICKLSIZE 86,2651
+#define TICKWSIZE 87,2674
+#define TICKBSIZE 88,2708
+#define CLICK_SHIFT_BASE 90,2743
+#define CLICK_SHIFT 91,2770
+#define CLICK_BUFFER 92,2826
+#define MIN(MIN95,2880
+typedef struct VINFO VINFO98,2929
+} VINFO;VINFO119,3834
+static	SWORD **Samples;121,3844
+static	VINFO *vinf=122,3868
+static	long tickleft,123,3898
+static	long tickleft,samplesthatfit,123,3898
+static	long tickleft,samplesthatfit,vc_memory=123,3898
+static	int vc_softchn;124,3947
+static	SLONGLONG idxsize,125,3970
+static	SLONGLONG idxsize,idxlpos,125,3970
+static	SLONGLONG idxsize,idxlpos,idxlend;125,3970
+static	SLONG *vc_tickbuf=126,4012
+static	UWORD vc_mode;127,4043
+static	int RVc1,131,4098
+static	int RVc1, RVc2,131,4098
+static	int RVc1, RVc2, RVc3,131,4098
+static	int RVc1, RVc2, RVc3, RVc4,131,4098
+static	int RVc1, RVc2, RVc3, RVc4, RVc5,131,4098
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6,131,4098
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6, RVc7,131,4098
+static	int RVc1, RVc2, RVc3, RVc4, RVc5, RVc6, RVc7, RVc8;131,4098
+static	ULONG RVRindex;132,4157
+static	SLONG *RVbufL1=135,4212
+static	SLONG *RVbufR1=139,4386
+#define NATIVE 143,4546
+#define NATIVE 145,4577
+static SLONG Mix32MonoNormal(151,4697
+static SLONG Mix32StereoNormal(183,5507
+static SLONG Mix32StereoSurround(226,6728
+static SLONGLONG MixMonoNormal(269,7740
+static SLONGLONG MixStereoNormal(301,8588
+static SLONGLONG MixStereoSurround(344,9863
+#define COMPUTE_LOC(COMPUTE_LOC389,11072
+#define COMPUTE_LECHO(COMPUTE_LECHO390,11122
+#define COMPUTE_RECHO(COMPUTE_RECHO391,11212
+static void MixReverb_Normal(393,11303
+static void MixReverb_Stereo(423,12210
+#define EXTRACT_SAMPLE(EXTRACT_SAMPLE464,13522
+#define CHECK_SAMPLE(CHECK_SAMPLE465,13602
+static void Mix32To16_Normal(467,13684
+static void Mix32To16_Stereo(486,14032
+static void Mix32To8_Normal(509,14543
+static void Mix32To8_Stereo(528,14898
+static void AddChannel(551,15436
+#define _IN_VIRTCH_672,19063
+#define VC1_SilenceBytes 674,19084
+#define VC1_WriteSamples 675,19131
+#define VC1_WriteBytes 676,19178
+#define VC1_Exit 677,19223
+#define VC1_VoiceSetVolume 678,19262
+#define VC1_VoiceGetVolume 679,19311
+#define VC1_VoiceSetPanning 680,19360
+#define VC1_VoiceGetPanning 681,19410
+#define VC1_VoiceSetFrequency 682,19460
+#define VC1_VoiceGetFrequency 683,19512
+#define VC1_VoicePlay 684,19564
+#define VC1_VoiceStop 685,19608
+#define VC1_VoiceStopped 686,19652
+#define VC1_VoiceGetPosition 687,19699
+#define VC1_SampleUnload 688,19750
+#define VC1_SampleLoad 689,19797
+#define VC1_SampleSpace 690,19842
+#define VC1_SampleLength 691,19888
+#define VC1_VoiceRealVolume 692,19935
+void VC2_WriteSamples(697,20033
+BOOL VC2_Init(773,21961
+BOOL VC2_PlayStart(804,22632
+void VC2_PlayStop(843,24339
+BOOL VC2_SetNumVoices(866,24959
+
+win32/mikmod.h,7506
+#define _MIKMOD_H_30,1109
+#define MIKMODAPI 45,1320
+#define MIKMODAPI 47,1366
+#define MIKMODAPI50,1419
+#define LIBMIKMOD_VERSION_MAJOR 57,1483
+#define LIBMIKMOD_VERSION_MINOR 58,1518
+#define LIBMIKMOD_REVISION 59,1553
+#define LIBMIKMOD_VERSION 61,1589
+#define WIN32_LEAN_AND_MEAN73,1833
+#define INCL_DOSSEMAPHORES79,1945
+typedef char CHAR;CHAR82,1995
+typedef signed char     SBYTE;SBYTE90,2073
+typedef unsigned char   UBYTE;UBYTE91,2130
+typedef signed short    SWORD;SWORD92,2189
+typedef unsigned short  UWORD;UWORD93,2247
+typedef signed int      SLONG;SLONG94,2307
+typedef unsigned int    ULONG;ULONG95,2365
+typedef int             BOOL;BOOL96,2425
+typedef signed char     SBYTE;SBYTE101,2520
+typedef unsigned char   UBYTE;UBYTE102,2577
+typedef signed short    SWORD;SWORD103,2636
+typedef unsigned short  UWORD;UWORD104,2694
+typedef signed long     SLONG;SLONG105,2754
+typedef unsigned long   ULONG;ULONG107,2870
+typedef int             BOOL;BOOL108,2930
+	MMERR_OPENING_FILE 117,3046
+	MMERR_OUT_OF_MEMORY,118,3071
+	MMERR_DYNAMIC_LINKING,119,3093
+	MMERR_SAMPLE_TOO_BIG,121,3118
+	MMERR_OUT_OF_HANDLES,122,3141
+	MMERR_UNKNOWN_WAVE_TYPE,123,3164
+	MMERR_LOADING_PATTERN,125,3191
+	MMERR_LOADING_TRACK,126,3215
+	MMERR_LOADING_HEADER,127,3237
+	MMERR_LOADING_SAMPLEINFO,128,3260
+	MMERR_NOT_A_MODULE,129,3287
+	MMERR_NOT_A_STREAM,130,3308
+	MMERR_MED_SYNTHSAMPLES,131,3329
+	MMERR_ITPACK_INVALID_DATA,132,3354
+	MMERR_DETECTING_DEVICE,134,3383
+	MMERR_INVALID_DEVICE,135,3408
+	MMERR_INITIALIZING_MIXER,136,3431
+	MMERR_OPENING_AUDIO,137,3458
+	MMERR_8BIT_ONLY,138,3480
+	MMERR_16BIT_ONLY,139,3498
+	MMERR_STEREO_ONLY,140,3517
+	MMERR_ULAW,141,3537
+	MMERR_NON_BLOCK,142,3550
+	MMERR_AF_AUDIO_PORT,144,3569
+	MMERR_AIX_CONFIG_INIT,146,3592
+	MMERR_AIX_CONFIG_CONTROL,147,3616
+	MMERR_AIX_CONFIG_START,148,3643
+	MMERR_GUS_SETTINGS,150,3669
+	MMERR_GUS_RESET,151,3690
+	MMERR_GUS_TIMER,152,3708
+	MMERR_HP_SETSAMPLESIZE,154,3727
+	MMERR_HP_SETSPEED,155,3752
+	MMERR_HP_CHANNELS,156,3772
+	MMERR_HP_AUDIO_OUTPUT,157,3792
+	MMERR_HP_AUDIO_DESC,158,3816
+	MMERR_HP_BUFFERSIZE,159,3838
+	MMERR_OSS_SETFRAGMENT,161,3861
+	MMERR_OSS_SETSAMPLESIZE,162,3885
+	MMERR_OSS_SETSTEREO,163,3911
+	MMERR_OSS_SETSPEED,164,3933
+	MMERR_SGI_SPEED,166,3955
+	MMERR_SGI_16BIT,167,3973
+	MMERR_SGI_8BIT,168,3991
+	MMERR_SGI_STEREO,169,4008
+	MMERR_SGI_MONO,170,4027
+	MMERR_SUN_INIT,172,4045
+	MMERR_OS2_MIXSETUP,174,4063
+	MMERR_OS2_SEMAPHORE,175,4084
+	MMERR_OS2_TIMER,176,4106
+	MMERR_OS2_THREAD,177,4124
+	MMERR_DS_PRIORITY,179,4144
+	MMERR_DS_BUFFER,180,4164
+	MMERR_DS_FORMAT,181,4182
+	MMERR_DS_NOTIFY,182,4200
+	MMERR_DS_EVENT,183,4218
+	MMERR_DS_THREAD,184,4235
+	MMERR_DS_UPDATE,185,4253
+	MMERR_WINMM_HANDLE,187,4272
+	MMERR_WINMM_ALLOCATED,188,4293
+	MMERR_WINMM_DEVICEID,189,4317
+	MMERR_WINMM_FORMAT,190,4340
+	MMERR_WINMM_UNKNOWN,191,4361
+	MMERR_MAC_SPEED,193,4384
+	MMERR_MAC_START,194,4402
+	MMERR_MAX196,4421
+typedef void (MikMod_handler)MikMod_handler203,4473
+typedef MikMod_handler *MikMod_handler_t;MikMod_handler_t204,4510
+MIKMODAPI extern int  MikMod_errno;206,4553
+MIKMODAPI extern BOOL MikMod_critical;207,4589
+typedef struct MREADER MREADER241,5620
+} MREADER;MREADER247,5825
+typedef struct MWRITER MWRITER249,5837
+} MWRITER;MWRITER254,6016
+#define SFX_CRITICAL 261,6106
+#define SF_16BITS 264,6181
+#define SF_STEREO 265,6212
+#define SF_SIGNED 266,6243
+#define SF_BIG_ENDIAN 267,6274
+#define SF_DELTA 268,6305
+#define SF_ITPACKED	269,6336
+#define	SF_FORMATMASK	271,6365
+#define SF_LOOP 275,6425
+#define SF_BIDI 276,6456
+#define SF_REVERSE 277,6487
+#define SF_SUSTAIN 278,6518
+#define SF_PLAYBACKMASK	280,6550
+#define SF_OWNPAN	284,6616
+#define SF_UST_LOOP 285,6642
+#define SF_EXTRAPLAYBACKMASK	287,6674
+#define PAN_LEFT 290,6735
+#define PAN_CENTER 291,6760
+#define PAN_RIGHT 292,6785
+#define PAN_SURROUND 293,6810
+typedef struct SAMPLE SAMPLE295,6875
+} SAMPLE;SAMPLE321,8100
+#define INSTNOTES 353,9162
+typedef struct ENVPT ENVPT356,9206
+} ENVPT;ENVPT359,9253
+#define ENVPOINTS 362,9290
+typedef struct INSTRUMENT INSTRUMENT365,9339
+} INSTRUMENT;INSTRUMENT408,10502
+#define UF_XMPERIODS 414,10573
+#define UF_LINEAR 415,10631
+#define UF_INST 416,10707
+#define UF_NNA 417,10762
+#define UF_S3MSLIDES 418,10843
+#define UF_BGSLIDES 419,10904
+#define UF_HIGHBPM 420,10979
+#define UF_NOWRAP 421,11035
+#define UF_ARPMEM 422,11116
+#define UF_FT2QUIRKS 423,11175
+typedef struct MODULE MODULE425,11241
+} MODULE;MODULE487,14396
+MIKMODAPI extern struct MLOADER load_669;499,14635
+MIKMODAPI extern struct MLOADER load_amf;500,14726
+MIKMODAPI extern struct MLOADER load_dsm;501,14818
+MIKMODAPI extern struct MLOADER load_far;502,14894
+MIKMODAPI extern struct MLOADER load_gdm;503,14980
+MIKMODAPI extern struct MLOADER load_it;504,15068
+MIKMODAPI extern struct MLOADER load_imf;505,15149
+MIKMODAPI extern struct MLOADER load_med;506,15228
+MIKMODAPI extern struct MLOADER load_m15;507,15314
+MIKMODAPI extern struct MLOADER load_mod;508,15389
+MIKMODAPI extern struct MLOADER load_mtm;509,15474
+MIKMODAPI extern struct MLOADER load_okt;510,15560
+MIKMODAPI extern struct MLOADER load_stm;511,15624
+MIKMODAPI extern struct MLOADER load_stx;512,15705
+MIKMODAPI extern struct MLOADER load_s3m;513,15780
+MIKMODAPI extern struct MLOADER load_ult;514,15861
+MIKMODAPI extern struct MLOADER load_uni;515,15931
+MIKMODAPI extern struct MLOADER load_xm;516,16021
+typedef void (MikMod_player)MikMod_player547,17358
+typedef MikMod_player *MikMod_player_t;MikMod_player_t548,17394
+#define MUTE_EXCLUSIVE 552,17509
+#define MUTE_INCLUSIVE 553,17539
+	MD_MUSIC 560,17607
+	MD_SNDFX561,17622
+	MD_HARDWARE 565,17643
+	MD_SOFTWARE566,17661
+#define DMODE_16BITS 572,17766
+#define DMODE_STEREO 573,17825
+#define DMODE_SOFT_SNDFX 574,17884
+#define DMODE_SOFT_MUSIC 575,17963
+#define DMODE_HQMIXER 576,18034
+#define DMODE_SURROUND 578,18150
+#define DMODE_INTERP 579,18210
+#define DMODE_REVERSE 580,18269
+typedef struct MDRIVER MDRIVER583,18340
+} MDRIVER;MDRIVER618,19689
+MIKMODAPI extern UBYTE md_volume;621,19780
+MIKMODAPI extern UBYTE md_musicvolume;622,19853
+MIKMODAPI extern UBYTE md_sndfxvolume;623,19913
+MIKMODAPI extern UBYTE md_reverb;624,19982
+MIKMODAPI extern UBYTE md_pansep;625,20049
+MIKMODAPI extern UWORD md_device;631,20387
+MIKMODAPI extern UWORD md_mixfreq;632,20439
+MIKMODAPI extern UWORD md_mode;633,20501
+MIKMODAPI extern MDRIVER* md_driver;636,20629
+MIKMODAPI extern struct MDRIVER drv_nos;640,20724
+MIKMODAPI extern struct MDRIVER drv_pipe;641,20783
+MIKMODAPI extern struct MDRIVER drv_raw;642,20846
+MIKMODAPI extern struct MDRIVER drv_stdout;643,20929
+MIKMODAPI extern struct MDRIVER drv_wav;644,20996
+MIKMODAPI extern struct MDRIVER drv_ultra;646,21086
+MIKMODAPI extern struct MDRIVER drv_sam9407;647,21160
+MIKMODAPI extern struct MDRIVER drv_AF;649,21233
+MIKMODAPI extern struct MDRIVER drv_aix;650,21303
+MIKMODAPI extern struct MDRIVER drv_alsa;651,21370
+MIKMODAPI extern struct MDRIVER drv_esd;652,21461
+MIKMODAPI extern struct MDRIVER drv_hp;653,21545
+MIKMODAPI extern struct MDRIVER drv_oss;654,21614
+MIKMODAPI extern struct MDRIVER drv_sgi;655,21700
+MIKMODAPI extern struct MDRIVER drv_sun;656,21768
+MIKMODAPI extern struct MDRIVER drv_dart;658,21851
+MIKMODAPI extern struct MDRIVER drv_os2;659,21928
+MIKMODAPI extern struct MDRIVER drv_ds;661,21991
+MIKMODAPI extern struct MDRIVER drv_win;662,22066
+MIKMODAPI extern struct MDRIVER drv_mac;664,22145
+
+win32/mikmod_build.h,7506
+#define _MIKMOD_H_30,1109
+#define MIKMODAPI 45,1320
+#define MIKMODAPI 47,1366
+#define MIKMODAPI50,1419
+#define LIBMIKMOD_VERSION_MAJOR 57,1483
+#define LIBMIKMOD_VERSION_MINOR 58,1518
+#define LIBMIKMOD_REVISION 59,1553
+#define LIBMIKMOD_VERSION 61,1589
+#define WIN32_LEAN_AND_MEAN73,1833
+#define INCL_DOSSEMAPHORES79,1945
+typedef char CHAR;CHAR82,1995
+typedef signed char     SBYTE;SBYTE90,2073
+typedef unsigned char   UBYTE;UBYTE91,2130
+typedef signed short    SWORD;SWORD92,2189
+typedef unsigned short  UWORD;UWORD93,2247
+typedef signed int      SLONG;SLONG94,2307
+typedef unsigned int    ULONG;ULONG95,2365
+typedef int             BOOL;BOOL96,2425
+typedef signed char     SBYTE;SBYTE101,2520
+typedef unsigned char   UBYTE;UBYTE102,2577
+typedef signed short    SWORD;SWORD103,2636
+typedef unsigned short  UWORD;UWORD104,2694
+typedef signed long     SLONG;SLONG105,2754
+typedef unsigned long   ULONG;ULONG107,2870
+typedef int             BOOL;BOOL108,2930
+	MMERR_OPENING_FILE 117,3046
+	MMERR_OUT_OF_MEMORY,118,3071
+	MMERR_DYNAMIC_LINKING,119,3093
+	MMERR_SAMPLE_TOO_BIG,121,3118
+	MMERR_OUT_OF_HANDLES,122,3141
+	MMERR_UNKNOWN_WAVE_TYPE,123,3164
+	MMERR_LOADING_PATTERN,125,3191
+	MMERR_LOADING_TRACK,126,3215
+	MMERR_LOADING_HEADER,127,3237
+	MMERR_LOADING_SAMPLEINFO,128,3260
+	MMERR_NOT_A_MODULE,129,3287
+	MMERR_NOT_A_STREAM,130,3308
+	MMERR_MED_SYNTHSAMPLES,131,3329
+	MMERR_ITPACK_INVALID_DATA,132,3354
+	MMERR_DETECTING_DEVICE,134,3383
+	MMERR_INVALID_DEVICE,135,3408
+	MMERR_INITIALIZING_MIXER,136,3431
+	MMERR_OPENING_AUDIO,137,3458
+	MMERR_8BIT_ONLY,138,3480
+	MMERR_16BIT_ONLY,139,3498
+	MMERR_STEREO_ONLY,140,3517
+	MMERR_ULAW,141,3537
+	MMERR_NON_BLOCK,142,3550
+	MMERR_AF_AUDIO_PORT,144,3569
+	MMERR_AIX_CONFIG_INIT,146,3592
+	MMERR_AIX_CONFIG_CONTROL,147,3616
+	MMERR_AIX_CONFIG_START,148,3643
+	MMERR_GUS_SETTINGS,150,3669
+	MMERR_GUS_RESET,151,3690
+	MMERR_GUS_TIMER,152,3708
+	MMERR_HP_SETSAMPLESIZE,154,3727
+	MMERR_HP_SETSPEED,155,3752
+	MMERR_HP_CHANNELS,156,3772
+	MMERR_HP_AUDIO_OUTPUT,157,3792
+	MMERR_HP_AUDIO_DESC,158,3816
+	MMERR_HP_BUFFERSIZE,159,3838
+	MMERR_OSS_SETFRAGMENT,161,3861
+	MMERR_OSS_SETSAMPLESIZE,162,3885
+	MMERR_OSS_SETSTEREO,163,3911
+	MMERR_OSS_SETSPEED,164,3933
+	MMERR_SGI_SPEED,166,3955
+	MMERR_SGI_16BIT,167,3973
+	MMERR_SGI_8BIT,168,3991
+	MMERR_SGI_STEREO,169,4008
+	MMERR_SGI_MONO,170,4027
+	MMERR_SUN_INIT,172,4045
+	MMERR_OS2_MIXSETUP,174,4063
+	MMERR_OS2_SEMAPHORE,175,4084
+	MMERR_OS2_TIMER,176,4106
+	MMERR_OS2_THREAD,177,4124
+	MMERR_DS_PRIORITY,179,4144
+	MMERR_DS_BUFFER,180,4164
+	MMERR_DS_FORMAT,181,4182
+	MMERR_DS_NOTIFY,182,4200
+	MMERR_DS_EVENT,183,4218
+	MMERR_DS_THREAD,184,4235
+	MMERR_DS_UPDATE,185,4253
+	MMERR_WINMM_HANDLE,187,4272
+	MMERR_WINMM_ALLOCATED,188,4293
+	MMERR_WINMM_DEVICEID,189,4317
+	MMERR_WINMM_FORMAT,190,4340
+	MMERR_WINMM_UNKNOWN,191,4361
+	MMERR_MAC_SPEED,193,4384
+	MMERR_MAC_START,194,4402
+	MMERR_MAX196,4421
+typedef void (MikMod_handler)MikMod_handler203,4473
+typedef MikMod_handler *MikMod_handler_t;MikMod_handler_t204,4510
+MIKMODAPI extern int  MikMod_errno;206,4553
+MIKMODAPI extern BOOL MikMod_critical;207,4589
+typedef struct MREADER MREADER241,5620
+} MREADER;MREADER247,5825
+typedef struct MWRITER MWRITER249,5837
+} MWRITER;MWRITER254,6016
+#define SFX_CRITICAL 261,6106
+#define SF_16BITS 264,6181
+#define SF_STEREO 265,6212
+#define SF_SIGNED 266,6243
+#define SF_BIG_ENDIAN 267,6274
+#define SF_DELTA 268,6305
+#define SF_ITPACKED	269,6336
+#define	SF_FORMATMASK	271,6365
+#define SF_LOOP 275,6425
+#define SF_BIDI 276,6456
+#define SF_REVERSE 277,6487
+#define SF_SUSTAIN 278,6518
+#define SF_PLAYBACKMASK	280,6550
+#define SF_OWNPAN	284,6616
+#define SF_UST_LOOP 285,6642
+#define SF_EXTRAPLAYBACKMASK	287,6674
+#define PAN_LEFT 290,6735
+#define PAN_CENTER 291,6760
+#define PAN_RIGHT 292,6785
+#define PAN_SURROUND 293,6810
+typedef struct SAMPLE SAMPLE295,6875
+} SAMPLE;SAMPLE321,8100
+#define INSTNOTES 353,9162
+typedef struct ENVPT ENVPT356,9206
+} ENVPT;ENVPT359,9253
+#define ENVPOINTS 362,9290
+typedef struct INSTRUMENT INSTRUMENT365,9339
+} INSTRUMENT;INSTRUMENT408,10502
+#define UF_XMPERIODS 414,10573
+#define UF_LINEAR 415,10631
+#define UF_INST 416,10707
+#define UF_NNA 417,10762
+#define UF_S3MSLIDES 418,10843
+#define UF_BGSLIDES 419,10904
+#define UF_HIGHBPM 420,10979
+#define UF_NOWRAP 421,11035
+#define UF_ARPMEM 422,11116
+#define UF_FT2QUIRKS 423,11175
+typedef struct MODULE MODULE425,11241
+} MODULE;MODULE487,14396
+MIKMODAPI extern struct MLOADER load_669;499,14635
+MIKMODAPI extern struct MLOADER load_amf;500,14726
+MIKMODAPI extern struct MLOADER load_dsm;501,14818
+MIKMODAPI extern struct MLOADER load_far;502,14894
+MIKMODAPI extern struct MLOADER load_gdm;503,14980
+MIKMODAPI extern struct MLOADER load_it;504,15068
+MIKMODAPI extern struct MLOADER load_imf;505,15149
+MIKMODAPI extern struct MLOADER load_med;506,15228
+MIKMODAPI extern struct MLOADER load_m15;507,15314
+MIKMODAPI extern struct MLOADER load_mod;508,15389
+MIKMODAPI extern struct MLOADER load_mtm;509,15474
+MIKMODAPI extern struct MLOADER load_okt;510,15560
+MIKMODAPI extern struct MLOADER load_stm;511,15624
+MIKMODAPI extern struct MLOADER load_stx;512,15705
+MIKMODAPI extern struct MLOADER load_s3m;513,15780
+MIKMODAPI extern struct MLOADER load_ult;514,15861
+MIKMODAPI extern struct MLOADER load_uni;515,15931
+MIKMODAPI extern struct MLOADER load_xm;516,16021
+typedef void (MikMod_player)MikMod_player547,17358
+typedef MikMod_player *MikMod_player_t;MikMod_player_t548,17394
+#define MUTE_EXCLUSIVE 552,17509
+#define MUTE_INCLUSIVE 553,17539
+	MD_MUSIC 560,17607
+	MD_SNDFX561,17622
+	MD_HARDWARE 565,17643
+	MD_SOFTWARE566,17661
+#define DMODE_16BITS 572,17766
+#define DMODE_STEREO 573,17825
+#define DMODE_SOFT_SNDFX 574,17884
+#define DMODE_SOFT_MUSIC 575,17963
+#define DMODE_HQMIXER 576,18034
+#define DMODE_SURROUND 578,18150
+#define DMODE_INTERP 579,18210
+#define DMODE_REVERSE 580,18269
+typedef struct MDRIVER MDRIVER583,18340
+} MDRIVER;MDRIVER618,19689
+MIKMODAPI extern UBYTE md_volume;621,19780
+MIKMODAPI extern UBYTE md_musicvolume;622,19853
+MIKMODAPI extern UBYTE md_sndfxvolume;623,19913
+MIKMODAPI extern UBYTE md_reverb;624,19982
+MIKMODAPI extern UBYTE md_pansep;625,20049
+MIKMODAPI extern UWORD md_device;631,20387
+MIKMODAPI extern UWORD md_mixfreq;632,20439
+MIKMODAPI extern UWORD md_mode;633,20501
+MIKMODAPI extern MDRIVER* md_driver;636,20629
+MIKMODAPI extern struct MDRIVER drv_nos;640,20724
+MIKMODAPI extern struct MDRIVER drv_pipe;641,20783
+MIKMODAPI extern struct MDRIVER drv_raw;642,20846
+MIKMODAPI extern struct MDRIVER drv_stdout;643,20929
+MIKMODAPI extern struct MDRIVER drv_wav;644,20996
+MIKMODAPI extern struct MDRIVER drv_ultra;646,21086
+MIKMODAPI extern struct MDRIVER drv_sam9407;647,21160
+MIKMODAPI extern struct MDRIVER drv_AF;649,21233
+MIKMODAPI extern struct MDRIVER drv_aix;650,21303
+MIKMODAPI extern struct MDRIVER drv_alsa;651,21370
+MIKMODAPI extern struct MDRIVER drv_esd;652,21461
+MIKMODAPI extern struct MDRIVER drv_hp;653,21545
+MIKMODAPI extern struct MDRIVER drv_oss;654,21614
+MIKMODAPI extern struct MDRIVER drv_sgi;655,21700
+MIKMODAPI extern struct MDRIVER drv_sun;656,21768
+MIKMODAPI extern struct MDRIVER drv_dart;658,21851
+MIKMODAPI extern struct MDRIVER drv_os2;659,21928
+MIKMODAPI extern struct MDRIVER drv_ds;661,21991
+MIKMODAPI extern struct MDRIVER drv_win;662,22066
+MIKMODAPI extern struct MDRIVER drv_mac;664,22145
+
+acconfig.h,0
+
+config.h,653
+#define STDC_HEADERS 18,517
+#define DRV_PIPE 21,603
+#define DRV_ESD 30,898
+#define DRV_OSS 34,1044
+#define MIKMOD_DYNAMIC 48,1548
+#define HAVE_PTHREAD 50,1626
+#define HAVE_RTLD_GLOBAL 62,2075
+#define HAVE_SETENV 65,2150
+#define HAVE_SNPRINTF 68,2222
+#define HAVE_SRANDOM 71,2295
+#define HAVE_STRCASECMP 74,2370
+#define HAVE_STRDUP 77,2444
+#define HAVE_STRSTR 80,2514
+#define HAVE_DLFCN_H 83,2590
+#define HAVE_FCNTL_H 86,2667
+#define HAVE_MALLOC_H 89,2745
+#define HAVE_MEMORY_H 92,2824
+#define HAVE_STRINGS_H 95,2904
+#define HAVE_SYS_IOCTL_H 113,3441
+#define HAVE_UNISTD_H 116,3523
+#define PACKAGE 119,3570
+#define VERSION 122,3631

@@ -1,0 +1,27 @@
+Begin3
+Title: MikMod sound library
+Version: 3.1.9
+Entered-date: 02/14/2000
+Description: libmikmod is a portable sound library, capable of playing
+Description: samples as well as module files, originally written by
+Description: Jean-Paul Mikkers (MikMak) for DOS. It has subsequently been
+Description: hacked by many hands and now runs on many Unix flavours.
+Description: It uses the OSS /dev/dsp driver including in all recent 
+Description: kernels for output, as well as ALSA and EsounD,
+Description: and will also write wav files. 
+Description: Supported file formats include mod, stm, s3m, mtm, xm,
+Description: and it.
+Description: Full source included, use of this library for music/sound 
+Description: effects in your own programs is encouraged !
+Keywords: mikmod library digital music sound modules audio oss /dev/dsp
+Keywords: mod s3m xm mtm stm it ult dsm med 669 far med amf imf stx gdm okt
+Keywords: alsa esd esound gus ultra
+Author: (Many - see file AUTHORS in source distribution for complete list)
+Maintained-by: Miodrag Vallat <miodrag@mikmod.darkorb.net>
+Primary-site: ftp://metalab.unc.edu/pub/Linux/apps/sound/libs/
+Alternate-site: none
+Original-site: http://mikmod.darkorb.net
+Platforms: AIX, FreeBSD, HP-UX, IRIX, Linux, MacOS, OSF/1, OS/2, NetBSD,
+Platforms: OpenBSD, Solaris, SunOS 4, Win32... more on request !
+Copying-policy: LGPL
+End

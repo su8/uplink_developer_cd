@@ -1,0 +1,209 @@
+--------------------Configuration: libtiff - Win32 Release--------------------
+Begining build with project "F:\VisualC++\contrib\tiff-3.4\libtiff.dsp", at root.
+Active configuration is Win32 (x86) Static Library (based on Win32 (x86) Static Library)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"Release/libtiff.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c "
+			"Browser Database Maker" with flags "/nologo /o"Release/libtiff.bsc" "
+			"Library Manager" with flags "/nologo /out:"libtiff.lib" "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\WINDOWS\TEMP\RSPF385.TMP" with contents </nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"Release/libtiff.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"F:\VisualC++\contrib\tiff-3.4\mkg3states.c"
+"F:\VisualC++\contrib\tiff-3.4\mkspans.c"
+"F:\VisualC++\contrib\tiff-3.4\mkversion.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_aux.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_close.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_codec.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_compress.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_dir.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_dirinfo.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_dirread.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_dumpmode.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_error.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_flush.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_getimage.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_jpeg.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_lzw.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_msdos.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_next.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_open.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_packbits.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_pixarlog.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_predict.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_print.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_read.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_strip.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_swab.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_thunder.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_tile.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_version.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_warning.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_win3.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_win32.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_write.c"
+"F:\VisualC++\contrib\tiff-3.4\tif_zip.c"
+>
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSPF385.TMP" 
+Creating temp file "C:\WINDOWS\TEMP\RSPF386.TMP" with contents </nologo /out:"libtiff.lib" 
+".\Release\mkg3states.obj"
+".\Release\mkspans.obj"
+".\Release\mkversion.obj"
+".\Release\tif_aux.obj"
+".\Release\tif_close.obj"
+".\Release\tif_codec.obj"
+".\Release\tif_compress.obj"
+".\Release\tif_dir.obj"
+".\Release\tif_dirinfo.obj"
+".\Release\tif_dirread.obj"
+".\Release\tif_dirwrite.obj"
+".\Release\tif_dumpmode.obj"
+".\Release\tif_error.obj"
+".\Release\tif_flush.obj"
+".\Release\tif_getimage.obj"
+".\Release\tif_jpeg.obj"
+".\Release\tif_lzw.obj"
+".\Release\tif_msdos.obj"
+".\Release\tif_next.obj"
+".\Release\tif_open.obj"
+".\Release\tif_packbits.obj"
+".\Release\tif_pixarlog.obj"
+".\Release\tif_predict.obj"
+".\Release\tif_print.obj"
+".\Release\tif_read.obj"
+".\Release\tif_strip.obj"
+".\Release\tif_swab.obj"
+".\Release\tif_thunder.obj"
+".\Release\tif_tile.obj"
+".\Release\tif_version.obj"
+".\Release\tif_warning.obj"
+".\Release\tif_win3.obj"
+".\Release\tif_win32.obj"
+".\Release\tif_write.obj"
+".\Release\tif_zip.obj">
+Creating command line "link.exe -lib @C:\WINDOWS\TEMP\RSPF386.TMP" 
+Compiling...
+mkg3states.c
+F:\VisualC++\contrib\tiff-3.4\mkg3states.c(383) : warning C4013: 'getopt' undefined; assuming extern returning int
+mkspans.c
+F:\VisualC++\contrib\tiff-3.4\mkspans.c(51) : warning C4035: 'dumparray' : no return value
+F:\VisualC++\contrib\tiff-3.4\mkspans.c(72) : warning C4035: 'main' : no return value
+mkversion.c
+tif_aux.c
+tif_close.c
+tif_codec.c
+tif_compress.c
+F:\VisualC++\contrib\tiff-3.4\tif_compress.c(128) : warning C4761: integral size mismatch in argument; conversion supplied
+tif_dir.c
+tif_dirinfo.c
+tif_dirread.c
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(124) : warning C4018: '==' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(135) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(148) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(155) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(599) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(654) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(762) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(763) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(764) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(765) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(769) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(770) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(771) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(772) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(789) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(790) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(794) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(795) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirread.c(1356) : warning C4018: '>' : signed/unsigned mismatch
+tif_dirwrite.c
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(288) : warning C4244: '=' : conversion from 'unsigned long ' to 'unsigned short ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(701) : warning C4244: '=' : conversion from 'double ' to 'unsigned long ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(757) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(768) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(779) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(787) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(795) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(803) : warning C4018: '<' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_dirwrite.c(811) : warning C4018: '<' : signed/unsigned mismatch
+tif_dumpmode.c
+tif_error.c
+tif_flush.c
+tif_getimage.c
+F:\VisualC++\contrib\tiff-3.4\tif_getimage.c(1549) : warning C4244: '=' : conversion from 'long ' to 'unsigned char ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_getimage.c(1552) : warning C4244: '=' : conversion from 'long ' to 'unsigned char ', possible loss of data
+tif_jpeg.c
+tif_lzw.c
+F:\VisualC++\contrib\tiff-3.4\tif_lzw.c(390) : warning C4244: '=' : conversion from 'unsigned short ' to 'char ', possible loss of data
+F:\VisualC++\contrib\tiff-3.4\tif_lzw.c(455) : warning C4244: '=' : conversion from 'unsigned short ' to 'char ', possible loss of data
+tif_msdos.c
+F:\VisualC++\contrib\tiff-3.4\tif_msdos.c(89) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'void *'
+F:\VisualC++\contrib\tiff-3.4\tif_msdos.c(89) : warning C4024: 'TIFFClientOpen' : different types for formal and actual parameter 3
+tif_next.c
+F:\VisualC++\contrib\tiff-3.4\tif_next.c(114) : warning C4018: '>=' : signed/unsigned mismatch
+tif_open.c
+tif_packbits.c
+tif_pixarlog.c
+tif_predict.c
+F:\VisualC++\contrib\tiff-3.4\tif_predict.c(173) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_predict.c(217) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_predict.c(234) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_predict.c(296) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_predict.c(342) : warning C4018: '>' : signed/unsigned mismatch
+tif_print.c
+tif_read.c
+F:\VisualC++\contrib\tiff-3.4\tif_read.c(173) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_read.c(249) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_read.c(362) : warning C4018: '>' : signed/unsigned mismatch
+F:\VisualC++\contrib\tiff-3.4\tif_read.c(434) : warning C4018: '>' : signed/unsigned mismatch
+tif_strip.c
+tif_swab.c
+tif_thunder.c
+tif_tile.c
+tif_version.c
+tif_warning.c
+tif_win3.c
+F:\VisualC++\contrib\tiff-3.4\tif_win3.c(92) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'void *'
+F:\VisualC++\contrib\tiff-3.4\tif_win3.c(92) : warning C4024: 'TIFFClientOpen' : different types for formal and actual parameter 3
+tif_win32.c
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(38) : warning C4022: 'ReadFile' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(47) : warning C4022: 'WriteFile' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(71) : warning C4022: 'SetFilePointer' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(77) : warning C4022: 'CloseHandle' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(83) : warning C4022: 'GetFileSize' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(98) : warning C4068: unknown pragma
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(113) : warning C4022: 'CreateFileMappingA' : pointer mismatch for actual parameter 1
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(127) : warning C4068: unknown pragma
+F:\VisualC++\contrib\tiff-3.4\tif_win32.c(200) : warning C4047: '==' : 'int ' differs in levels of indirection from 'void *'
+tif_write.c
+F:\VisualC++\contrib\tiff-3.4\tif_write.c(355) : warning C4018: '>' : signed/unsigned mismatch
+tif_zip.c
+Creating library...
+tif_win3.obj : warning LNK4006: _TIFFFdOpen already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: _TIFFOpen already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFmalloc already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFfree already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFrealloc already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFmemset already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFmemcpy already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFmemcmp already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFerrorHandler already defined in tif_win32.obj; second definition ignored
+tif_win3.obj : warning LNK4006: __TIFFwarningHandler already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: _TIFFFdOpen already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: _TIFFOpen already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFmalloc already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFfree already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFrealloc already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFmemset already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFmemcpy already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFmemcmp already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFerrorHandler already defined in tif_win32.obj; second definition ignored
+tif_msdos.obj : warning LNK4006: __TIFFwarningHandler already defined in tif_win32.obj; second definition ignored
+mkspans.obj : warning LNK4006: _main already defined in mkversion.obj; second definition ignored
+mkg3states.obj : warning LNK4006: _main already defined in mkversion.obj; second definition ignored
+
+
+
+libtiff.lib - 0 error(s), 82 warning(s)

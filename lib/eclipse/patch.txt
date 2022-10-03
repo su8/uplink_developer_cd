@@ -1,0 +1,294 @@
+Hi Chris
+
+Here is a patch to uplink/lib/eclipse, to remove some memory leaks, generally
+improve things :)
+
+Patch summary (lines changed, + means added, - means removed)
+
+ animation.cpp |   11 +++++++++++
+ animation.h   |    5 +++++
+ button.cpp    |    4 ++--
+ eclipse.cpp   |   40 +++++++++++++++++++++++++++++++---------
+ eclipse.h     |    3 +++
+ 5 files changed, 52 insertions, 11 deletions
+
+To apply, either go through each diff below by hand and make the change 
+  (below -2,8 means from lines 2-8 in the source file)
+
+Or get gnu patch for windows (if you don't already have it):
+  ftp://mirrors.rcn.net/mirrors/sources.redhat.com/cygwin/latest/setup.exe
+
+Then:
+1. cd eclipse
+2. patch --dry-run -p1 < patch 
+   (Note that there is no need to edit this file)
+3. patch -p1 < patch
+
+If that doesn't work, and you would like the real files, request
+them and I'll send them to you.
+
+Cheers
+Johnny
+
+diff -b -w -u4 eclipse.orig/animation.cpp eclipse/animation.cpp
+--- eclipse.orig/animation.cpp	Fri Jun  1 19:27:57 2001
++++ eclipse/animation.cpp	Wed May 30 00:26:35 2001
+@@ -2,8 +2,19 @@
+ #include "stdio.h"
+ 
+ #include "animation.h"
+ 
++Animation::Animation()
++    : buttonname(0), button(0), targetC(0)
++{
++}
++
++Animation::~Animation()
++{
++    delete [] buttonname;
++    delete [] targetC;
++}
++
+ void Animation::DebugPrint ()
+ {
+ 
+ 	printf ( "ANIMATION : buttonname:'%s'\n", buttonname );
+diff -b -w -u4 eclipse.orig/animation.h eclipse/animation.h
+--- eclipse.orig/animation.h	Fri Jun  1 19:27:57 2001
++++ eclipse/animation.h	Wed May 30 00:25:54 2001
+@@ -9,8 +9,11 @@
+ {
+ 
+ public:
+ 
++        Animation();
++        ~Animation();
++    
+ 	char *buttonname;
+ 	Button *button;
+ 	int sourceX, sourceY;      // Where the button started
+ 	int targetX, targetY;      // Where the button should end up
+@@ -31,8 +34,10 @@
+ 	void (*callback) ();       // Called when animation has finished
+ 
+ 	void DebugPrint ();		   // Print out all state information
+ 
++        
++
+ };
+ 
+ 
+ 
+diff -b -w -u4 eclipse.orig/button.cpp eclipse/button.cpp
+--- eclipse.orig/button.cpp	Fri Jun  1 19:27:57 2001
++++ eclipse/button.cpp	Wed May 30 00:34:18 2001
+@@ -75,18 +75,18 @@
+ 
+ 	if ( !caption || strcmp ( newcaption, caption ) != 0 ) 
+ 		Dirty ();
+ 
+-	if ( caption ) delete caption;
++	if ( caption ) delete [] caption;
+ 	caption = new char [strlen (newcaption) + 1];
+ 	strcpy ( caption, newcaption );
+ 
+ }
+ 
+ void Button::SetTooltip ( char *newtooltip )
+ {
+ 
+-	if ( tooltip ) delete tooltip;
++	if ( tooltip ) delete [] tooltip;
+ 
+ 	tooltip = new char [strlen (newtooltip) + 1];
+ 	strcpy ( tooltip, newtooltip );
+ 
+diff -b -w -u4 eclipse.orig/eclipse.cpp eclipse/eclipse.cpp
+--- eclipse.orig/eclipse.cpp	Fri Jun  1 19:27:57 2001
++++ eclipse/eclipse.cpp	Fri Jun  1 19:22:51 2001
+@@ -16,10 +16,10 @@
+ 
+ // Protected members ==========================================================
+ 
+ local LList <Button *> buttons;
+-local char *currenthighlight;
+-local char *currentclick;
++local char *currenthighlight = 0;
++local char *currentclick = 0;
+ 
+ local DArray <Animation *> anims;
+ local bool animsenabled = true;
+ 
+@@ -68,12 +68,17 @@
+ 
+ 	buttons.Empty ();
+ 	editablebuttons.Empty ();
+ 
++        delete [] currenthighlight;
++        delete [] currentclick;
++        
+ 	currenthighlight = NULL;
+ 	currentclick = NULL;
++        
+ 	superhighlight_borderwidth = 0;
+ 
++        // EclDirtyClear();
+ }
+ 
+ void EclRegisterButton ( int x, int y, int width, int height, 
+   			 			 char *caption, char *name )
+@@ -134,13 +139,17 @@
+ 	if ( buttons.ValidIndex (index) ) {
+ 
+ 		Button *button = buttons [index];
+ 
+-		if ( EclIsHighlighted ( name ) )
++		if ( EclIsHighlighted ( name ) ) {
++                    delete [] currenthighlight;
+ 			currenthighlight = NULL;
++                }
+ 
+-		if ( EclIsClicked ( name ) )
++		if ( EclIsClicked ( name ) ) {
++                    delete [] currentclick;
+ 			currentclick = NULL;
++                }
+ 
+ 		if ( EclIsSuperHighlighted ( name ) )
+ 			EclSuperUnHighlight ( name );			
+ 
+@@ -290,9 +299,9 @@
+ 
+ 	for ( int i = 0; i < editablebuttons.Size (); ++i ) {
+ 		if ( editablebuttons.ValidIndex (i) ) {
+ 			if ( strcmp ( editablebuttons.GetData (i), name ) == 0 ) {				
+-				delete ( editablebuttons.GetData (i) );
++				delete [] ( editablebuttons.GetData (i) );
+ 				editablebuttons.RemoveData (i);
+ 				break;
+ 			}
+ 		}
+@@ -499,8 +508,10 @@
+ 			if ( buttons [i]->dirty ) 			
+ 				if ( buttons [i]->x >= 0 && buttons [i]->y >= 0 )
+ 					EclDrawButton ( i );				
+ 
++        EclDirtyClear();
++        
+ }
+ 
+ void EclDirtyClear  ()
+ {
+@@ -545,12 +556,16 @@
+ 
+ 	if ( !currenthighlight || strcmp ( currenthighlight, name ) != 0 ) {
+ 	
+ 		EclUnHighlightButton ();
++                delete [] currenthighlight;
+ 		currenthighlight = new char [strlen (name) + 1];
+ 		strcpy ( currenthighlight, name );
+ 		EclDirtyButton ( name );
+ 
++#ifdef _DEBUG
++                SLPrintAllocatedMemory();
++#endif
+ 	}
+ 
+ }
+ 
+@@ -559,8 +574,9 @@
+ 
+ 	if ( !currentclick || strcmp ( currentclick, name ) != 0 ) {
+ 	
+ 		EclUnClickButton ();
++                delete [] currentclick;
+ 		currentclick = new char [strlen (name) + 1];
+ 		strcpy ( currentclick, name );
+ 		EclDirtyButton ( name );
+ 
+@@ -587,8 +603,9 @@
+ 
+ 	Button *button = EclGetButton ( currenthighlight );
+ 	if ( button ) EclDirtyButton ( button->name );
+ 
++        delete [] currenthighlight;
+ 	currenthighlight = NULL;
+ 		
+ }
+ 			
+@@ -924,8 +941,9 @@
+ 				EclRemoveAnimation ( ca );
+ 				ca = EclIsCaptionChangeActive ( bname );
+ 			}
+ 			
++			delete [] anim->targetC;
+ 			anim->targetC = new char [strlen(targetC)+1];
+ 			strcpy ( anim->targetC, targetC );			
+ 			anim->dC = float ( strlen ( targetC ) ) / float ( anim->finishtime - anim->starttime );
+ 			
+@@ -995,10 +1013,12 @@
+ 
+ void EclRemoveAnimation ( int idnumber )
+ {
+ 
+-	if ( anims.ValidIndex ( idnumber ) )
++    if ( anims.ValidIndex ( idnumber ) ) {
++        delete anims[idnumber];
+ 		anims.RemoveData ( idnumber );
++    }
+ 
+ }
+ 
+ void EclUpdateAllAnimations ()
+@@ -1040,8 +1060,9 @@
+ #ifdef _DEBUG
+ 				printf ( "ECL WARNING : Animation defined on invalid button : %s\n", anim->buttonname );
+ #endif
+ 				anims.RemoveData (i);
++                                delete anim;
+ 
+ 			}
+ 			else {
+ 							
+@@ -1083,9 +1104,9 @@
+ 						
+ 					// Remove the animation from the list
+ 					anims.RemoveData ( i );
+ 
+-					// Call the callback if neccisary
++					// Call the callback if neccesary
+ 					if ( anim->callback ) anim->callback ();
+ 					delete anim;
+ 
+ 				}
+@@ -1176,11 +1197,12 @@
+ 						// Buttons caption can change
+ 						int showlength = ( (float) ( EclGetAccurateTime () - anim->starttime ) * anim->dC );
+ 						char *caption = new char [strlen(anim->targetC)+1];
+ 						strcpy ( caption, anim->targetC );
+-						if ( showlength < strlen(anim->targetC)+1 )	caption [showlength] = 0;
++						if ( showlength < strlen(anim->targetC)+1 )
++                                                    caption [showlength] = 0;
+ 						anim->button->SetCaption ( caption );
+-						delete caption;
++						delete [] caption;
+ 
+ 					}
+ 
+ 					// Update any SuperHighlights that exist on this button
+diff -b -w -u4 eclipse.orig/eclipse.h eclipse/eclipse.h
+--- eclipse.orig/eclipse.h	Fri Jun  1 19:27:57 2001
++++ eclipse/eclipse.h	Wed May 30 12:14:54 2001
+@@ -14,8 +14,11 @@
+ 
+ #ifndef _included_eclipse_h
+ #define _included_eclipse_h
+ 
++#ifdef DMALLOC
++#include "dmalloc.h"
++#endif
+ 
+ #include "button.h"
+ #include "animation.h"
+ 
+

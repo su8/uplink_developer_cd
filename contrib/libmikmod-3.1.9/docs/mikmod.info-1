@@ -1,0 +1,1319 @@
+This is mikmod.info, produced by makeinfo version 4.0 from mikmod.texi.
+
+   Copyright (C) 1998, 1999, 2000 Miodrag Vallat and others -- see file
+AUTHORS for complete list.
+
+   This library is free software; you can redistribute it and/or modify
+it under the terms of the GNU Library General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.
+
+INFO-DIR-SECTION Programming
+START-INFO-DIR-ENTRY
+* MikMod: (mikmod).            MikMod Sound Library.
+END-INFO-DIR-ENTRY
+
+
+File: mikmod.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
+
+MikMod Sound Library
+********************
+
+This manual documents the MikMod Sound Library, version 3.1.9.
+
+* Menu:
+
+* Introduction::          What is MikMod ?
+* Tutorial::              Your first steps with MikMod.
+* Using the Library::     A thematic presentation of the library.
+* Library Reference::     Detailed description of the functions and variables.
+* Index::
+
+
+File: mikmod.info,  Node: Introduction,  Next: Tutorial,  Prev: Top,  Up: Top
+
+Introduction
+************
+
+   The MikMod sound library is an excellent way for a programmer to add
+music and sound effects to an application. It is a powerful and
+flexible library, with a simple and easy-to-learn API.
+
+   Besides, the library is very portable and runs under a lot of
+Unices, as well as under OS/2, MacOS and Windows. Third party
+individuals also maintain ports on other systems, including MS-DOS, and
+BeOS.
+
+   MikMod is able to play a wide range of module formats, as well as
+digital sound files. It can take advantage of particular features of
+your system, such as sound redirection over the network. And due to its
+modular nature, the library can be extended to support more sound or
+module formats, as well as new hardware or other sound output
+capabilities, as they appear.
+
+
+File: mikmod.info,  Node: Tutorial,  Next: Using the Library,  Prev: Introduction,  Up: Top
+
+Tutorial
+********
+
+   This chapter will describe how to quickly incorporate MikMod's power
+into your programs. It doesn't cover everything, but that's a start and
+I hope it will help you understand the library philosophy.
+
+   If you have a real tutorial to put here, you're welcome ! Please
+send it to me....
+
+* Menu:
+
+* MikMod Concepts::         A few things you'll need to know.
+* A Skeleton Program::      The shortest MikMod program.
+* Playing Modules::         How to create a simple module player.
+* Playing Sound Effects::   How to play simple sound effects.
+* More Sound Effects::      How to play more complex sound effects.
+
+
+File: mikmod.info,  Node: MikMod Concepts,  Next: A Skeleton Program,  Prev: Tutorial,  Up: Tutorial
+
+MikMod Concepts
+===============
+
+   MikMod's sound output is composed of several sound _voices_ which are
+mixed, either in software or in hardware, depending of your hardware
+configuration. Simple sounds, like sound effects, use only one voice,
+whereas sound modules, which are complex arrangements of sound effects,
+use several voices.
+
+   MikMod's functions operate either globally, or at the voice level.
+Differences in the handling of sound effects and modules are kept
+minimal, at least for the programmer.
+
+   The sound playback is done by a _sound driver_. MikMod provides
+several sound drivers: different hardware drivers, and some software
+drivers to redirect sound in a file, or over the network. You can even
+add your own driver, register it to make it known by the library, and
+select it (this is exactly what the module plugin of xmms does).
+
+
+File: mikmod.info,  Node: A Skeleton Program,  Next: Playing Modules,  Prev: MikMod Concepts,  Up: Tutorial
+
+A Skeleton Program
+==================
+
+   To use MikMod in your program, there are a few steps required:
+
+   * Include `mikmod.h' in your program.
+
+   * Register the MikMod drivers you need.
+
+   * Initialize the library with MikMod_Init() before using any other
+     MikMod function.
+
+   * Give up resources with MikMod_Exit() at the end of your program,
+     or before when MikMod is not needed anymore.
+
+   * Link your application with the MikMod sound library.
+
+   Here's a program which meets all those conditions:
+
+     /* MikMod Sound Library example program: a skeleton */
+     
+     #include <mikmod.h>
+     
+     main()
+     {
+     	/* register all the drivers */
+     	MikMod_RegisterAllDrivers();
+     
+     	/* initialize the library */
+     	MikMod_Init("");
+     
+     	/* we could play some sound here... */
+     
+     	/* give up */
+     	MikMod_Exit();
+     }
+
+   This program would be compiled with the following command line: `cc
+-o example example.c `libmikmod-config --cflags` `libmikmod-config
+--libs`'
+
+   Although this programs produces no useful result, many things happen
+when you run it. The call to `MikMod_RegisterAllDrivers' registers all
+the drivers embedded in the MikMod library. Then, `MikMod_Init' chooses
+the more adequate driver and initializes it. The program is now ready
+to produce sound.  When sound is not needed any more, `MikMod_Exit' is
+used to relinquish memory and let other programs have access to the
+sound hardware.
+
+
+File: mikmod.info,  Node: Playing Modules,  Next: Playing Sound Effects,  Prev: A Skeleton Program,  Up: Tutorial
+
+Playing Modules
+===============
+
+   Our program is not really useful if it doesn't produce sound. Let's
+suppose you've got this good old module, "Beyond music", in the file
+`beyond music.mod'. How about playing it ?
+
+   To do this, we'll use the following code:
+
+     /* MikMod Sound Library example program: a simple module player */
+     
+     #include <unistd.h>
+     #include <mikmod.h>
+     
+     main()
+     {
+         MODULE *module;
+     
+         /* register all the drivers */
+         MikMod_RegisterAllDrivers();
+     
+         /* register all the module loaders */
+         MikMod_RegisterAllLoaders();
+     
+         /* initialize the library */
+         md_mode |= DMODE_SOFT_MUSIC;
+         if (MikMod_Init("")) {
+             fprintf(stderr, "Could not initialize sound, reason: %s\n",
+                     MikMod_strerror(MikMod_errno));
+             return;
+         }
+     
+         /* load module */
+         module = Player_Load("beyond music.mod", 64, 0);
+         if (module) {
+             /* start module */
+             Player_Start(module);
+     
+             while (Player_Active()) {
+                 /* we're playing */
+                 usleep(10000);
+                 MikMod_Update();
+             }
+     
+             Player_Stop();
+             Player_Free(module);
+         } else
+             fprintf(stderr, "Could not load module, reason: %s\n",
+                     MikMod_strerror(MikMod_errno));
+     
+         /* give up */
+         MikMod_Exit();
+     }
+
+   What's new here ? First, we've not only registered MikMod's device
+driver, but also the module loaders. MikMod comes with a large choice
+of module loaders, each one for a different module type. Since _every_
+loader is called to determine the type of the module when we try to
+load them, you may want to register only a few of them to save time. In
+our case, we don't matter, so we happily register every module loader.
+
+   Then, there's an extra line before calling `MikMod_Init'. We change
+the value of MikMod's variable `md_mode' to tell the library that we
+want the module to be processed by the software. If you're the happy
+owner of a GUS-type card, you could use the specific hardware driver
+for this card, but in this case you should not set the
+`DMODE_SOFT_MUSIC' flag.
+
+   We'll ensure that `MikMod_Init' was successful. Note that, in case of
+error, MikMod provides the variable `MikMod_errno', an equivalent of
+the C library `errno' for MikMod errors, and the function
+`MikMod_strerror', an equivalent to `strerror'.
+
+   Now onto serious business ! The module is loaded with the
+`Player_Load' function, which takes the name of the module file, and
+the number of voices afforded to the module. In this case, the module
+has only 4 channels, so 4 voices, but complex Impulse Tracker modules
+can have a lot of voices (as they can have as many as 256 virtual
+channels with so-called "new note actions").  Since empty voices don't
+cost time to be processed, it is safe to use a big value, such as 64 or
+128. The third parameter is the "curiosity" of the loader: if nonzero,
+the loader will search for hidden parts in the module.  However, only a
+few module formats can embed hidden or non played parts, so we'll use 0
+here.
+
+   Now that the module is ready to play, let's play it. We inform the
+player that the current module is `module' with `Player_Start'.
+Playback starts, but we have to update it on a regular basis. So
+there's a loop on the result of the `Player_Active' function, which
+will tell us if the module has finished. To update the sound, we simply
+call `MikMod_Update'.
+
+   After the module has finished, we tell the player its job is done
+with `Player_Stop', and we free the module with `Player_Free'.
+
+
+File: mikmod.info,  Node: Playing Sound Effects,  Next: More Sound Effects,  Prev: Playing Modules,  Up: Tutorial
+
+Playing Sound Effects
+=====================
+
+   MikMod is not limited to playing modules, it can also play sound
+effects, that is, module samples. It's a bit more complex than playing
+a module, because the module player does a lot of things for us, but
+here we'll get more control over what is actually played by the
+program. Let's look at an example:
+
+     /* MikMod Sound Library example program: sound effects */
+     
+     #include <unistd.h>
+     #include <mikmod.h>
+     
+     main()
+     {
+         int i;
+         /* sound effects */
+         SAMPLE *sfx1, *sfx2;
+         /* voices */
+         int v1, v2;
+     
+         /* register all the drivers */
+         MikMod_RegisterAllDrivers();
+     
+         /* initialize the library */
+         md_mode |= DMODE_SOFT_SNDFX;
+         if (MikMod_Init("")) {
+             fprintf(stderr, "Could not initialize sound, reason: %s\n",
+                     MikMod_strerror(MikMod_errno));
+             return;
+         }
+     
+         /* load samples */
+         sfx1 = Sample_Load("first.wav");
+         if (!sfx1) {
+             MikMod_Exit();
+             fprintf(stderr, "Could not load the first sound, reason: %s\n",
+                     MikMod_strerror(MikMod_errno));
+             return;
+         }
+         sfx2 = Sample_Load("second.wav");
+         if (!sfx2) {
+             Sample_Free(sfx1);
+             MikMod_Exit();
+             fprintf(stderr, "Could not load the second sound, reason: %s\n",
+                     MikMod_strerror(MikMod_errno));
+             return;
+         }
+     
+         /* reserve 2 voices for sound effects */
+         MikMod_SetNumVoices(-1, 2);
+     
+         /* get ready to play */
+         MikMod_EnableOutput();
+     
+         /* play first sample */
+         v1 = Sample_Play(sfx1, 0, 0);
+         for(i = 0; i < 5; i++) {
+             MikMod_Update();
+             usleep(100000);
+         }
+     
+         /* half a second later, play second sample */
+         v2 = Sample_Play(sfx2, 0, 0);
+         do {
+             MikMod_Update();
+             usleep(100000);
+         } while (!Voice_Stopped(v2));
+     
+         MikMod_DisableOutput();
+     
+         Sample_Free(sfx2);
+         Sample_Free(sfx1);
+     
+         MikMod_Exit();
+     }
+
+   As in the previous example, we begin by registering the sound
+drivers and initializing the library. We also ask for software mixing
+by modifying the variable `md_mode'.
+
+   It's time to load our files, with the `Sample_Load' function. Don't
+forget to test the return value -- it looks ugly here on such a small
+example, but it's a good practice....
+
+   Since we want to play two samples, we have to use at least two
+voices for this, so we reserve them with a `MikMod_SetNumVoices' call.
+The first parameter sets the number of module voices, and the second
+parameter the number of sound effect voices. We don't want to set the
+number of module voices here (it's part of the module player's duty),
+so we use the value `-1' to keep the current value, and we reserve two
+sound effect voices.
+
+   Now we're ready to play, so we call `MikMod_EnableOutput' to make the
+driver ready. Sound effects are played by the `Sample_Play' function.
+You just have to specify which sample you want to play, the offset from
+which you want to start, and the playback flags. More on this later.
+The function returns the number of the voice associated to the sample.
+
+   We play the first sample for half a second, then we start to play
+the second sample. Since we've reserved two channels, both samples play
+simultaneously. We use the `Voice_Stopped' function to stop the
+playback: it returns the current status of the voice argument, which is
+zero when the sample plays and nonzero when it has finished. So the
+`do' loop will stop exactly when the second sample is finished,
+regardless of the length of the first sample.
+
+   To finish, we get rid of the samples with `Sample_Free'.
+
+
+File: mikmod.info,  Node: More Sound Effects,  Prev: Playing Sound Effects,  Up: Tutorial
+
+More Sound Effects
+==================
+
+   Sound effects have some attributes that can be affected to control
+the playback.  These are speed, panning, and volume. Given a voice
+number, you can affect these attributes with the `Voice_SetFrequency',
+`Voice_SetPanning' and `Voice_SetVolume' functions.
+
+   In the previous example, we'll replace the actual sound code,
+located between the calls to `MikMod_EnableOutput' and
+`MikMod_DisableOutput', with the following code:
+
+         Sample_Play(sfx1, 0, 0);
+         for(i = 0; i < 5; i++) {
+             MikMod_Update();
+             usleep(100000);
+         }
+         v2 = Sample_Play(sfx2, 0, SFX_CRITICAL);
+         i = 0;
+         do {
+             MikMod_Update();
+             usleep(100000);
+             v1 = Sample_Play(sfx1, 0, 0);
+             Voice_SetVolume(v1, 160);
+             Voice_SetFrequency(v1, (sfx1->speed * (100 + i)) / 100);
+             Voice_SetPanning(v2, (i++ & 1) ? PAN_LEFT : PAN_RIGHT);
+         } while (!Voice_Stopped(v2));
+
+   The first thing you'll notice, is the `SFX_CRITICAL' flag used to
+play the second sample. Since the `do' loop will add another sample
+every 100 milliseconds, and we reserved only two voices, the oldest
+voice will be cut each time this is necessary. Doing this would cut the
+second sample in the second iteration of the loop. However, since we
+flagged this sound as "critical", it won't be cut until it is finished
+or we stop it with a `Voice_Stop' call. So the second sample will play
+fine, whereas the first sample will be stopped every loop iteration.
+
+   Then, we choose to play the first sample a bit lower, with
+`Voice_SetVolume'. Volume voices range from 0 (silence) to 256. In this
+case we play the sample at 160. To make the sound look weird, we also
+change its frequency with `Voice_SetFrequency'. The computation in the
+example code makes the frequency more and more high (starting from the
+sample frequency and then increasing from 1% each iteration).
+
+   And to demonstrate the `Voice_SetPanning' function, we change the
+panning of the second sample at each iteration from the left to the
+right. The argument can be one of the standard panning `PAN_LEFT',
+`PAN_RIGHT', `PAN_CENTER' and `PAN_SURROUND'(1), or a numeric value
+between 0 (`PAN_LEFT') and 255 (`PAN_RIGHT').
+
+   ---------- Footnotes ----------
+
+   (1) `PAN_SURROUND' will be mapped to `PAN_CENTER' if the library is
+initialized without surround sound, that is, if the variable `md_mode'
+doesn't have the bit `DMODE_SURROUND' set.
+
+
+File: mikmod.info,  Node: Using the Library,  Next: Library Reference,  Prev: Tutorial,  Up: Top
+
+Using the Library
+*****************
+
+   This chapter describes the various parts of the library and their
+uses.
+
+* Menu:
+
+* Library Version::
+* Type Definitions::
+* Error Handling::
+* Library Initialization::
+* Samples and Voice Control::
+* Modules and Player Control::
+* Loading Data from Memory::
+
+
+File: mikmod.info,  Node: Library Version,  Next: Type Definitions,  Prev: Using the Library,  Up: Using the Library
+
+Library Version
+===============
+
+   If your program is dynamically linked with the MikMod library, you
+should check which version of the library you're working with.  To do
+this, the library defines a few constants and a function to help you
+determine if the current library is adequate for your needs or if it
+has to be upgraded.
+
+   When your program includes `mikmod.h', the following constants are
+defined:
+   * `LIBMIKMOD_VERSION_MAJOR' is equal to the major version number of
+     the library.
+
+   * `LIBMIKMOD_VERSION_MINOR' is equal to the minor version number of
+     the library.
+
+   * `LIBMIKMOD_REVISION' is equal to the revision number of the
+     library.
+
+   * `LIBMIKMOD_VERSION' is the sum of `LIBMIKMOD_VERSION_MAJOR'
+     shifted 16 times, `LIBMIKMOD_VERSION_MINOR' shifted 8 times, and
+     `LIBMIKMOD_REVISION'.
+
+   So your program can tell with which version of the library it has
+been compiled this way:
+     printf("Compiled with MikMod Sound Library version %ld.%ld.%ld\n",
+            LIBMIKMOD_VERSION_MAJOR,
+            LIBMIKMOD_VERSION_MINOR,
+            LIBMIKMOD_REVISION);
+
+   The library defines the function `MikMod_GetVersion' which returns
+the value of LIBMIKMOD_VERSION for the library. If this value is
+greater than or equal to the value of LIBMIKMOD_VERSION for your
+program, your program will work; otherwise, you'll have to inform the
+user that he has to upgrade the library:
+
+     {
+         long engineversion = MikMod_GetVersion();
+     
+         if (engineversion < LIBMIKMOD_VERSION) {
+             printf("MikMod library version (%ld.%ld.%ld) is too old.\n",
+                    (engineversion >> 16) & 255,
+                    (engineversion >> 8) & 255,
+                    (engineversion) & 255);
+             printf("This programs requires at least version %ld.%ld.%ld\n",
+                    LIBMIKMOD_VERSION_MAJOR,
+                    LIBMIKMOD_VERSION_MINOR,
+                    LIBMIKMOD_REVISION);
+             puts("Please upgrade your MikMod library.");
+             exit(1);
+         }
+     }
+
+
+File: mikmod.info,  Node: Type Definitions,  Next: Error Handling,  Prev: Library Version,  Up: Using the Library
+
+Type Definitions
+================
+
+   MikMod defines several data types to deal with modules and sample
+data.  These types have the same memory size on every platform MikMod
+has been ported to.
+
+   These types are:
+   * `CHAR' is a printable character. For now it is the same as the
+     `char' type, but in the future it may be wide char (Unicode) on
+     some platforms.
+
+   * `SBYTE' is a signed 8 bit number (can range from -128 to 127).
+
+   * `UBYTE' is an unsigned 8 bit number (can range from 0 to 255).
+
+   * `SWORD' is a signed 16 bit number (can range from -32768 to 32767).
+
+   * `UWORD' is an unsigned 16 bit number (can range from 0 to 65535).
+
+   * `SLONG' is a signed 32 bit number (can range from -2.147.483.648 to
+     2.147.483.647).
+
+   * `ULONG' is an unsigned 32 bit number (can range from 0 to
+     4.294.967.296).
+
+   * `BOOL' is a boolean value. A value of 0 means false, any other
+     value means true.
+
+
+File: mikmod.info,  Node: Error Handling,  Next: Library Initialization,  Prev: Type Definitions,  Up: Using the Library
+
+Error Handling
+==============
+
+   Although MikMod does its best to do its work, there are times where
+it can't.  For example, if you're trying to play a corrupted file,
+well, it can't.
+
+   A lot of MikMod functions return pointers or `BOOL' values. If the
+pointer is `NULL' or the `BOOL' is 0 (false), an error has occurred.
+
+   MikMod errors are returned in the variable `MikMod_errno'. Each
+possible error has a symbolic error code, beginning with `MMERR_'. For
+example, if MikMod can't open a file, `MikMod_errno' will receive the
+value `MMERR_OPENING_FILE'.
+
+   You can get an appropriate error message to display from the function
+`MikMod_strerror'.
+
+   There is a second error variable named `MikMod_critical'. As its name
+suggests, it is only set if the error lets the library in an unstable
+state.  This variable can only be set by the functions `MikMod_Init',
+`MikMod_SetNumVoices' and `MikMod_EnableOutput'. If one of these
+functions return an error and `MikMod_critical' is set, the library is
+left in the uninitialized state (i.e. it was not initialized, or
+`MikMod_Exit' was called).
+
+   If you prefer, you can use a callback function to get notified of
+errors. This function must be prototyped as `void MyFunction(void)'.
+Then, call `MikMod_RegisterHandler' with your function as argument to
+have it notified when an error occurs. There can only be one callback
+function registered, but `MikMod_RegisterHandler' will return you the
+previous handler, so you can chain handlers if you want to.
+
+
+File: mikmod.info,  Node: Library Initialization,  Next: Samples and Voice Control,  Prev: Error Handling,  Up: Using the Library
+
+Library Initialization and Core Functions
+=========================================
+
+   To initialize the library, you must register some sound drivers
+first. You can either register all the drivers embedded in the library
+for your platform with `MikMod_RegisterAllDrivers', or register only
+some of them with `MikMod_RegisterDriver'. If you choose to register
+the drivers manually, you must be careful in their order, since
+`MikMod_Init' will try them in the order you registered them. The
+`MikMod_RegisterAllDrivers' function registers the network drivers
+first (for playing sound over the network), then the hardware drivers,
+then the disk writers, and in last resort, the nosound driver.
+Registering the nosound driver first would not be a very good idea....
+
+   You can get some printable information regarding the registered
+drivers with `MikMod_InfoDriver'; don't forget to call `free' on the
+returned string when you don't need it anymore.
+
+   After you've registered your drivers, you can initialize the sound
+playback with `MikMod_Init', passing specific information to the driver
+if necessary. If you set the variable `md_device' to zero, which is its
+default value, the driver will be autodetected, that is, the first
+driver in the list that is available on the system will be used;
+otherwise only the driver whose order in the list of the registered
+drivers is equal to `md_device' will be tried.  If your playback
+settings, in the variables `md_mixfreq' and `md_mode', are not
+supported by the device, `MikMod_Init' will fail.
+
+   You can then choose the number of voices you need with
+`MikMod_SetNumVoices', and activate the playback with
+`MikMod_EnableOutput'.
+
+   Don't forget to call `MikMod_Update' as often as possible to process
+the sound mixing. If necessary, fork a dedicated process to do this, or
+if the library is thread-safe on your system, use a dedicated thread.
+
+   If you want to change playback settings, most of them can't be
+changed on the fly. You'll need to stop the playback and reinitialize
+the driver. Use `MikMod_Active' to check if there is still sound
+playing; in this case, call `MikMod_DisableOutput' to end playback.
+Then, change your settings and call `MikMod_Reset'. You're now ready to
+select your number of voices and restart playback.
+
+   When your program ends, don't forget to stop playback and call
+`MikMod_Exit' to leave the sound hardware in a coherent state.
+
+   On systems that have pthreads, libmikmod is thread-safe(1). You can
+check this in your programs with the `MikMod_InitThreads' function. If
+this function returns 1, the library is thread-safe.
+
+   The main benefit of thread-safety is that `MikMod_Update' can be
+called from a separate thread, which often makes application design
+easier. However, several libmikmod global variables are accessible from
+all your threads, so when more than one thread need to access libmikmod
+variables, you'll have to protect these access with the `MikMod_Lock'
+and `MikMod_Unlock' functions. If libmikmod is not thread-safe, these
+functions are no-ops.
+
+   ---------- Footnotes ----------
+
+   (1) Unless you explicitely choose to create a non thread-safe
+version of libmikmod at compile-time.
+
+
+File: mikmod.info,  Node: Samples and Voice Control,  Next: Modules and Player Control,  Prev: Library Initialization,  Up: Using the Library
+
+Samples and Voice Control
+=========================
+
+   Currently, MikMod only supports uncompressed mono WAV files as
+samples. You can load a sample by calling `Sample_Load' with a
+filename, or by calling `Sample_LoadFP' with an open `FILE*' pointer.
+These functions return a pointer to a `SAMPLE' structure, or `NULL' in
+case of error.
+
+   The `SAMPLE' structure has a few interesting fields:
+   - `speed' contains the default frequency of the sample.
+
+   - `volume' contains the default volume of the sample, ranging from 0
+     (silence) to 64.
+
+   - `panning' contains the default panning position of the sample.
+
+   Altering one of those fields will affect all voices currently
+playing the sample. You can achieve the same result on a single voice
+with the functions `Voice_SetFrequency', `Voice_SetVolume' and
+`Voice_SetPanning'.  Since the same sample can be played with different
+frequency, volume and panning parameters on each voice, you can get
+voice specific information with `Voice_GetFrequency', `Voice_GetVolume'
+and `Voice_GetPanning'.
+
+   You can also make your sample loop by setting the fields `loopstart'
+and `loopend' and or'ing `flags' with `SF_LOOP'. To compute your loop
+values, the field `length' will be useful. However, you must know that
+all the sample length are expressed in samples, i.e. 8 bits for an 8
+bit sample, and 16 bit for a 16 bit sample... Test `flags' for the value
+`SF_16BITS' to know this.
+
+   Speaking of flags, if you're curious and want to know the original
+format of the sample on disk (since libmikmod does some work on the
+sample data internally), refer to the `inflags' field.
+
+   If the common forward loop isn't enough, you can play with some
+other flags: `SF_BIDI' will make your sample loop "ping pong" (back and
+forth), and `SF_REVERSE' will make it play backwards.
+
+   To play your sample, use the `Sample_Play' function. This function
+will return a voice number which enable you to use the `Voice_xx'
+functions.
+
+   The sample will play until another sample takes over its voice (when
+you play more samples than you reserved sound effect voices), unless it
+has been flagged as `SFX_CRITICAL'. You can force it to stop with
+`Voice_Stop', or you can force another sample to take over this voice
+with `Voice_Play'; however `Voice_Play' doesn't let you flag the new
+sample as critical.
+
+   Non looping samples will free their voice channel as soon as they
+are finished; you can know the current playback position of your sample
+with `Voice_GetPosition'. If it is zero, either the sample has finished
+playing or it is just beginning; use `Voice_Stopped' to know.
+
+   When you don't need a sample anymore, don't forget to free its
+memory with `Sample_Free'.
+
+
+File: mikmod.info,  Node: Modules and Player Control,  Next: Loading Data from Memory,  Prev: Samples and Voice Control,  Up: Using the Library
+
+Modules and Player Control
+==========================
+
+   As for the sound drivers, you have to register the module loaders
+you want to use for MikMod to be able to load modules. You can either
+register all the module loaders with `MikMod_RegisterAllLoaders', or
+only a few of them with `MikMod_RegisterLoader'. Be careful if you
+choose this solution, as the 15 instrument MOD loader has to be
+registered last, since loaders are called in the order they were
+register to identify modules, and the detection of this format is not
+fully reliable, so other modules might be mistaken as 15 instrument MOD
+files.
+
+   You can get some printable information regarding the registered
+loaders with `MikMod_InfoLoader'; don't forget to call `free' on the
+returned string when you don't need it anymore.
+
+   Note that, contrary to the sound drivers, you can register module
+loaders at any time, it doesn't matter.
+
+   For playlists, you might be interested in knowing the module title
+first, and `Player_LoadTitle' will give you this information. Don't
+forget to `free' the returned text when you don't need it anymore.
+
+   You can load a module either with `Player_Load' and the name of the
+module, or with `Player_LoadFP' and an open `FILE*' pointer. These
+functions also expect a maximal number of voices, and a curiosity flag.
+Unless you have excellent reasons not to do so, choose a big limit,
+such as 64 or even 128 for complex Impulse Tracker modules. Both
+functions return a pointer to an `MODULE' structure, or `NULL' if an
+error occurs.
+
+   You'll find some useful information in this structure:
+   - `numchn' contains the number of module "real" channels.
+
+   - `numvoices' contains the number of voices reserved by the player
+     for the real channels and the virtual channels (NNA).
+
+   - `numpas' and `numpat' contain the number of song positions and
+     song patterns.
+
+   - `numins' and `numsmp' contain the number of instruments and
+     samples.
+
+   - `songname' contains the song title.
+
+   - `modtype' contains the name of the tracker used to create the song.
+
+   - `comment' contains the song comment, if it has one.
+
+   - `sngtime' contains the time elapsed in the module, in 2^-10
+     seconds (not exactly a millisecond).
+
+   - `sngspd' and `bpm' contain the song speed and tempo.
+
+   - `realchn' contains the actual number of active channels.
+
+   - `totalchn' contains the actual number of active virtual channels,
+     i.e. the sum of `realchn' and the number of NNA virtual channels.
+
+   Now that the module is loaded, you need to tell the module player
+that you want to play this particular module with `Player_Start' (the
+player can only play one module, but you can have several modules in
+memory). The playback begins. Should you forget which module is
+playing, `Player_GetModule' will return it to you.
+
+   You can change the current song position with the functions
+`Player_NextPosition', `Player_PrevPosition' and `Player_SetPosition',
+the speed with `Player_SetSpeed' and `Player_SetTempo', and the volume
+(ranging from 0 to 128) with `Player_SetVolume'.
+
+   Playback can be paused or resumed with `Player_TogglePause'. Be sure
+to check with `Player_Paused' that it isn't already in the state you
+want !
+
+   Fine player control is achieved by the functions `Player_Mute',
+`Player_UnMute' and `Player_ToggleMute' which can silence or resume a
+set of module channels. The function `Player_Muted' will return the
+state of a given channel. And if you want even more control, you can
+get the voice corresponding to a module channel with
+`Player_GetChannelVoice' and act directly on the voice.
+
+   Modules play only once, but can loop indefinitely if they are
+designed to do so.  You can change this behavior with the `wrap' and
+`loop' of the `MODULE' structure; the first one, if set, will make the
+module restart when it's finished, and the second one, if set, will
+prevent the module from jumping backwards.
+
+   You can test if the module is still playing with `Player_Active',
+and you can stop it at any time with `Player_Stop'. When the module
+isn't needed anymore, get rid of it with `Player_Free'.
+
+
+File: mikmod.info,  Node: Loading Data from Memory,  Prev: Modules and Player Control,  Up: Using the Library
+
+Loading Data from Memory
+========================
+
+   If you need to load modules or sound effects from other places than
+plain files, you can use the `MREADER' and `MWRITER' objects to achieve
+this.
+
+   The `MREADER' and `MWRITER' structures contain a list of function
+pointers, which emulate the behaviour of a regular `FILE *' object. In
+fact, all functions which take filenames or `FILE *' as arguments are
+only wrappers to a real function which takes an `MREADER' or an
+`MWRITER' argument.
+
+   So, if you need to load a module from memory, or for a multi-file
+archive, for example, all you need is to build an adequate `MREADER'
+object, and use `Player_LoadGeneric' instead of `Player_Load' or
+`Player_LoadFP'. For samples, use `Sample_LoadGeneric' instead of
+`Sample_Load' or `Sample_LoadFP'.
+
+
+File: mikmod.info,  Node: Library Reference,  Next: Index,  Prev: Using the Library,  Up: Top
+
+Library Reference
+*****************
+
+   This chapter describes in more detail all the functions and
+variables provided by the library. *Note Type Definitions::, for the
+basic type reference.
+
+* Menu:
+
+* Variable Reference::
+* Structure Reference::
+* Error Reference::
+* Function Reference::
+* Loader Reference::
+* Driver Reference::
+
+
+File: mikmod.info,  Node: Variable Reference,  Next: Structure Reference,  Prev: Library Reference,  Up: Library Reference
+
+Variable Reference
+==================
+
+Error Variables
+---------------
+
+   The following variables are set by the library to return error
+information.
+
+`int MikMod_errno'
+     When an error occurs, this variable contains the error code.
+     *Note Error Reference::, for more information.
+
+`BOOL MikMod_critical'
+     When an error occurs, this variable informs of the severity of the
+     error. Its value has sense only if the value of `MikMod_errno' is
+     different from zero.  If the value of `MikMod_critical' is zero,
+     the error wasn't fatal and the library is in a stable state.
+     However, if it is nonzero, then the library can't be used and has
+     reseted itself to the uninitialized state. This often means that
+     the mixing parameters you choose were not supported by the driver,
+     or that it doesn't has enough voices for your needs if you called
+     `MikMod_SetNumVoices'.
+
+Sound Settings
+--------------
+
+   The following variables control the sound output parameters and
+their changes take effect immediately.
+
+`UBYTE md_musicvolume'
+     Volume of the module. Allowed values range from 0 to 128. The
+     default value is 128.
+
+`UBYTE md_pansep'
+     Stereo channels separation. Allowed values range from 0 (no
+     separation, thus mono sound) to 128 (full channel separation). The
+     default value is 128.
+
+`UBYTE md_reverb'
+     Amount of sound reverberation. Allowed values range from 0 (no
+     reverberation) to 15 (a rough estimate for chaos...). The default
+     value is 6.
+
+`UBYTE md_sndfxvolume'
+     Volume of the sound effects. Allowed values range from 0 to 128.
+     The default value is 128.
+
+`UBYTE md_volume'
+     Overall sound volume. Allowed values range from 0 to 128. The
+     default value is 96.
+
+Driver Settings
+---------------
+
+   The following variables control more in-depth sound output
+parameters. Except for some `md_mode' flags, their changes do not have
+any effect until you call `MikMod_Init' or `MikMod_Reset'.
+
+`UWORD md_device'
+     This variable contains the order, in the list of the registered
+     drivers, of the sound driver which will be used for sound
+     playback. This order is one-based; if this variable is set to
+     zero, the driver is autodetected, which means the list is tested
+     until a driver is present on the system. The default value is 0,
+     thus driver is autodetected.
+
+`MDRIVER* md_driver'
+     This variable points to the driver which is being used for sound
+     playback, and is undefined when the library is uninitialized
+     (before `MikMod_Init' and after `MikMod_Exit'). This variable is
+     for information only, you should never attempt to change its
+     value. Use `md_driver' and `MikMod_Init' (or `MikMod_Reset')
+     instead.
+
+`UWORD md_mixfreq'
+     Sound playback frequency, in hertz. High values yield high sound
+     quality, but need more computing power than lower values. The
+     default value is 44100 Hz, which is compact disc quality. Other
+     common values are 22100 Hz (radio quality), 11025 Hz (phone
+     quality), and 8000 Hz (mu-law quality).
+
+`UWORD md_mode'
+     This variable is a combination of several flags, to select which
+     output mode to select.  The following flags have a direct action
+     to the sound output (i.e. changes take effect immediately):
+    `DMODE_INTERP'
+          This flag, if set, enables the interpolated mixers.
+          Interpolated mixing gives better sound but takes a bit more
+          time than standard mixing. If the library is built with the
+          high quality mixer, interpolated mixing is always enabled,
+          regardless of this flag.
+
+    `DMODE_REVERSE'
+          This flag, if set, exchanges the left and right stereo
+          channels.
+
+    `DMODE_SURROUND'
+          This flag, if set, enables the surround mixers. Since
+          surround mixing works only for stereo sound, this flag has no
+          effect if the sound playback is in mono.
+
+     The following flags aren't taken in account until the sound driver
+     is changed or reset:
+    `DMODE_16BIT'
+          This flag, if set, selects 16 bit sound mode. This mode
+          yields better sound quality, but needs twice more mixing time.
+
+    `DMODE_HQMIXER'
+          This flag, if set, selects the high-quality software mixer.
+          This mode yields better sound quality, but needs more mixing
+          time. Of course, this flag has no effect if no
+          `DMODE_SOFT_xx' flag is set.
+
+    `DMODE_SOFT_MUSIC'
+          This flag, if set, selects software mixing of the module.
+
+    `DMODE_SOFT_SNDFX'
+          This flag, if set, selects software mixing of the sound
+          effects.
+
+    `DMODE_STEREO'
+          This flag, if set, selects stereo sound.
+
+     The default value of this variable is `DMODE_STEREO |
+     DMODE_SURROUND | DMODE_16BITS | DMODE_SOFT_MUSIC |
+     DMODE_SOFT_SNDFX'.
+
+
+File: mikmod.info,  Node: Structure Reference,  Next: Error Reference,  Prev: Variable Reference,  Up: Library Reference
+
+Structure Reference
+===================
+
+   Only the useful fields are described here; if a structure field is
+not described, you must assume that it's an internal field which must
+not be modified.
+
+Drivers
+-------
+
+   The `MDRIVER' structure is not meant to be used by anything else
+than the core of the library, but its first four fields contain useful
+information for your programs:
+`CHAR* Name'
+     Name of the driver, usually never more than 20 characters.
+
+`CHAR* Description'
+     Description of the driver, usually never more than 50 characters.
+
+`UBYTE HardVoiceLimit'
+     Maximum number of hardware voices for this driver, 0 if the driver
+     has no hardware mixing support.
+
+`UBYTE SoftVoiceLimit'
+     Maximum number of software voices for this driver, 0 if the driver
+     has no software mixing support.
+
+`CHAR* Alias'
+     A short name for the driver, without spaces, usually never more
+     than 10 characters.
+
+Modules
+-------
+
+   The `MODULE' structure gathers all the necessary information needed
+to play a module file, regardless of its initial format.
+
+General Module Information
+..........................
+
+   The fields described in this section contain general information
+about the module and should not be modified.
+
+`CHAR* songname'
+     Name of the module.
+
+`CHAR* modtype'
+     Type of the module (which tracker format).
+
+`CHAR* comment'
+     Either the module comments, or NULL if the module doesn't have
+     comments.
+
+`UWORD flags'
+     Several module flags or'ed together.
+    `UF_ARPMEM'
+          If set, arpeggio effects have memory.
+
+    `UF_BGSLIDES'
+          If set, volume slide effects continue until a new note or a
+          new effect is played.
+
+    `UF_HIGHBPM'
+          If set, the module is allowed to have its tempo value (bpm)
+          over 255.
+
+    `UF_INST'
+          If set, the module has instruments and samples; otherwise, the
+          module has only samples.
+
+    `UF_LINEAR'
+          If set, slide periods are linear; otherwise, they are
+          logarithmic.
+
+    `UF_NNA'
+          If set, module uses new note actions (NNA) and the
+          `numvoices' field is valid.
+
+    `UF_NOWRAP'
+          If set, pattern break on the last pattern does not continue
+          to the first pattern.
+
+    `UF_S3MSLIDES'
+          If set, module uses old-S3M style volume slides (slides
+          processed every tick); otherwise, it uses the standard style
+          (slides processed every tick except the first).
+
+    `UF_XMPERIODS'
+          If set, module uses XM-type periods; otherwise, it uses Amiga
+          periods.
+
+    `UF_FT2QUIRKS'
+          If set, module player will reproduce some FastTracker 2
+          quirks during playback.
+
+`UBYTE numchn'
+     The number of channels in the module.
+
+`UBYTE numvoices'
+     If the module uses NNA, and this variable is not zero, it contains
+     the limit of module voices; otherwise, the limit is set to the
+     `maxchan' parameter of the `Player_Loadxx' functions.
+
+`UWORD numpos'
+     The number of sound positions in the module.
+
+`UWORD numpat'
+     The number of patterns.
+
+`UWORD numins'
+     The number of instruments.
+
+`UWORD numsmp'
+     The number of samples.
+
+`INSTRUMENT* instruments'
+     Points to an array of instrument structures.
+
+`SAMPLE* samples'
+     Points to an array of sample structures.
+
+`UBYTE realchn'
+     During playback, this variable contains the number of active
+     channels (not counting NNA channels).
+
+`UBYTE totalchn'
+     During playback, this variable contains the total number of
+     channels (including NNA channels).
+
+`ULONG sngtime'
+     Elapsed song time, in 2^-10 seconds units (not exactly a
+     millisecond). To convert this value to seconds, divide by 1024,
+     not 1000 !
+
+Playback Settings
+.................
+
+   The fields described here control the module playback and can be
+modified at any time, unless otherwise specified.
+
+`UBYTE initspeed'
+     The initial speed of the module (Protracker compatible). Valid
+     range is 1-32.
+
+`UBYTE inittempo'
+     The initial tempo of the module (Protracker compatible). Valid
+     range is 32-255.
+
+`UBYTE initvolume'
+     The initial overall volume of the module. Valid range is 0-128.
+
+`UWORD panning[]'
+     The current channel panning positions. Only the first `numchn'
+     values are defined.
+
+`UBYTE chanvol[]'
+     The current channel volumes. Only the first `numchn' values are
+     defined.
+
+`UWORD bpm'
+     The current tempo of the module. Use `Player_SetTempo' to change
+     its value.
+
+`UBYTE sngspd'
+     The current speed of the module. Use `Player_SetSpeed' to change
+     its value.
+
+`UBYTE volume'
+     The current overall volume of the module, in range 0-128. Use
+     `Player_SetVolume' to change its value.
+
+`BOOL extspd'
+     If zero, Protracker extended speed effect (in-module tempo
+     modification) is not processed. The default value is 1, which
+     causes this effect to be processed.  However, some old modules
+     might not play correctly if this effect is not neutralized.
+
+`BOOL panflag'
+     If zero, panning effects are not processed. The default value is
+     1, which cause all panning effects to be processed. However, some
+     old modules might not play correctly if panning is not neutralized.
+
+`BOOL wrap'
+     If nonzero, module wraps to its restart position when it is
+     finished, to play continuously. Default value is zero (play only
+     once).
+
+`UBYTE reppos'
+     The restart position of the module, when it wraps.
+
+`BOOL loop'
+     If nonzero, all in-module loops are processed; otherwise, backward
+     loops which decrease the current position are not processed (i.e.
+     only forward loops, and backward loops in the same pattern, are
+     processed). This ensures that the module never loops endlessly.
+     The default value is 1 (all loops are processed).
+
+`BOOL fadeout'
+     If nonzero, volume fades out during when last position of the
+     module is being played. Default value us zero (no fadeout).
+
+`UWORD patpos'
+     Current position (row) in the pattern being played. Must not be
+     changed.
+
+`SWORD sngpos'
+     Current song position. Do not change this variable directly, use
+     `Player_NextPosition', `Player_PrevPosition' or
+     `Player_SetPosition' instead.
+
+`SWORD relspd'
+     Relative playback speed. The value of this variable is added to
+     the module tempo to define the actual playback speed. The default
+     value is 0, which make modules play at their intended speed.
+
+Module Instruments
+------------------
+
+   Although the `INSTRUMENT' structure is intended for internal use, you
+might need to know its name:
+
+`CHAR* insname'
+     The instrument text, theoretically its name, but often a message
+     line.
+
+Samples
+-------
+
+   The `SAMPLE' structure is used for sound effects and module samples
+as well. You can play with the following fields:
+
+`SWORD panning'
+     Panning value of the sample. Valid values range from PAN_LEFT (0)
+     to PAN_RIGHT (255), or PAN_SURROUND.
+
+`ULONG speed'
+     Playing frequency of the sample, it hertz.
+
+`UBYTE volume'
+     Sample volume. Valid range is 0-64.
+
+`UWORD flags'
+     Several format flags or'ed together describing the format of the
+     sample in memory.
+
+     Format flags:
+    `SF_16BITS'
+          If set, sample data is 16 bit wide; otherwise, it is 8 bit
+          wide.
+
+    `SF_BIG_ENDIAN'
+          If set, sample data is in big-endian (Motorola) format;
+          otherwise, it is in little-endian (Intel) format.
+
+    `SF_DELTA'
+          If set, sample is stored as delta values (differences between
+          two consecutive samples); otherwise, sample is stored as
+          sample values.
+
+    `SF_ITPACKED'
+          If set, sample data is packed with Impulse Tracker's
+          compression method; otherwise, sample is not packed.
+
+    `SF_SIGNED'
+          If set, sample data is made of signed values; otherwise, it
+          is made of unsigned values.
+
+    `SF_STEREO'
+          If set, sample data is stereo (two channels); otherwise, it
+          is mono.
+
+     Playback flags:
+    `SF_BIDI'
+          If set, sample loops "ping pong" (back and forth).
+
+    `SF_LOOP'
+          If set, sample loops forward.
+
+    `SF_REVERSE'
+          If set, sample plays backwards.
+
+`UWORD inflags'
+     Same as "flags", but describing the format of the sample on disk.
+
+`ULONG length'
+     Length of the sample, in _samples_. The length of a sample is 8
+     bits (1 byte) for a 8 bit sample, and 16 bits (2 bytes) for a 16
+     bit sample.
+
+`ULONG loopstart'
+     Loop starting position, relative to the start of the sample, in
+     samples.
+
+`ULONG loopend'
+     Loop ending position, relative to the start of the sample, in
+     samples.
+
+MREADER
+-------
+
+   The `MREADER' contains the following function pointers:
+
+`BOOL (*Seek)(struct MREADER*, long offset, int whence)'
+     This function should have the same behaviour as `fseek', with
+     offset 0 meaning the start of the object (module, sample) being
+     loaded.
+
+`long (*Tell)(struct MREADER*)'
+     This function should have the same behaviour as `ftell', with
+     offset 0 meaning the start of the object being loaded.
+
+`BOOL (*Read)(struct MREADER*, void *dest, size_t length)'
+     This function should copy `length' bytes of data into `dest', and
+     return zero if an error occured, and any nonzero value otherwise.
+     Note that an end-of-file condition will not be considered as an
+     error in this case.
+
+`int (*Get)(struct MREADER*)'
+     This function should have the same behaviour as `fgetc'.
+
+`BOOL (*Eof)(struct MREADER*)'
+     This function should have the same behaviour as `feof'.
+
+   For an example of how to build an `MREADER' object, please refer to
+the `MFILEREADER' object in file `mmio/mmio.c' in the library sources.
+
+MWRITER
+-------
+
+   The `MREADER' contains the following function pointers:
+
+`BOOL (*Seek)(struct MWRITER*, long offset, int whence);'
+     This function should have the same behaviour as `fseek', with
+     offset 0 meaning the start of the object being written.
+
+`long (*Tell)(struct MWRITER*);'
+     This function should have the same behaviour as `ftell', with
+     offset 0 meaning the start of the object being written.
+
+`BOOL (*Write)(struct MWRITER*, void *dest, size_t length);'
+     This function should copy `length' bytes of data from `dest', and
+     return zero if an error occured, and any nonzero value otherwise.
+
+`BOOL (*Put)(struct MWRITER*, int data);'
+     This function should have the same behaviour as `fputc'.
+
+   For an example of how to build an `MWRITER' object, please refer to
+the `MFILEWRITER' object in file `mmio/mmio.c' in the library sources.
+

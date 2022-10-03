@@ -1,0 +1,40 @@
+Known problems in libmikmod
+===========================
+
+PROBLEM: LIB004 Synthsound instruments are not played in MED modules
+REPORTED-BY: Brett
+STATUS: Not solved yet, but I might borrow some code from xmp (with
+        permission)...
+
+PROBLEM: LIB005 Effect 9 is not always correctly interpreted in MED modules
+REPORTED-BY: Brett
+STATUS: Not solved yet. Still has to figure a theory about the effects of this
+        command, which works with all MED modules...
+
+PROBLEM: LIB026 When changing instrument on a voice and the new and previous
+                instruments have different NNA types, the NNA isn't played
+                correctly.
+REPORTED-BY: Miodrag Vallat, Ben Collver
+STATUS: Not solved yet. I've tried several fixes but there are still modules
+        for which it doesn't work. Current test modules for this problem are
+        CHRIS31B.IT (blue flame), TheSong.IT (the song I couldn't name) and
+        k_3.IT (waterworks).
+
+PROBLEM: LIB052 The MikMod plugin for xmms does not load under Solaris.
+REPORTED-BY: Many !
+STATUS: Not solved yet.
+
+Problems found in previous libmikmod versions and corrected in 3.1.9
+====================================================================
+
+PROBLEM: LIB022 XM keyoff cuts notes too fast (not related to LIB058)
+REPORTED-BY: Scott Miller
+STATUS: Solved in 3.1.9-beta
+
+PROBLEM: LIB023 Using the OSS driver with a GUS card does not work
+REPORTED-BY: Antti Lamsa, Claudio Matsuoka
+STATUS: Was in fact fixed in 3.1.8, now confirmed to work
+
+PROBLEM: LIB061 Panning ignored in GDM loader
+REPORTED-BY: ufo
+STATUS: Solved in 3.1.9

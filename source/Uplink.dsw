@@ -1,0 +1,143 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Uplink"=.\Uplink.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name bungle
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name eclipse
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name gucci
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name redshirt
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name soundgarden
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name vanbakel
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "bungle"=..\lib\bungle\bungle.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "eclipse"=..\lib\eclipse\eclipse.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "gucci"=..\lib\gucci\gucci.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "redshirt"=..\lib\redshirt\redshirt.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "slasher"=..\lib\slasher\Slasher.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "soundgarden"=..\lib\soundgarden\soundgarden.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "tosser"=..\lib\tosser\tosser.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "vanbakel"=..\lib\vanbakel\vanbakel.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

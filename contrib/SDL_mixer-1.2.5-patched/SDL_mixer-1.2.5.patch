@@ -1,0 +1,746 @@
+This patch adds a few more module formats from MikMod to SDL Mixer.
+To apply it, download SDL_mixer source,
+cd SDL_mixer-1.2.5
+patch -p1 < SDL_mixer-1.2.5.patch
+
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/load_it.c SDL_mixer-1.2.5-patched/mikmod/load_it.c
+--- SDL_mixer-1.2.5.orig/mikmod/load_it.c	2001-09-11 19:49:18.000000000 +0100
++++ SDL_mixer-1.2.5-patched/mikmod/load_it.c	2003-04-21 10:38:23.000000000 +0100
+@@ -5,23 +5,23 @@
+ 	This library is free software; you can redistribute it and/or modify
+ 	it under the terms of the GNU Library General Public License as
+ 	published by the Free Software Foundation; either version 2 of
+ 	the License, or (at your option) any later version.
+-
++ 
+ 	This program is distributed in the hope that it will be useful,
+ 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ 	GNU Library General Public License for more details.
+-
++ 
+ 	You should have received a copy of the GNU Library General Public
+ 	License along with this library; if not, write to the Free Software
+ 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ 	02111-1307, USA.
+ */
+ 
+ /*==============================================================================
+ 
+-  $Id: load_it.c,v 1.6 2001/09/11 18:49:18 slouken Exp $
++  $Id: load_it.c,v 1.42 2000/02/14 22:10:22 miod Exp $
+ 
+   Impulse tracker (IT) module loader
+ 
+ ==============================================================================*/
+@@ -53,9 +53,9 @@
+ 	UBYTE	mixvol;		/* mixing volume [ignored] */
+ 	UBYTE	initspeed;
+ 	UBYTE	inittempo;
+ 	UBYTE	pansep;		/* panning separation between channels */
+-	UBYTE	zerobyte;
++	UBYTE	zerobyte;       
+ 	UWORD	msglength;
+ 	ULONG	msgoffset;
+ 	UBYTE	blank02[4];
+ 	UBYTE	pantable[64];
+@@ -93,21 +93,21 @@
+ 	ULONG	size;			/* (dword) Instrument size */
+ 	CHAR	filename[12];	/* (char) Instrument filename */
+ 	UBYTE	zerobyte;		/* (byte) Instrument type (always 0) */
+ 	UBYTE	volflg;
+-	UBYTE	volpts;
++	UBYTE	volpts;   
+ 	UBYTE	volbeg;			/* (byte) Volume loop start (node) */
+ 	UBYTE	volend;			/* (byte) Volume loop end (node) */
+ 	UBYTE	volsusbeg;		/* (byte) Volume sustain begin (node) */
+ 	UBYTE	volsusend;		/* (byte) Volume Sustain end (node) */
+ 	UBYTE	panflg;
+-	UBYTE	panpts;
++	UBYTE	panpts;  
+ 	UBYTE	panbeg;			/* (byte) channel loop start (node) */
+ 	UBYTE	panend;			/* (byte) channel loop end (node) */
+ 	UBYTE	pansusbeg;		/* (byte) channel sustain begin (node) */
+ 	UBYTE	pansusend;		/* (byte) channel Sustain end (node) */
+ 	UBYTE	pitflg;
+-	UBYTE	pitpts;
++	UBYTE	pitpts;   
+ 	UBYTE	pitbeg;			/* (byte) pitch loop start (node) */
+ 	UBYTE	pitend;			/* (byte) pitch loop end (node) */
+ 	UBYTE	pitsusbeg;		/* (byte) pitch sustain begin (node) */
+ 	UBYTE	pitsusend;		/* (byte) pitch Sustain end (node) */
+@@ -135,9 +135,9 @@
+ 	SBYTE	pannode[ITENVCNT];   /* panenv - node points */
+ 	UWORD	pantick[ITENVCNT];   /* tick value of panning nodes */
+ 	SBYTE	pitnode[ITENVCNT];   /* pitchenv - node points */
+ 	UWORD	pittick[ITENVCNT];   /* tick value of pitch nodes */
+-} ITINSTHEADER;
++} ITINSTHEADER;                       
+ 
+ /* unpacked note */
+ 
+ typedef struct ITNOTE {
+@@ -152,9 +152,9 @@
+ static UBYTE *mask=NULL;	/* arrays allocated to 64 elements and used for */
+ static ITNOTE *last=NULL;	/* uncompressing IT's pattern information */
+ static int numtrk=0;
+ static int old_effect;		/* if set, use S3M old-effects stuffs */
+-
++   
+ static CHAR* IT_Version[]={
+ 	"ImpulseTracker  .  ",
+ 	"Compressed ImpulseTracker  .  ",
+ 	"ImpulseTracker 2.14p3",
+@@ -203,9 +203,9 @@
+ 
+ /* Because so many IT files have 64 channels as the set number used, but really
+    only use far less (usually from 8 to 24 still), I had to make this function,
+    which determines the number of channels that are actually USED by a pattern.
+-
++ 
+    NOTE: You must first seek to the file location of the pattern before calling
+          this procedure.
+ 
+    Returns 1 on error
+@@ -268,9 +268,9 @@
+ 
+ 		/* process volume / panning column
+ 		   volume / panning effects do NOT all share the same memory address
+ 		   yet. */
+-		if(volpan<=64)
++		if(volpan<=64) 
+ 			UniVolEffect(VOL_VOLUME,volpan);
+ 		else if(volpan<=74)	/* fine volume slide up (65-74) */
+ 			UniVolEffect(VOL_VOLSLIDE,0x0f+((volpan-65)<<4));
+ 		else if(volpan<=84)	/* fine volume slide down (75-84) */
+@@ -323,15 +323,15 @@
+ 			ch=remap[(flag-1)&63];
+ 			if(ch!=-1) {
+ 				n=&itt[ch];
+ 				l=&last[ch];
+-			} else
++			} else 
+ 				n=l=&dummy;
+ 
+ 			if(flag&128) mask[ch]=_mm_read_UBYTE(modreader);
+ 			if(mask[ch]&1)
+ 				/* convert IT note off to internal note off */
+-				if((l->note=n->note=_mm_read_UBYTE(modreader))==255)
++				if((l->note=n->note=_mm_read_UBYTE(modreader))==255) 
+ 					l->note=n->note=253;
+ 			if(mask[ch]&2)
+ 				l->ins=n->ins=_mm_read_UBYTE(modreader);
+ 			if(mask[ch]&4)
+@@ -405,9 +405,9 @@
+ 			   ((midiline[5]=='0')||(midiline[5]=='1'))) {
+ 				filtersettings[i].filter=(midiline[5]-'0')|0x80;
+ 				dat=(midiline[6])?(midiline[6]-'0'):0;
+ 				if(midiline[7])dat=(dat<<4)|(midiline[7]-'0');
+-				filtersettings[i].inf=(UBYTE)dat;
++				filtersettings[i].inf=dat;
+ 			}
+ 		}
+ 	} else { /* use default information */
+ 		filtermacros[0]=FILT_CUT;
+@@ -537,9 +537,9 @@
+ 		_mm_errno = MMERR_LOADING_HEADER;
+ 		return 0;
+ 	}
+ 
+-	poslookupcnt=(UBYTE)mh->ordnum;
++	poslookupcnt=mh->ordnum;
+ 	S3MIT_CreateOrders(curious);
+ 
+ 	if(!(paraptr=(ULONG*)_mm_malloc((mh->insnum+mh->smpnum+of.numpat)*
+ 	                               sizeof(ULONG)))) return 0;
+@@ -647,9 +647,9 @@
+ 		if(s.flag&64) q->flags|=SF_BIDI;
+ 
+ 		if(mh->cwt>=0x200) {
+ 			if(s.convert&1) q->flags|=SF_SIGNED;
+-			if(s.convert&4) q->flags|=SF_DELTA;
++			if(s.convert&4) q->flags|=SF_DELTA;   
+ 		}
+ 
+ 		q++;
+ 	}
+@@ -705,48 +705,45 @@
+ 				_mm_read_UBYTES(ih.volenv,200,modreader);
+ 				for(lp=0;lp<ITENVCNT;lp++) {
+ 					ih.oldvoltick[lp] = _mm_read_UBYTE(modreader);
+ 					ih.volnode[lp]    = _mm_read_UBYTE(modreader);
+-				}
++				} 
+ 			} else {
+ 				/* load IT 2xx volume, pan and pitch envelopes */
++#if defined __STDC__ || defined _MSC_VER
++#define IT_LoadEnvelope(name,type) 											\
++				ih.##name##flg   =_mm_read_UBYTE(modreader);				\
++				ih.##name##pts   =_mm_read_UBYTE(modreader);				\
++				ih.##name##beg   =_mm_read_UBYTE(modreader);				\
++				ih.##name##end   =_mm_read_UBYTE(modreader);				\
++				ih.##name##susbeg=_mm_read_UBYTE(modreader);				\
++				ih.##name##susend=_mm_read_UBYTE(modreader);				\
++				for(lp=0;lp<ITENVCNT;lp++) {								\
++					ih.##name##node[lp]=_mm_read_##type##(modreader);		\
++					ih.##name##tick[lp]=_mm_read_I_UWORD(modreader);		\
++				}															\
++				_mm_read_UBYTE(modreader);
++#else
++#define IT_LoadEnvelope(name,type) 											\
++				ih./**/name/**/flg   =_mm_read_UBYTE(modreader);			\
++				ih./**/name/**/pts   =_mm_read_UBYTE(modreader);			\
++				ih./**/name/**/beg   =_mm_read_UBYTE(modreader);			\
++				ih./**/name/**/end   =_mm_read_UBYTE(modreader);			\
++				ih./**/name/**/susbeg=_mm_read_UBYTE(modreader);			\
++				ih./**/name/**/susend=_mm_read_UBYTE(modreader);			\
++				for(lp=0;lp<ITENVCNT;lp++) {								\
++					ih./**/name/**/node[lp]=_mm_read_/**/type/**/(modreader);\
++					ih./**/name/**/tick[lp]=_mm_read_I_UWORD(modreader);	\
++				}															\
++				_mm_read_UBYTE(modreader);
++#endif
+ 
+- ih.volflg   =_mm_read_UBYTE(modreader);             
+- ih.volpts   =_mm_read_UBYTE(modreader);             
+- ih.volbeg   =_mm_read_UBYTE(modreader);             
+- ih.volend   =_mm_read_UBYTE(modreader);             
+- ih.volsusbeg=_mm_read_UBYTE(modreader);             
+- ih.volsusend=_mm_read_UBYTE(modreader);             
+- for(lp=0;lp<ITENVCNT;lp++) {
+- ih.volnode[lp]=_mm_read_UBYTE(modreader);
+- ih.voltick[lp]=_mm_read_I_UWORD(modreader); 
+- }                                                            
+- _mm_read_UBYTE(modreader);
+- ih.panflg   =_mm_read_UBYTE(modreader);             
+- ih.panpts   =_mm_read_UBYTE(modreader);             
+- ih.panbeg   =_mm_read_UBYTE(modreader);             
+- ih.panend   =_mm_read_UBYTE(modreader);             
+- ih.pansusbeg=_mm_read_UBYTE(modreader);             
+- ih.pansusend=_mm_read_UBYTE(modreader);             
+- for(lp=0;lp<ITENVCNT;lp++) {
+- ih.pannode[lp]=_mm_read_SBYTE(modreader);
+- ih.pantick[lp]=_mm_read_I_UWORD(modreader); 
+- }                                                            
+- _mm_read_UBYTE(modreader);
+- ih.pitflg   =_mm_read_UBYTE(modreader);             
+- ih.pitpts   =_mm_read_UBYTE(modreader);             
+- ih.pitbeg   =_mm_read_UBYTE(modreader);             
+- ih.pitend   =_mm_read_UBYTE(modreader);             
+- ih.pitsusbeg=_mm_read_UBYTE(modreader);             
+- ih.pitsusend=_mm_read_UBYTE(modreader);             
+- for(lp=0;lp < ITENVCNT; lp++) {
+- ih.pitnode[lp]=_mm_read_SBYTE(modreader);
+- ih.pittick[lp]=_mm_read_I_UWORD(modreader); 
+- }                                                            
+- _mm_read_UBYTE(modreader);
+-
++				IT_LoadEnvelope(vol,UBYTE);
++				IT_LoadEnvelope(pan,SBYTE);
++				IT_LoadEnvelope(pit,SBYTE);
++#undef IT_LoadEnvelope
+ 			}
+-
++ 
+ 			if(_mm_eof(modreader)) {
+ 				_mm_errno = MMERR_LOADING_SAMPLEINFO;
+ 				return 0;
+ 			}
+@@ -763,12 +760,12 @@
+ 				}
+ 
+ 				if(ih.volflg&1) d->volflg|=EF_ON;
+ 				if(ih.volflg&2) d->volflg|=EF_LOOP;
+-				if(ih.volflg&4) d->volflg|=EF_SUSTAIN;
++				if(ih.volflg&4) d->volflg|=EF_SUSTAIN;      
+ 
+ 				/* XM conversion of IT envelope Array */
+-				d->volbeg    = ih.volbeg;
++				d->volbeg    = ih.volbeg;   
+ 				d->volend    = ih.volend;
+ 				d->volsusbeg = ih.volsusbeg;
+ 				d->volsusend = ih.volsusend;
+ 
+@@ -779,9 +776,9 @@
+ 							d->volenv[d->volpts].pos=ih.oldvoltick[d->volpts];
+ 							d->volpts++;
+ 						} else
+ 							break;
+-				}
++				}  
+ 			} else {
+ 				d->panning=((ih.chanpan&127)==64)?255:(ih.chanpan&127)<<2;
+ 				if(!(ih.chanpan&128)) d->flags|=IF_OWNPAN;
+ 
+@@ -799,60 +796,64 @@
+ 					d->rvolvar = ih.rvolvar;
+ 					d->rpanvar = ih.rpanvar;
+ 				}
+ 
+-if(ih.volflg&1) d->volflg|=EF_ON;
+-if(ih.volflg&2) d->volflg|=EF_LOOP;
+-if(ih.volflg&4) d->volflg|=EF_SUSTAIN;
+-d->volpts=ih.volpts;
+-d->volbeg=ih.volbeg;
+-d->volend=ih.volend;
+-d->volsusbeg=ih.volsusbeg;
+-d->volsusend=ih.volsusend;
+-for(u=0;u<ih.volpts;u++)
+- d->volenv[u].pos=ih.voltick[u];                               if((d->volflg&EF_ON)&&(d->volpts<2))                          
+- d->volflg&=~EF_ON;
+-for(u=0;u<ih.volpts;u++)
+- d->volenv[u].val=(ih.volnode[u]<<2);
+-                               
+-if(ih.panflg&1) d->panflg|=EF_ON;
+-if(ih.panflg&2) d->panflg|=EF_LOOP;
+-if(ih.panflg&4) d->panflg|=EF_SUSTAIN;
+-d->panpts=ih.panpts;
+-d->panbeg=ih.panbeg;
+-d->panend=ih.panend;                                                   
+-d->pansusbeg=ih.pansusbeg;
+-d->pansusend=ih.pansusend;
+-for(u=0;u<ih.panpts;u++)
+- d->panenv[u].pos=ih.pantick[u];                               
+-if((d->panflg&EF_ON)&&(d->panpts<2))         
+-d->panflg&=~EF_ON;                 
+- for(u=0;u<ih.panpts;u++)
+-  d->panenv[u].val=ih.pannode[u]==32?255:(ih.pannode[u]+32)<<2;
+-
+-if(ih.pitflg&1) d->pitflg|=EF_ON;
+-if(ih.pitflg&2) d->pitflg|=EF_LOOP;
+-if(ih.pitflg&4) d->pitflg|=EF_SUSTAIN;
+-d->pitpts=ih.pitpts;
+-d->pitbeg=ih.pitbeg;
+-d->pitend=ih.pitend;                                                   
+-d->pitsusbeg=ih.pitsusbeg;                                            
+-d->pitsusend=ih.pitsusend;                                            
+-for(u=0;u<ih.pitpts;u++)                                                    
+-d->pitenv[u].pos=ih.pittick[u];                               
+-if((d->pitflg&EF_ON)&&(d->pitpts<2))
+-d->pitflg&=~EF_ON;
+- for(u=0;u<ih.pitpts;u++)
+-  d->pitenv[u].val=ih.pitnode[u]+32;
++#if defined __STDC__ || defined _MSC_VER
++#define IT_ProcessEnvelope(name) 											\
++				if(ih.##name##flg&1) d->##name##flg|=EF_ON;					\
++				if(ih.##name##flg&2) d->##name##flg|=EF_LOOP;				\
++				if(ih.##name##flg&4) d->##name##flg|=EF_SUSTAIN;			\
++				d->##name##pts=ih.##name##pts;								\
++				d->##name##beg=ih.##name##beg;								\
++				d->##name##end=ih.##name##end;								\
++				d->##name##susbeg=ih.##name##susbeg;						\
++				d->##name##susend=ih.##name##susend;						\
++																			\
++				for(u=0;u<ih.##name##pts;u++)								\
++					d->##name##env[u].pos=ih.##name##tick[u];				\
++																			\
++				if((d->##name##flg&EF_ON)&&(d->##name##pts<2))				\
++					d->##name##flg&=~EF_ON;
++#else
++#define IT_ProcessEnvelope(name) 											\
++				if(ih./**/name/**/flg&1) d->/**/name/**/flg|=EF_ON;			\
++				if(ih./**/name/**/flg&2) d->/**/name/**/flg|=EF_LOOP;		\
++				if(ih./**/name/**/flg&4) d->/**/name/**/flg|=EF_SUSTAIN;	\
++				d->/**/name/**/pts=ih./**/name/**/pts;						\
++				d->/**/name/**/beg=ih./**/name/**/beg;						\
++				d->/**/name/**/end=ih./**/name/**/end;						\
++				d->/**/name/**/susbeg=ih./**/name/**/susbeg;				\
++				d->/**/name/**/susend=ih./**/name/**/susend;				\
++																			\
++				for(u=0;u<ih./**/name/**/pts;u++)							\
++					d->/**/name/**/env[u].pos=ih./**/name/**/tick[u];		\
++																			\
++				if((d->/**/name/**/flg&EF_ON)&&(d->/**/name/**/pts<2))		\
++					d->/**/name/**/flg&=~EF_ON;
++#endif
++
++				IT_ProcessEnvelope(vol);
++				for(u=0;u<ih.volpts;u++)
++					d->volenv[u].val=(ih.volnode[u]<<2);
++
++				IT_ProcessEnvelope(pan);
++				for(u=0;u<ih.panpts;u++)
++					d->panenv[u].val=
++					  ih.pannode[u]==32?255:(ih.pannode[u]+32)<<2;
++
++				IT_ProcessEnvelope(pit);
++				for(u=0;u<ih.pitpts;u++)
++					d->pitenv[u].val=ih.pitnode[u]+32;
++#undef IT_ProcessEnvelope
+ 
+ 				if(ih.pitflg&0x80) {
+ 					/* filter envelopes not supported yet */
+ 					d->pitflg&=~EF_ON;
+ 					ih.pitpts=ih.pitbeg=ih.pitend=0;
+ #ifdef MIKMOD_DEBUG
+ 					{
+ 						static int warn=0;
+-
++						
+ 						if(!warn)
+ 							fputs("\rFilter envelopes not supported yet\n",stderr);
+ 						warn=1;
+ 					}
+@@ -871,9 +872,9 @@
+ 					d->samplenote[u]=(note<0)?0:(note>255?255:note);
+ 				}
+ 			}
+ 
+-			d++;
++			d++;                  
+ 		}
+ 	} else if(of.flags & UF_LINEAR) {
+ 		if(!AllocInstruments()) return 0;
+ 		d=of.instruments;
+@@ -914,9 +915,9 @@
+ 		}
+ 	}
+ 
+ 	/* give each of them a different number */
+-	for(t=0;t<64;t++)
++	for(t=0;t<64;t++) 
+ 		if(!remap[t])
+ 			remap[t]=of.numchn++;
+ 
+ 	of.numtrk = of.numpat*of.numchn;
+@@ -956,9 +957,9 @@
+ 	CHAR s[26];
+ 
+ 	_mm_fseek(modreader,4,SEEK_SET);
+ 	if(!_mm_read_UBYTES(s,26,modreader)) return NULL;
+-
++   
+ 	return(DupStr(s,26,0));
+ }
+ 
+ /*========== Loader information */
+Only in SDL_mixer-1.2.5-patched/mikmod: load_m15.c
+Only in SDL_mixer-1.2.5-patched/mikmod: load_med.c
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/load_mod.c SDL_mixer-1.2.5-patched/mikmod/load_mod.c
+--- SDL_mixer-1.2.5.orig/mikmod/load_mod.c	2001-09-11 19:49:18.000000000 +0100
++++ SDL_mixer-1.2.5-patched/mikmod/load_mod.c	2003-04-21 10:38:23.000000000 +0100
+@@ -5,23 +5,23 @@
+ 	This library is free software; you can redistribute it and/or modify
+ 	it under the terms of the GNU Library General Public License as
+ 	published by the Free Software Foundation; either version 2 of
+ 	the License, or (at your option) any later version.
+-
++ 
+ 	This program is distributed in the hope that it will be useful,
+ 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ 	GNU Library General Public License for more details.
+-
++ 
+ 	You should have received a copy of the GNU Library General Public
+ 	License along with this library; if not, write to the Free Software
+ 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ 	02111-1307, USA.
+ */
+ 
+ /*==============================================================================
+ 
+-  $Id: load_mod.c,v 1.5 2001/09/11 18:49:18 slouken Exp $
++  $Id: load_mod.c,v 1.35 2000/02/14 22:10:22 miod Exp $
+ 
+   Generic MOD loader (Protracker, StarTracker, FastTracker, etc)
+ 
+ ==============================================================================*/
+Only in SDL_mixer-1.2.5-patched/mikmod: load_mtm.c
+Only in SDL_mixer-1.2.5-patched/mikmod: load_okt.c
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/load_s3m.c SDL_mixer-1.2.5-patched/mikmod/load_s3m.c
+--- SDL_mixer-1.2.5.orig/mikmod/load_s3m.c	2001-09-11 19:49:18.000000000 +0100
++++ SDL_mixer-1.2.5-patched/mikmod/load_s3m.c	2003-04-21 10:38:23.000000000 +0100
+@@ -5,23 +5,23 @@
+ 	This library is free software; you can redistribute it and/or modify
+ 	it under the terms of the GNU Library General Public License as
+ 	published by the Free Software Foundation; either version 2 of
+ 	the License, or (at your option) any later version.
+-
++ 
+ 	This program is distributed in the hope that it will be useful,
+ 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ 	GNU Library General Public License for more details.
+-
++ 
+ 	You should have received a copy of the GNU Library General Public
+ 	License along with this library; if not, write to the Free Software
+ 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ 	02111-1307, USA.
+ */
+ 
+ /*==============================================================================
+ 
+-  $Id: load_s3m.c,v 1.5 2001/09/11 18:49:18 slouken Exp $
++  $Id: load_s3m.c,v 1.35 2000/02/14 22:10:22 miod Exp $
+ 
+   Screamtracker (S3M) module loader
+ 
+ ==============================================================================*/
+@@ -164,9 +164,9 @@
+ 			if(flag&128){_mm_read_UBYTE(modreader);_mm_read_UBYTE(modreader);}
+ 		} else row++;
+ 	}
+ 	return 0;
+-}
++}    
+ 
+ static BOOL S3M_ReadPattern(void)
+ {
+ 	int row=0,flag,ch;
+@@ -295,9 +295,9 @@
+ 		_mm_errno = MMERR_LOADING_HEADER;
+ 		return 0;
+ 	}
+ 
+-	poslookupcnt=(UBYTE)mh->ordnum;
++	poslookupcnt=mh->ordnum;
+ 	S3MIT_CreateOrders(curious);
+ 
+ 	if(!(paraptr=(UWORD*)_mm_malloc((of.numins+of.numpat)*sizeof(UWORD))))
+ 		return 0;
+@@ -391,13 +391,13 @@
+ 	}
+ 
+ 	/* build the remap array  */
+ 	for(t=0;t<32;t++)
+-		if(!remap[t])
++		if(!remap[t]) 
+ 			remap[t]=of.numchn++;
+ 
+ 	/* set panning positions after building remap chart! */
+-	for(t=0;t<32;t++)
++	for(t=0;t<32;t++) 
+ 		if((mh->channels[t]<32)&&(remap[t]!=-1)) {
+ 			if(mh->channels[t]<8)
+ 				of.panning[remap[t]]=0x20;	/* 0x30 = std s3m val */
+ 			else
+Only in SDL_mixer-1.2.5-patched/mikmod: load_stm.c
+Only in SDL_mixer-1.2.5-patched/mikmod: load_stx.c
+Only in SDL_mixer-1.2.5-patched/mikmod: load_ult.c
+Only in SDL_mixer-1.2.5-patched/mikmod: load_uni.c
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/load_xm.c SDL_mixer-1.2.5-patched/mikmod/load_xm.c
+--- SDL_mixer-1.2.5.orig/mikmod/load_xm.c	2001-12-19 17:11:40.000000000 +0000
++++ SDL_mixer-1.2.5-patched/mikmod/load_xm.c	2003-04-21 10:38:23.000000000 +0100
+@@ -5,23 +5,23 @@
+ 	This library is free software; you can redistribute it and/or modify
+ 	it under the terms of the GNU Library General Public License as
+ 	published by the Free Software Foundation; either version 2 of
+ 	the License, or (at your option) any later version.
+-
++ 
+ 	This program is distributed in the hope that it will be useful,
+ 	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ 	GNU Library General Public License for more details.
+-
++ 
+ 	You should have received a copy of the GNU Library General Public
+ 	License along with this library; if not, write to the Free Software
+ 	Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ 	02111-1307, USA.
+ */
+ 
+ /*==============================================================================
+ 
+-  $Id: load_xm.c,v 1.7 2001/12/19 17:11:40 slouken Exp $
++  $Id: load_xm.c,v 1.36 2000/02/14 22:10:22 miod Exp $
+ 
+   Fasttracker (XM) module loader
+ 
+ ==============================================================================*/
+@@ -46,9 +46,9 @@
+ 	UWORD restart;         /* Restart position */
+ 	UWORD numchn;          /* Number of channels (2,4,6,8,10,...,32) */
+ 	UWORD numpat;          /* Number of patterns (max 256) */
+ 	UWORD numins;          /* Number of instruments (max 128) */
+-	UWORD flags;
++	UWORD flags;       
+ 	UWORD tempo;           /* Default tempo */
+ 	UWORD bpm;             /* Default BPM */
+ 	UBYTE orders[256];     /* Pattern order table  */
+ } XMHEADER;
+@@ -285,11 +285,8 @@
+ 						UniEffect(UNI_XMEFFECTX2,dat&0xf);
+ 						break;
+ 				}
+ 				break;
+-			case 'Z'-55: /* Z - synchro */
+-				UniEffect(UNI_XMEFFECTZ,dat);
+-				break;
+ 			default:
+ 				if(eff<=0xf) {
+ 					/* the pattern jump destination is written in decimal,
+ 					   but it seems some poor tracker software writes them
+@@ -346,10 +343,10 @@
+ 			if(!(xmpat=(XMNOTE*)_mm_calloc(ph.numrows*of.numchn,sizeof(XMNOTE))))
+ 				return 0;
+ 
+ 			/* when packsize is 0, don't try to load a pattern.. it's empty. */
+-			if(ph.packsize)
+-				for(u=0;u<ph.numrows;u++)
++			if(ph.packsize) 
++				for(u=0;u<ph.numrows;u++) 
+ 					for(v=0;v<of.numchn;v++) {
+ 						if(!ph.packsize) break;
+ 
+ 						ph.packsize-=XM_ReadNote(&xmpat[(v*ph.numrows)+u]);
+@@ -461,34 +458,55 @@
+ 				for(u=0;u<XMNOTECNT;u++)
+ 					d->samplenumber[u]=pth.what[u]+of.numsmp;
+ 				d->volfade = pth.volfade;
+ 
+-memcpy(d->volenv,pth.volenv,XMENVCNT);
+-if (pth.volflg&1) d->volflg|=EF_ON;
+-if (pth.volflg&2) d->volflg|=EF_SUSTAIN;
+-if (pth.volflg&4) d->volflg|=EF_LOOP;
+-d->volsusbeg=d->volsusend=pth.volsus;                                      
+-d->volbeg=pth.volbeg;
+-d->volend=pth.volend;
+-d->volpts=pth.volpts;
+-/* scale envelope */
+-for (p=0;p<XMENVCNT/2;p++)                                                       
+- d->volenv[p].val<<=2;
+-if ((d->volflg&EF_ON)&&(d->volpts<2))
+- d->volflg&=~EF_ON;
+-memcpy(d->panenv,pth.panenv,XMENVCNT);
+-if (pth.panflg&1) d->panflg|=EF_ON;
+-if (pth.panflg&2) d->panflg|=EF_SUSTAIN;
+-if (pth.panflg&4) d->panflg|=EF_LOOP;
+-d->pansusbeg=d->pansusend=pth.pansus;                                      
+-d->panbeg=pth.panbeg;
+-d->panend=pth.panend;
+-d->panpts=pth.panpts;
+-/* scale envelope */
+-for (p=0;p<XMENVCNT/2;p++)                                                       
+- d->panenv[p].val<<=2;
+-if ((d->panflg&EF_ON)&&(d->panpts<2))
+- d->panflg&=~EF_ON;
++#if defined __STDC__ || defined _MSC_VER
++#define XM_ProcessEnvelope(name) 											\
++				for (u = 0; u < (XMENVCNT >> 1); u++) {						\
++					d->##name##env[u].pos = pth.##name##env[u << 1];		\
++					d->##name##env[u].val = pth.##name##env[(u << 1)+ 1];	\
++				}															\
++				if (pth.##name##flg&1) d->##name##flg|=EF_ON;				\
++				if (pth.##name##flg&2) d->##name##flg|=EF_SUSTAIN;			\
++				if (pth.##name##flg&4) d->##name##flg|=EF_LOOP;				\
++				d->##name##susbeg=d->##name##susend=pth.##name##sus;		\
++				d->##name##beg=pth.##name##beg;								\
++				d->##name##end=pth.##name##end;								\
++				d->##name##pts=pth.##name##pts;								\
++																			\
++				/* scale envelope */										\
++				for (p=0;p<XMENVCNT/2;p++)									\
++					d->##name##env[p].val<<=2;								\
++																			\
++				if ((d->##name##flg&EF_ON)&&(d->##name##pts<2))				\
++					d->##name##flg&=~EF_ON;
++#else
++#define XM_ProcessEnvelope(name) 											\
++				for (u = 0; u < (XMENVCNT >> 1); u++) {						\
++					d->/**/name/**/env[u].pos = pth./**/name/**/env[u << 1];\
++					d->/**/name/**/env[u].val = pth./**/name/**/env[(u << 1)+ 1];\
++				}															\
++				if (pth./**/name/**/flg&1) d->/**/name/**/flg|=EF_ON;		\
++				if (pth./**/name/**/flg&2) d->/**/name/**/flg|=EF_SUSTAIN;	\
++				if (pth./**/name/**/flg&4) d->/**/name/**/flg|=EF_LOOP;		\
++				d->/**/name/**/susbeg=d->/**/name/**/susend=				\
++				                      pth./**/name/**/sus;					\
++				d->/**/name/**/beg=pth./**/name/**/beg;						\
++				d->/**/name/**/end=pth./**/name/**/end;						\
++				d->/**/name/**/pts=pth./**/name/**/pts;						\
++																			\
++				/* scale envelope */										\
++				for (p=0;p<XMENVCNT/2;p++)									\
++					d->/**/name/**/env[p].val<<=2;							\
++																			\
++				if ((d->/**/name/**/flg&EF_ON)&&(d->/**/name/**/pts<2))		\
++					d->/**/name/**/flg&=~EF_ON;
++#endif			
++
++				XM_ProcessEnvelope(vol);
++				XM_ProcessEnvelope(pan);
++#undef XM_ProcessEnvelope
++
+ 				/* Samples are stored outside the instrument struct now, so we
+ 				   have to load them all into a temp area, count the of.numsmp
+ 				   along the way and then do an AllocSamples() and move
+ 				   everything over */
+@@ -604,13 +622,13 @@
+ 		return 0;
+ 	}
+ 
+ 	/* set module variables */
+-	of.initspeed = (UBYTE)mh->tempo;
+-	of.inittempo = (UBYTE)mh->bpm;
++	of.initspeed = mh->tempo;         
++	of.inittempo = mh->bpm;
+ 	strncpy(tracker,mh->trackername,20);tracker[20]=0;
+ 	for(t=20;(tracker[t]<=' ')&&(t>=0);t--) tracker[t]=0;
+-
++	
+ 	/* some modules have the tracker name empty */
+ 	if (!tracker[0])
+ 		strcpy(tracker,"Unknown tracker");
+ 
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/Makefile.am SDL_mixer-1.2.5-patched/mikmod/Makefile.am
+--- SDL_mixer-1.2.5.orig/mikmod/Makefile.am	2000-02-01 21:16:29.000000000 +0000
++++ SDL_mixer-1.2.5-patched/mikmod/Makefile.am	2003-04-21 10:38:23.000000000 +0100
+@@ -3,12 +3,11 @@
+ 
+ libmikmod_la_SOURCES =		\
+ 	drv_nos.c		\
+ 	drv_sdl.c		\
+-	load_it.c		\
+-	load_mod.c		\
+-	load_s3m.c		\
+-	load_xm.c		\
++load_669.c  load_far.c	load_it.c   load_mod.c	load_s3m.c  load_ult.c \
++load_amf.c  load_gdm.c	load_m15.c  load_mtm.c	load_uni.c \
++load_dsm.c  load_imf.c	load_med.c  load_okt.c	load_xm.c  \
+ 	mdreg.c			\
+ 	mdriver.c		\
+ 	mikmod.h		\
+ 	mikmod_build.h		\
+diff -ru4 SDL_mixer-1.2.5.orig/mikmod/mlreg.c SDL_mixer-1.2.5-patched/mikmod/mlreg.c
+--- SDL_mixer-1.2.5.orig/mikmod/mlreg.c	2000-11-17 21:38:05.000000000 +0000
++++ SDL_mixer-1.2.5-patched/mikmod/mlreg.c	2003-04-21 10:38:23.000000000 +0100
+@@ -34,31 +34,25 @@
+ 
+ void MikMod_RegisterAllLoaders_internal(void)
+ {
+ #if 1
+-	_mm_registerloader(&load_it);
+-	_mm_registerloader(&load_mod);
+-	_mm_registerloader(&load_s3m);
+-	_mm_registerloader(&load_xm);
+-#else
+ 	_mm_registerloader(&load_669);
+ 	_mm_registerloader(&load_amf);
+ 	_mm_registerloader(&load_dsm);
+ 	_mm_registerloader(&load_far);
+ 	_mm_registerloader(&load_gdm);
+-	_mm_registerloader(&load_it);
+ 	_mm_registerloader(&load_imf);
+-	_mm_registerloader(&load_mod);
++	_mm_registerloader(&load_it);
++	_mm_registerloader(&load_m15);
+ 	_mm_registerloader(&load_med);
++	_mm_registerloader(&load_mod);
+ 	_mm_registerloader(&load_mtm);
+ 	_mm_registerloader(&load_s3m);
+-	_mm_registerloader(&load_stm);
+-	_mm_registerloader(&load_stx);
+ 	_mm_registerloader(&load_ult);
+ 	_mm_registerloader(&load_uni);
+ 	_mm_registerloader(&load_xm);
+-
+-	_mm_registerloader(&load_m15);
++// 	_mm_registerloader(&load_stm);
++// 	_mm_registerloader(&load_stx);
+ #endif
+ }
+ 
+ void MikMod_RegisterAllLoaders(void)

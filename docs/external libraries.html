@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>Uplink Developer CD</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#000033" text="#FFFFFF" link="#6666FF" vlink="#9999FF">
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td>&nbsp;</td>
+    <td width="640" valign="top"> 
+      <p align="center"><font face="Arial, Helvetica, sans-serif" size="+1"><b>External 
+        Libraries </b></font></p>
+      <p align="center">&nbsp;</p>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1">Uplink makes use 
+        of a number of External libraries. You can find the source and pre-compiled 
+        libraries for most of these in the contrib directory on your CD. You will 
+        need to make sure their headers and libs are in your path when you compile 
+        Uplink.</font></p>
+      <p>&nbsp;</p>
+      <p><font face="Arial, Helvetica, sans-serif"><b>openGL</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">A graphics library 
+            designed for 3d, abused and forced into shape for Uplink ;) openGL 
+            is included as standard on pretty much all machines now.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><a href="http://www.opengl.org"><b>http://www.opengl.org</b></a></font></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif"><b>glut 3.7</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">A windowing system. 
+            Basically it opens a Window for openGL to render into. Handles mouse 
+            input, keyboard input etc.</font></p>
+          <p><a href="http://www.xmission.com/%7Enate/glut.html" target="_blank"><b><font face="Arial, Helvetica, sans-serif" size="-1">http://www.xmission.com/~nate/glut.html</font></b></a></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1"><br>
+        </font><font face="Arial, Helvetica, sans-serif"><b>tcp4u 3.30</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">A library that 
+            handles all of the low level networking code. Can be used to send 
+            data using tcp, udp etc. We use it in Uplink for the multimonitor 
+            system.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><a href="http://membres.lycos.fr/phjounin/man/tcp4u.htm" target="_blank"><b>http://membres.lycos.fr/phjounin/man/tcp4u.htm</b></a></font></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1"><br>
+        </font><font face="Arial, Helvetica, sans-serif"> <b>libtiff 3.4</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">Loads TIFF image 
+            files.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><b><a href="http://www.libtiff.org/" target="_blank">http://www.libtiff.org/</a></b></font></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1"><br>
+        </font><font face="Arial, Helvetica, sans-serif"><b>freetype 1.3.1</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">Loads TTF truetype 
+            font files. We use gltt to render the fonts.</font></p>
+          <p><a href="http://www.freetype.org/" target="_blank"><b><font size="-1" face="Arial, Helvetica, sans-serif">http://www.freetype.org/</font></b></a></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1"><br>
+        </font><font face="Arial, Helvetica, sans-serif"><b>gltt 2.5</b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">Works with freetype 
+            to render Truetype fonts to the screen.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><b><a href="http://gltt.sourceforge.net/" target="_blank">http://gltt.sourceforge.net/</a></b></font></p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif" size="-1"><br>
+        </font><font face="Arial, Helvetica, sans-serif"> <b>mikmod 2.1 and mikmod 
+        3.1.9 </b></font></p>
+      <blockquote> 
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">Handles the task 
+            of playing MOD music and sound effects. There are much newer versions 
+            of Mikmod floating around, but we found the latency on sounds to be 
+            very high under Windows so the Windows version still uses 2.1.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">You can easily 
+            use later versions of Mikmod under Windows by compiling Soundgarden 
+            using the default Linux settings. This is because the Linux version 
+            is set to use a much later version of Mikmod, which has a very different 
+            api.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><b><a href="http://www.mikmod.org/" target="_blank">http://www.mikmod.org/</a></b></font></p>
+          <p>&nbsp;</p>
+        </blockquote>
+      </blockquote>
+      <p><font face="Arial, Helvetica, sans-serif"><b>SDL 1.2.5</b></font></p>
+      <blockquote>
+        <blockquote> 
+          <p><font face="Arial, Helvetica, sans-serif" size="-1">Used in the Linux 
+            version for window management. Effectively replaces glut under Linux. 
+            We have also included a patched version in SDL_mixer-1.2.5-patched 
+            which includes our own modifications to the sound system. This entire 
+            library is only used for the Linux port of Uplink.</font></p>
+          <p><font face="Arial, Helvetica, sans-serif" size="-1"><a href="http://www.libsdl.org" target="_blank"><b>http://www.libsdl.org/</b></a></font></p>
+          <p>&nbsp;</p>
+        </blockquote>
+      </blockquote>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

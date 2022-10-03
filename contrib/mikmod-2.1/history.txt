@@ -1,0 +1,32 @@
+Releases of Mikmod for DirectSound
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+0.31  7/13/1997
+    - removed a NULL pointer bug in DS_Update();
+
+0.30  10/31/1996
+    - a bit less clicks with software mixing (sounds now as "good" as sb16
+      in Mikmod 2.10 x-mas; expcepting that it is 10 times slower; f... MS)
+    - removed code which did clicks on non looped samples (hardware mixing)
+    - volume and panning values stored in tables -> speed up!
+
+0.21  7/27/1996
+
+    + the title of the console window shows song title
+    - software mixed loops no longer pop
+
+0.20  7/26/1996
+
+    + looped samples are now played 100% correctly :=)
+    - bug in myTimerSet fixed: Speed is now correct
+    - panning is no more logarithmic, but linear as it should be
+
+0.11  never released
+
+    + Directsound detection routine added
+    + Mikwav now works (I added just one line:)
+    - looping is now clickfree on hardware mixing (awe32)
+
+0.10  7/24/1996
+
+    + first release

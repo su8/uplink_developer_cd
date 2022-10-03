@@ -1,0 +1,21 @@
+MikMod 2.10 X-mas compilation notes
+===================================
+
+Go the the source directory, and type:
+
+        WMAKE all
+
+        or
+
+        WMAKE mikmod.exe
+
+        or
+
+        WMAKE mikcvt.exe
+
+        or
+
+        WMAKE mikwav.exe
+
+Easy huh?
+

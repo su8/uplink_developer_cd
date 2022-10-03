@@ -1,0 +1,86 @@
+	cl /nologo /O2 /MTd /Zi /Fm /c /DWIN32 /DDRV_DS /DDRV_WIN /DHAVE_FCNTL_H /DHAVE_MALLOC_H /DHAVE_LIMITS_H /I..\include /I.. /I..\win32 /Fodrv_ds.o ..\drivers\drv_ds.c
+drv_ds.c
+C:\DevStudio\VC\INCLUDE\dsound.h(96) : error C2061: syntax error : identifier 'LPWAVEFORMATEX'
+C:\DevStudio\VC\INCLUDE\dsound.h(97) : error C2059: syntax error : '}'
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2143: syntax error : missing ')' before '*'
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2081: 'LPDSBUFFERDESC' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2081: 'LPLPDIRECTSOUNDBUFFER' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2081: 'IUnknown' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2143: syntax error : missing ';' before '*'
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2059: syntax error : '*'
+C:\DevStudio\VC\INCLUDE\dsound.h(133) : error C2059: syntax error : ')'
+C:\DevStudio\VC\INCLUDE\dsound.h(141) : error C2059: syntax error : '}'
+C:\DevStudio\VC\INCLUDE\dsound.h(175) : error C2081: 'LPWAVEFORMATEX' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(175) : error C2081: 'DWORD' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(175) : error C2081: 'LPDWORD' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(180) : error C2081: 'LPDSBUFFERDESC' : name in formal parameter list illegal
+C:\DevStudio\VC\INCLUDE\dsound.h(184) : error C2081: 'LPWAVEFORMATEX' : name in formal parameter list illegal
+..\drivers\drv_ds.c(63) : error C2282: 'LPDIRECTSOUNDNOTIFY' is followed by 'pSoundBufferNotify' (missing ','?)
+..\drivers\drv_ds.c(71) : error C2065: 'DSBCAPS_GLOBALFOCUS' : undeclared identifier
+..\drivers\drv_ds.c(71) : error C2099: initializer is not a constant
+..\drivers\drv_ds.c(146) : error C2146: syntax error : missing ';' before identifier 'free'
+..\drivers\drv_ds.c(162) : error C2065: 'DSBUFFERDESC' : undeclared identifier
+..\drivers\drv_ds.c(162) : error C2146: syntax error : missing ';' before identifier 'soundBufferFormat'
+..\drivers\drv_ds.c(162) : error C2065: 'soundBufferFormat' : undeclared identifier
+..\drivers\drv_ds.c(163) : error C2065: 'WAVEFORMATEX' : undeclared identifier
+..\drivers\drv_ds.c(163) : error C2146: syntax error : missing ';' before identifier 'pcmwf'
+..\drivers\drv_ds.c(163) : error C2065: 'pcmwf' : undeclared identifier
+..\drivers\drv_ds.c(164) : error C2065: 'DSBPOSITIONNOTIFY' : undeclared identifier
+..\drivers\drv_ds.c(164) : error C2146: syntax error : missing ';' before identifier 'positionNotifications'
+..\drivers\drv_ds.c(164) : error C2065: 'positionNotifications' : undeclared identifier
+..\drivers\drv_ds.c(164) : error C2109: subscript requires array or pointer type
+..\drivers\drv_ds.c(171) : error C2039: 'SetCooperativeLevel' : is not a member of 'IDirectSoundVtbl'
+..\drivers\drv_ds.c(177) : error C2065: 'PCMWAVEFORMAT' : undeclared identifier
+..\drivers\drv_ds.c(178) : error C2224: left of '.wFormatTag' must have struct/union type
+..\drivers\drv_ds.c(178) : error C2065: 'WAVE_FORMAT_PCM' : undeclared identifier
+..\drivers\drv_ds.c(179) : error C2224: left of '.nChannels' must have struct/union type
+..\drivers\drv_ds.c(180) : error C2224: left of '.nSamplesPerSec' must have struct/union type
+..\drivers\drv_ds.c(181) : error C2224: left of '.nBlockAlign' must have struct/union type
+..\drivers\drv_ds.c(182) : error C2224: left of '.nAvgBytesPerSec' must have struct/union type
+..\drivers\drv_ds.c(182) : error C2224: left of '.nSamplesPerSec' must have struct/union type
+..\drivers\drv_ds.c(182) : error C2224: left of '.nBlockAlign' must have struct/union type
+..\drivers\drv_ds.c(183) : error C2224: left of '.wBitsPerSample' must have struct/union type
+..\drivers\drv_ds.c(186) : error C2224: left of '.dwSize' must have struct/union type
+..\drivers\drv_ds.c(187) : error C2224: left of '.dwFlags' must have struct/union type
+..\drivers\drv_ds.c(188) : error C2224: left of '.dwBufferBytes' must have struct/union type
+..\drivers\drv_ds.c(189) : error C2224: left of '.lpwfxFormat' must have struct/union type
+..\drivers\drv_ds.c(192) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'int *'
+..\drivers\drv_ds.c(192) : warning C4024: 'function through pointer' : different types for formal and actual parameter 2
+..\drivers\drv_ds.c(192) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'struct IDirectSoundBuffer ** '
+..\drivers\drv_ds.c(192) : warning C4024: 'function through pointer' : different types for formal and actual parameter 3
+..\drivers\drv_ds.c(192) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'void *'
+..\drivers\drv_ds.c(192) : warning C4024: 'function through pointer' : different types for formal and actual parameter 4
+..\drivers\drv_ds.c(198) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'int *'
+..\drivers\drv_ds.c(198) : warning C4024: 'function through pointer' : different types for formal and actual parameter 2
+..\drivers\drv_ds.c(205) : error C2224: left of '.wFormatTag' must have struct/union type
+..\drivers\drv_ds.c(206) : error C2224: left of '.nChannels' must have struct/union type
+..\drivers\drv_ds.c(207) : error C2224: left of '.nSamplesPerSec' must have struct/union type
+..\drivers\drv_ds.c(208) : error C2224: left of '.nBlockAlign' must have struct/union type
+..\drivers\drv_ds.c(209) : error C2224: left of '.nAvgBytesPerSec' must have struct/union type
+..\drivers\drv_ds.c(209) : error C2224: left of '.nSamplesPerSec' must have struct/union type
+..\drivers\drv_ds.c(209) : error C2224: left of '.nBlockAlign' must have struct/union type
+..\drivers\drv_ds.c(210) : error C2224: left of '.wBitsPerSample' must have struct/union type
+..\drivers\drv_ds.c(212) : error C2224: left of '.nAvgBytesPerSec' must have struct/union type
+..\drivers\drv_ds.c(215) : error C2224: left of '.dwSize' must have struct/union type
+..\drivers\drv_ds.c(216) : error C2224: left of '.dwFlags' must have struct/union type
+..\drivers\drv_ds.c(217) : error C2224: left of '.dwBufferBytes' must have struct/union type
+..\drivers\drv_ds.c(218) : error C2224: left of '.lpwfxFormat' must have struct/union type
+..\drivers\drv_ds.c(221) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'int *'
+..\drivers\drv_ds.c(221) : warning C4024: 'function through pointer' : different types for formal and actual parameter 2
+..\drivers\drv_ds.c(221) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'struct IDirectSoundBuffer ** '
+..\drivers\drv_ds.c(221) : warning C4024: 'function through pointer' : different types for formal and actual parameter 3
+..\drivers\drv_ds.c(221) : warning C4047: 'function' : 'int ' differs in levels of indirection from 'void *'
+..\drivers\drv_ds.c(221) : warning C4024: 'function through pointer' : different types for formal and actual parameter 4
+..\drivers\drv_ds.c(227) : error C2065: 'IID_IDirectSoundNotify' : undeclared identifier
+..\drivers\drv_ds.c(227) : warning C4133: 'function' : incompatible types - from 'int *' to 'const struct _GUID *const '
+..\drivers\drv_ds.c(227) : error C2065: 'pSoundBufferNotify' : undeclared identifier
+..\drivers\drv_ds.c(248) : error C2109: subscript requires array or pointer type
+..\drivers\drv_ds.c(248) : error C2224: left of '.dwOffset' must have struct/union type
+..\drivers\drv_ds.c(249) : error C2109: subscript requires array or pointer type
+..\drivers\drv_ds.c(249) : error C2224: left of '.hEventNotify' must have struct/union type
+..\drivers\drv_ds.c(250) : error C2109: subscript requires array or pointer type
+..\drivers\drv_ds.c(250) : error C2224: left of '.dwOffset' must have struct/union type
+..\drivers\drv_ds.c(251) : error C2109: subscript requires array or pointer type
+..\drivers\drv_ds.c(251) : error C2224: left of '.hEventNotify' must have struct/union type
+..\drivers\drv_ds.c(252) : error C2223: left of '->lpVtbl' must point to struct/union
+..\drivers\drv_ds.c(277) : error C2223: left of '->lpVtbl' must point to struct/union
